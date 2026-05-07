@@ -18,27 +18,17 @@
             flex-direction: column;
         }
 
-        /* AJUSTE: FONDO MENOS BORROSO Y MÁS NÍTIDO */
+        /* EFECTO DE FONDO: RECONOCIBLE PERO SUAVE */
         .bg-blur {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            
-            /* Bajamos de 120px a 25px para que se note la foto */
-            filter: blur(25px) brightness(0.35); 
-            
+            /* Bajamos el desenfoque para que se note la foto de fondo */
+            filter: blur(10px) brightness(0.3); 
             z-index: -1;
             transition: background-image 0.6s ease-in-out;
             transform: scale(1.1);
-        }
-
-        /* Capa extra para que el texto siempre sea legible sobre la foto */
-        .bg-overlay {
-            position: fixed;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle, transparent 20%, rgba(5, 7, 10, 0.8) 100%);
-            z-index: -1;
         }
 
         header { padding: 30px 25px 0; display: flex; gap: 20px; z-index: 10; }
@@ -46,7 +36,7 @@
         .nav-item.active { color: white; border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
 
         .hero { padding: 10px 25px; z-index: 10; height: 130px; margin-top: 5px; }
-        .hero h1 { font-size: 36px; font-weight: 900; line-height: 1; text-shadow: 0 2px 10px rgba(0,0,0,0.5); }
+        .hero h1 { font-size: 36px; font-weight: 900; line-height: 1; }
         .hero p { font-size: 13px; color: var(--text-sub); margin-top: 5px; line-height: 1.3; }
 
         .slider-wrapper {
@@ -70,8 +60,8 @@
             overflow: hidden;
             flex-shrink: 0;
             scroll-snap-align: center;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            opacity: 0.4;
+            transition: all 0.4s ease;
+            opacity: 0.3;
             transform: scale(0.8);
             border: 2px solid rgba(255,255,255,0.1);
             position: relative;
@@ -87,12 +77,12 @@
         }
 
         .badge {
-            position: absolute; top: 12px; right: 12px;
+            position: absolute; top: 10px; right: 10px;
             background: white; color: black;
             width: 45px; height: 45px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
             font-weight: 900; font-size: 22px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            z-index: 5;
         }
 
         .dock {
@@ -103,8 +93,8 @@
             padding: 15px 10px; 
             display: flex; 
             justify-content: space-around;
-            background: rgba(15, 20, 30, 0.85); 
-            backdrop-filter: blur(20px);
+            background: rgba(15, 20, 30, 0.95); 
+            backdrop-filter: blur(25px);
             border-radius: 30px; 
             border: 1px solid rgba(255,255,255,0.1);
             z-index: 100;
@@ -116,7 +106,6 @@
 <body>
 
 <div class="bg-blur" id="bgBlur"></div>
-<div class="bg-overlay"></div>
 
 <header>
     <a href="#" class="nav-item active">LIBRARY</a>
@@ -133,6 +122,34 @@
         <div class="card" data-title="Honor of Kings" data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
             <div class="badge">1</div>
+        </div>
+        <div class="card" data-title="Among Us" data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+            <div class="badge">2</div>
+        </div>
+        <div class="card" data-title="League of Legends / Wild Rift" data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC y el móvil con Wild Rift. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+            <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+            <div class="badge">3</div>
+        </div>
+        <div class="card" data-title="Call of Duty: Warzone" data-desc="¿Por qué está acá? Experiencia de guerra definitiva y unificada en PC y Mobile. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+            <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+            <div class="badge">4</div>
+        </div>
+        <div class="card" data-title="Genshin Impact" data-desc="¿Por qué está acá? Calidad de consola en un celular. Visualmente es una bestia. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+            <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+            <div class="badge">5</div>
+        </div>
+        <div class="card" data-title="PUBG Mobile" data-desc="¿Por qué está acá? El padre del Battle Royale. Comunidad gigantesca y táctica. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+            <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+            <div class="badge">6</div>
+        </div>
+        <div class="card" data-title="Fortnite" data-desc="¿Por qué está acá? Un parque de diversiones gigante y red social. [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+            <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+            <div class="badge">7</div>
+        </div>
+        <div class="card" data-title="Free Fire" data-desc="¿Por qué está acá? El rey de los gama baja. Todos lo pueden jugar. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+            <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+            <div class="badge">8</div>
         </div>
         <div class="card" data-title="Minecraft" data-desc="¿Por qué está acá? El más vendido de la historia. Jugá con cualquiera. [leer más]" data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
