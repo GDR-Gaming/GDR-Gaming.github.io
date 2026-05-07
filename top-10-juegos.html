@@ -33,18 +33,18 @@
         .nav-item { font-size: 13px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; }
         .nav-item.active { color: white; border-bottom: 3px solid var(--accent); padding-bottom: 5px; }
 
-        .hero { padding: 20px 25px; z-index: 10; height: 170px; }
+        .hero { padding: 20px 25px; z-index: 10; height: 160px; }
         .hero h1 { font-size: 38px; font-weight: 900; line-height: 1; }
         .hero p { font-size: 14px; color: var(--text-sub); margin-top: 5px; line-height: 1.4; }
 
-        /* CARRUSEL FLUIDO */
+        /* AJUSTE: SUBIMOS EL CARRUSEL */
         .slider-wrapper {
             flex: 1;
             display: flex;
             align-items: center;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 0 15%; 
+            padding: 0 15% 80px; /* Agregamos 80px abajo para subir las cartas */
             scrollbar-width: none;
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
@@ -85,21 +85,23 @@
             display: flex; align-items: center; justify-content: center;
             font-weight: 900; font-size: 22px;
             z-index: 5;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
+        /* AJUSTE: DOCK MÁS ALTO PARA QUE SE VEAN LOS ICONOS */
         .dock {
-            padding: 20px 10px 30px; 
+            padding: 25px 10px 45px; /* Más padding arriba y abajo */
             display: flex; 
             justify-content: space-around;
-            background: rgba(15, 20, 30, 0.85); 
+            background: rgba(15, 20, 30, 0.9); 
             backdrop-filter: blur(25px);
             border-radius: 40px 40px 0 0; 
             border-top: 1px solid rgba(255,255,255,0.1);
             z-index: 100;
+            position: relative;
+            bottom: 0;
         }
-        .dock-btn { font-size: 32px; text-decoration: none; opacity: 0.3; color: white; }
-        .dock-btn.active { opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); color: #fff; }
+        .dock-btn { font-size: 34px; text-decoration: none; opacity: 0.4; color: white; }
+        .dock-btn.active { opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); }
     </style>
 </head>
 <body>
@@ -134,7 +136,7 @@
             <div class="badge">3</div>
         </div>
 
-        <div class="card" data-title="Call of Duty: Warzone / Mobile" data-desc="¿Por qué está acá? Todo lo que hacés en PC se guarda. Es la experiencia de guerra definitiva y unificada, ya sea Warzone o Mobile. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+        <div class="card" data-title="Call of Duty: Warzone / Mobile" data-desc="¿Por qué está acá? Todo lo que hacés en PC se guarda. Es la experiencia de guerra definitiva y unificada. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <div class="badge">4</div>
         </div>
@@ -154,12 +156,12 @@
             <div class="badge">7</div>
         </div>
 
-        <div class="card" data-title="Free Fire" data-desc="Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar el celu. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+        <div class="card" data-title="Free Fire" data-desc="Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <div class="badge">8</div>
         </div>
 
-        <div class="card" data-title="Minecraft" data-desc="¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
+        <div class="card" data-title="Minecraft" data-desc="¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien. [leer más]" data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <div class="badge">9</div>
         </div>
