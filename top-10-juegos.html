@@ -36,7 +36,7 @@
             background-image: url('https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png');
             background-size: cover;
             background-position: center;
-            filter: blur(60px) brightness(0.25);
+            filter: blur(60px) brightness(0.2);
             z-index: -1;
             transform: scale(1.2);
         }
@@ -56,10 +56,7 @@
             position: relative;
         }
 
-        .nav-item.active {
-            color: white;
-        }
-
+        .nav-item.active { color: white; }
         .nav-item.active::after {
             content: '';
             position: absolute;
@@ -71,57 +68,46 @@
             box-shadow: 0 0 15px var(--accent);
         }
 
-        .hero {
-            padding: 30px 30px 0;
-        }
-
+        .hero { padding: 30px 30px 0; }
         .hero h1 {
-            font-size: 58px;
+            font-size: 55px;
             font-weight: 900;
-            margin-bottom: 5px;
             letter-spacing: -2px;
+            line-height: 1;
         }
-
         .hero p {
-            font-size: 16px;
+            font-size: 15px;
             color: var(--text-sub);
-            line-height: 1.3;
-            max-width: 85%;
+            margin-top: 10px;
+            max-width: 80%;
         }
 
-        /* EL TRUCO PARA EL CENTRADO REAL */
-        .main-view {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center; /* Esto lo sube al medio del espacio sobrante */
-            align-items: center;
-            padding-bottom: 50px; /* Margen para no chocar con el dock */
-        }
-
-        .carousel {
+        /* EL CUADRADO CENTRADO A LA FUERZA */
+        .center-focus {
+            position: absolute;
+            top: 55%; /* Lo baja un poco del encabezado pero queda bien arriba del dock */
+            left: 50%;
+            transform: translate(-50%, -50%);
             display: flex;
             align-items: center;
-            gap: 25px;
+            gap: 20px;
         }
 
         .card-side {
-            width: 100px;
-            height: 100px;
+            width: 90px;
+            height: 90px;
             border-radius: 20px;
             background: rgba(255,255,255,0.05);
-            opacity: 0.2;
+            opacity: 0.15;
             overflow: hidden;
         }
 
-        .card-side img { width: 100%; height: 100%; object-fit: cover; }
-
         .card-main {
-            width: 280px; /* TAMAÑO MÁXIMO */
-            height: 280px;
-            border-radius: 35px;
-            border: 5px solid var(--accent);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.4);
+            width: 300px; /* Tamaño máximo para tu pantalla */
+            height: 300px;
+            border-radius: 40px;
+            border: 6px solid var(--accent);
+            box-shadow: 0 0 60px rgba(0, 255, 255, 0.5);
             position: relative;
         }
 
@@ -129,7 +115,7 @@
             width: 100%;
             height: 100%;
             object-fit: cover;
-            border-radius: 30px;
+            border-radius: 34px;
         }
 
         .badge {
@@ -138,15 +124,15 @@
             right: -15px;
             background: white;
             color: black;
-            width: 45px;
-            height: 45px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 22px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            font-size: 24px;
+            z-index: 20;
         }
 
         .dock {
@@ -154,9 +140,9 @@
             bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
+            width: 92%;
             height: 75px;
-            background: rgba(20, 25, 40, 0.8);
+            background: rgba(15, 20, 30, 0.85);
             backdrop-filter: blur(30px);
             border-radius: 40px;
             display: flex;
@@ -177,25 +163,22 @@
 <header>
     <a href="#" class="nav-item active">LIBRARY</a>
     <a href="#" class="nav-item">ADD NEW</a>
-    <a href="#" class="nav-item">SETTINGS</a>
 </header>
 
 <main class="hero">
     <h1>Top 10 más jugados</h1>
-    <p><b>TOP 10</b> Explorá los juegos más virales y con más jugadores de este mes. [LEER MAS]</p>
+    <p><b>TOP 10</b> Los títulos que están rompiendo récords este mes en la plataforma.</p>
 </main>
 
-<div class="main-view">
-    <div class="carousel">
-        <div class="card-side"><img src="https://m.media-amazon.com/images/I/61m1-v2B8vL._AC_UF894,1000_QL80_.jpg"></div>
-        
-        <div class="card-main">
-            <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
-            <div class="badge">1</div>
-        </div>
-
-        <div class="card-side"><img src="https://i.pinimg.com/736x/8e/1e/8a/8e1e8a2a0a2f1c3a7a9a1a1a1a1a1a1a.jpg"></div>
+<div class="center-focus">
+    <div class="card-side"><img src="https://i.pinimg.com/736x/8e/1e/8a/8e1e8a2a0a2f1c3a7a9a1a1a1a1a1a1a.jpg"></div>
+    
+    <div class="card-main">
+        <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+        <div class="badge">1</div>
     </div>
+
+    <div class="card-side"><img src="https://m.media-amazon.com/images/I/61m1-v2B8vL._AC_UF894,1000_QL80_.jpg"></div>
 </div>
 
 <nav class="dock">
