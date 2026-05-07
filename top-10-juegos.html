@@ -10,7 +10,7 @@
 
 :root{
     --accent:#00ffff;
-    --text-sub:rgba(255,255,255,0.68);
+    --text-sub:rgba(255,255,255,0.72);
 }
 
 *{
@@ -30,7 +30,7 @@ body{
     flex-direction:column;
 }
 
-/* FONDO GAMING PREMIUM */
+/* FONDO PREMIUM MÁS NÍTIDO */
 .bg-blur{
     position:fixed;
     inset:0;
@@ -38,13 +38,13 @@ body{
     background-size:cover;
     background-position:center;
 
-    transform:scale(1.08);
+    transform:scale(1.05);
 
     filter:
-        blur(8px)
-        brightness(0.72)
-        saturate(1.4)
-        contrast(1.15);
+        blur(4px)
+        brightness(0.82)
+        saturate(1.45)
+        contrast(1.18);
 
     opacity:1;
 
@@ -55,27 +55,27 @@ body{
         filter .45s ease;
 }
 
-/* OVERLAY PREMIUM */
+/* OVERLAY */
 .bg-overlay{
     position:fixed;
     inset:0;
 
     background:
         radial-gradient(circle at top,
-            rgba(0,255,255,0.12),
+            rgba(0,255,255,0.10),
             transparent 35%),
 
         radial-gradient(circle at bottom,
-            rgba(0,255,255,0.16),
+            rgba(0,255,255,0.12),
             transparent 45%),
 
         linear-gradient(
             to bottom,
-            rgba(0,0,0,0.18),
-            rgba(0,0,0,0.50)
+            rgba(0,0,0,0.12),
+            rgba(0,0,0,0.42)
         );
 
-    backdrop-filter:blur(1px);
+    backdrop-filter:blur(.5px);
 
     z-index:-1;
 
@@ -106,32 +106,38 @@ header{
 .hero{
     padding:10px 25px;
     z-index:10;
-    height:140px;
+    height:150px;
     margin-top:5px;
 }
 
 .hero h1{
     font-size:42px;
     font-weight:900;
-    line-height:0.95;
+    line-height:.95;
 
     text-shadow:
-        0 4px 25px rgba(0,0,0,0.55);
+        0 4px 25px rgba(0,0,0,0.6);
 }
 
 .hero p{
-    font-size:15px;
-    color:var(--text-sub);
-    margin-top:10px;
-    line-height:1.35;
-    max-width:95%;
+    font-size:14px;
+    color:rgba(255,255,255,0.86);
+
+    margin-top:12px;
+
+    line-height:1.4;
+
+    text-shadow:
+        0 2px 10px rgba(0,0,0,0.6);
 }
 
 /* SLIDER */
 .slider-wrapper{
     flex:1;
+
     display:flex;
     align-items:center;
+
     overflow-x:auto;
 
     scroll-snap-type:x mandatory;
@@ -234,7 +240,7 @@ header{
     display:flex;
     justify-content:space-around;
 
-    background:rgba(10,15,25,.75);
+    background:rgba(10,15,25,.72);
 
     backdrop-filter:blur(25px);
 
@@ -286,7 +292,7 @@ header{
 <!-- TOP 1 -->
 <div class="card active"
 data-title="Honor of Kings"
-data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable."
+data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable. [leer más]"
 data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
 
 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
@@ -297,7 +303,7 @@ data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equ
 <!-- TOP 2 -->
 <div class="card"
 data-title="Among Us"
-data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera."
+data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia. [leer más]"
 data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
 
 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
@@ -308,7 +314,7 @@ data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_ar
 <!-- TOP 3 -->
 <div class="card"
 data-title="League of Legends / Wild Rift"
-data-desc="¿Por qué está acá? Riot domina PC y móviles."
+data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC y el móvil con Wild Rift. [leer más]"
 data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
 
 <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
@@ -318,8 +324,8 @@ data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMX
 
 <!-- TOP 4 -->
 <div class="card"
-data-title="Warzone Mobile"
-data-desc="¿Por qué está acá? Shooter definitivo para móvil."
+data-title="Call of Duty: Warzone / Mobile"
+data-desc="¿Por qué está acá? Experiencia de guerra definitiva y unificada en PC y Mobile. [leer más]"
 data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
 
 <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
@@ -330,7 +336,7 @@ data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
 <!-- TOP 5 -->
 <div class="card"
 data-title="Genshin Impact"
-data-desc="¿Por qué está acá? Calidad de consola en un celular."
+data-desc="¿Por qué está acá? Calidad de consola en un celular. Visualmente es una bestia. [leer más]"
 data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
 
 <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
@@ -341,7 +347,7 @@ data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357
 <!-- TOP 6 -->
 <div class="card"
 data-title="PUBG Mobile"
-data-desc="¿Por qué está acá? El padre del Battle Royale."
+data-desc="¿Por qué está acá? El padre del Battle Royale. Comunidad gigantesca y táctica. [leer más]"
 data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
 
 <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
@@ -352,7 +358,7 @@ data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZW
 <!-- TOP 7 -->
 <div class="card"
 data-title="Fortnite"
-data-desc="¿Por qué está acá? Un parque de diversiones gigante."
+data-desc="¿Por qué está acá? Un parque de diversiones gigante y red social. [leer más]"
 data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
 
 <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
@@ -363,7 +369,7 @@ data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=f
 <!-- TOP 8 -->
 <div class="card"
 data-title="Free Fire"
-data-desc="¿Por qué está acá? El rey de los gama baja."
+data-desc="¿Por qué está acá? El rey de los gama baja. Todos lo pueden jugar. [leer más]"
 data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
 
 <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
@@ -374,7 +380,7 @@ data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
 <!-- TOP 9 -->
 <div class="card"
 data-title="Minecraft"
-data-desc="¿Por qué está acá? El más vendido de la historia."
+data-desc="¿Por qué está acá? El más vendido de la historia. Jugá con cualquiera. [leer más]"
 data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
 
 <img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
@@ -385,7 +391,7 @@ data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320
 <!-- TOP 10 -->
 <div class="card"
 data-title="Roblox"
-data-desc="¿Por qué está acá? Mundos creados por la comunidad."
+data-desc="Mundos creados por la comunidad. La mayor variedad de la actualidad. [leer más]"
 data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
 
 <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
