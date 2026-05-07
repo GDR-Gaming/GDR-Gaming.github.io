@@ -33,22 +33,22 @@
             transition: background-image 0.6s ease-in-out;
         }
 
-        header { padding: 50px 30px 10px; display: flex; gap: 20px; z-index: 10; }
+        header { padding: 40px 25px 5px; display: flex; gap: 20px; z-index: 10; }
         .nav-item { font-size: 13px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; position: relative; }
         .nav-item.active { color: white; }
         .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
-        .hero { padding: 30px 30px 0; z-index: 10; min-height: 180px; }
-        .hero h1 { font-size: 40px; font-weight: 900; line-height: 1; transition: all 0.3s; }
-        .hero p { font-size: 14px; color: var(--text-sub); margin-top: 10px; max-width: 85%; line-height: 1.4; }
+        .hero { padding: 25px 25px 0; z-index: 10; min-height: 140px; }
+        .hero h1 { font-size: 48px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+        .hero p { font-size: 15px; color: var(--text-sub); line-height: 1.3; max-width: 90%; }
         .hero p b { color: white; }
 
+        /* AJUSTE DEL TAMAÑO DEL CARRUSEL */
         .slider-wrapper {
             flex: 1;
             display: flex;
             align-items: center;
-            justify-content: center;
-            overflow: hidden;
+            overflow: visible; /* Para que no corte las sombras */
             position: relative;
             touch-action: pan-y;
         }
@@ -56,54 +56,57 @@
         .cards-container {
             display: flex;
             align-items: center;
-            gap: 25px;
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            gap: 35px; /* Más espacio entre juegos */
+            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
             will-change: transform;
+            padding-left: 50%; /* Ayuda al centrado */
         }
 
         .card {
-            width: 100px;
-            height: 100px;
-            border-radius: 20px;
+            width: 140px; /* Mucho más grandes que antes */
+            height: 140px;
+            border-radius: 25px;
             overflow: hidden;
-            opacity: 0.2;
+            opacity: 0.3;
             transition: all 0.5s ease;
             flex-shrink: 0;
-            transform: scale(0.8);
+            transform: scale(0.85);
+            position: relative;
         }
 
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* EL JUEGO SELECCIONADO: AHORA SÍ ES GRANDE */
         .card.active {
-            width: 280px;
-            height: 280px;
+            width: 310px; /* Tamaño máximo para que destaque */
+            height: 310px;
             opacity: 1;
-            border: 5px solid var(--accent);
-            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
-            position: relative;
+            border: 6px solid var(--accent);
+            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
             transform: scale(1);
         }
 
         .badge {
             position: absolute;
-            top: -12px; right: -12px;
+            top: -10px; right: -10px;
             background: white; color: black;
-            width: 45px; height: 45px; border-radius: 50%;
+            width: 50px; height: 50px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 22px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
-            z-index: 2;
+            font-weight: 900; font-size: 24px;
+            z-index: 5;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .dock {
-            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
-            width: 90%; height: 70px; background: rgba(15, 20, 30, 0.85);
-            backdrop-filter: blur(25px); border-radius: 35px;
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
+            width: 92%; height: 75px; background: rgba(15, 20, 30, 0.85);
+            backdrop-filter: blur(30px); border-radius: 40px;
             display: flex; justify-content: space-around; align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 100;
         }
 
-        .dock-btn { font-size: 28px; opacity: 0.3; text-decoration: none; color: white; }
+        .dock-btn { font-size: 32px; opacity: 0.3; text-decoration: none; color: white; }
         .dock-btn.active { opacity: 1; color: var(--accent); }
     </style>
 </head>
@@ -117,8 +120,8 @@
     </header>
 
     <main class="hero">
-        <h1 id="gameTitle">Top 10 más jugados</h1>
-        <p id="gameDesc">Deslizá para ver el ranking completo.</p>
+        <h1 id="gameTitle">Cargando...</h1>
+        <p id="gameDesc">Deslizá para ver el ranking.</p>
     </main>
 
     <div class="slider-wrapper" id="sliderWrapper">
@@ -134,42 +137,42 @@
                 <div class="badge">9</div>
             </div>
 
-            <div class="card" data-title="Free Fire" data-desc="<b>TOP 8</b> ¿Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar si tienen un celu viejo [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+            <div class="card" data-title="Free Fire" data-desc="<b>TOP 8</b> ¿Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
                 <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
                 <div class="badge">8</div>
             </div>
 
-            <div class="card" data-title="Fortnite" data-desc="<b>TOP 7</b> ¿Por qué está acá? Es un parque de diversiones gigante. Entre el modo LEGO y los conciertos, ya es más una red social que un juego [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+            <div class="card" data-title="Fortnite" data-desc="<b>TOP 7</b> ¿Por qué está acá? Es un parque de diversiones gigante. Ya es más una red social que un juego. [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
                 <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
                 <div class="badge">7</div>
             </div>
 
-            <div class="card" data-title="PUBG Mobile" data-desc="<b>TOP 6</b> ¿Por qué está acá? El padre del género. Su comunidad es gigantesca y es el favorito de los que buscan un Battle Royale más táctico. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+            <div class="card" data-title="PUBG Mobile" data-desc="<b>TOP 6</b> ¿Por qué está acá? El padre del género. El favorito de los que buscan algo más táctico. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
                 <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
                 <div class="badge">6</div>
             </div>
 
-            <div class="card" data-title="Genshin Impact" data-desc="<b>TOP 5</b> ¿Por qué está acá? Fue el primero en meter un juego de consola adentro de un celular. Visualmente es una bestia que no baja del top. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+            <div class="card" data-title="Genshin Impact" data-desc="<b>TOP 5</b> ¿Por qué está acá? Metió un juego de consola adentro de un celular. Visualmente es una bestia. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
                 <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
                 <div class="badge">5</div>
             </div>
 
-            <div class="card" data-title="Warzone Mobile" data-desc="<b>TOP 4</b> ¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Es la experiencia de guerra definitiva y unificada en 2026. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+            <div class="card" data-title="Warzone Mobile" data-desc="<b>TOP 4</b> ¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Guerra definitiva y unificada. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
                 <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
                 <div class="badge">4</div>
             </div>
 
-            <div class="card" data-title="Wild Rift" data-desc="<b>TOP 3</b> ¿Por qué está acá? Es la cara de los Esports. Riot domina la PC con el original y el móvil con la versión más pulida que existe. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+            <div class="card" data-title="Wild Rift" data-desc="<b>TOP 3</b> ¿Por qué está acá? Es la cara de los Esports. Riot domina el móvil con la versión más pulida. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
                 <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
                 <div class="badge">3</div>
             </div>
 
-            <div class="card" data-title="Among Us" data-desc="<b>TOP 2</b> ¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente de PC y celu. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+            <div class="card" data-title="Among Us" data-desc="<b>TOP 2</b> ¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
                 <div class="badge">2</div>
             </div>
 
-            <div class="card" data-title="Honor of Kings" data-desc="<b>TOP 1</b> ¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+            <div class="card" data-title="Honor of Kings" data-desc="<b>TOP 1</b> ¿Por qué está acá? Es el MOBA que más plata recauda. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
                 <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
                 <div class="badge">1</div>
             </div>
@@ -200,10 +203,11 @@
                 card.classList.toggle('active', i === currentIndex);
             });
             
-            const cardWidth = 100; 
-            const gap = 25;
+            const cardWidth = 140; 
+            const gap = 35;
             const screenCenter = window.innerWidth / 2;
-            const offset = screenCenter - (currentIndex * (cardWidth + gap)) - (280 / 2);
+            // Cálculo para que el centro de la carta activa coincida con el centro de la pantalla
+            const offset = screenCenter - (currentIndex * (cardWidth + gap)) - (310 / 2);
             
             container.style.transform = `translateX(${offset}px)`;
             
@@ -217,8 +221,8 @@
         container.addEventListener('touchend', (e) => {
             const endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-            if (diff > 50 && currentIndex < cards.length - 1) currentIndex++;
-            else if (diff < -50 && currentIndex > 0) currentIndex--;
+            if (diff > 40 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff < -40 && currentIndex > 0) currentIndex--;
             updateSlider();
         });
 
