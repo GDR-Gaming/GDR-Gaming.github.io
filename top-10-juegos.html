@@ -6,286 +6,200 @@
     <title>Top 10 más jugados - GDR</title>
     <style>
         :root {
-            /* Colores precisos según análisis de contraste */
-            --accent: #4df7ff; 
-            --accent-glow: rgba(77, 247, 255, 0.4);
-            --text-main: #ffffff;
-            --text-sub: rgba(255, 255, 255, 0.55);
-            --bg-dark: #020b0d;
+            --accent: #00ffff;
+            --text-sub: rgba(255, 255, 255, 0.6);
         }
 
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            -webkit-tap-highlight-color: transparent;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
 
         body {
-            background-color: var(--bg-dark);
-            color: var(--text-main);
+            background-color: #05070a;
+            color: white;
             width: 100vw;
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
-        }
-
-        /* FONDO DINÁMICO: Efecto de iluminación radial + Desenfoque */
-        .bg-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            background: radial-gradient(circle at 50% 30%, rgba(0, 150, 160, 0.2) 0%, transparent 70%);
+            position: relative;
         }
 
         .bg-blur {
-            position: absolute;
-            top: -10%;
-            left: -10%;
-            width: 120%;
-            height: 120%;
-            background-image: url('https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png');
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            filter: blur(80px) brightness(0.4) saturate(1.2);
-            opacity: 0.6;
+            filter: blur(60px) brightness(0.2);
+            z-index: -1;
+            transition: background-image 0.6s ease-in-out;
         }
 
-        /* HEADER: Navegación superior con indicador flotante */
-        header {
-            padding: 60px 40px 20px;
-            display: flex;
-            gap: 30px;
-            align-items: center;
-            z-index: 10;
-        }
+        header { padding: 50px 30px 10px; display: flex; gap: 20px; z-index: 10; }
+        .nav-item { font-size: 13px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; position: relative; }
+        .nav-item.active { color: white; }
+        .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
-        .nav-item {
-            font-size: 13px;
-            font-weight: 700;
-            color: var(--text-sub);
-            text-decoration: none;
-            letter-spacing: 1.2px;
-            position: relative;
-            transition: color 0.3s;
-        }
+        .hero { padding: 30px 30px 0; z-index: 10; min-height: 160px; }
+        .hero h1 { font-size: 42px; font-weight: 900; line-height: 1; transition: all 0.3s; }
+        .hero p { font-size: 14px; color: var(--text-sub); margin-top: 10px; max-width: 85%; line-height: 1.4; }
+        .hero p b { color: white; }
 
-        .nav-item.active { 
-            color: var(--accent); 
-        }
-
-        .nav-item.active::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 80%;
-            height: 2.5px;
-            background: var(--accent);
-            border-radius: 10px;
-            box-shadow: 0 0 10px var(--accent);
-        }
-
-        /* Contador en la pestaña */
-        .nav-badge {
-            background: rgba(77, 247, 255, 0.2);
-            color: var(--accent);
-            font-size: 10px;
-            padding: 2px 6px;
-            border-radius: 10px;
-            margin-left: 5px;
-            vertical-align: middle;
-        }
-
-        /* HERO SECTION: Tipografía de impacto */
-        .hero {
-            padding: 20px 40px;
-            z-index: 10;
-        }
-
-        .hero h1 {
-            font-size: 52px;
-            font-weight: 800;
-            line-height: 0.95;
-            letter-spacing: -1.5px;
-            margin-bottom: 12px;
-            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.5));
-        }
-
-        .hero p {
-            font-size: 15px;
-            line-height: 1.4;
-            color: var(--text-sub);
-            max-width: 85%;
-        }
-
-        .hero p span {
-            color: var(--text-main);
-            font-weight: 600;
-            cursor: pointer;
-        }
-
-        /* CAROUSEL CENTRAL: Estructura de tarjetas */
-        .main-display {
-            position: absolute;
-            top: 58%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .slider-wrapper {
+            flex: 1;
             display: flex;
             align-items: center;
             justify-content: center;
-            width: 100%;
-            gap: 20px;
-        }
-
-        /* Tarjetas laterales: Más pequeñas y desenfocadas */
-        .side-card {
-            width: 85px;
-            height: 110px;
-            border-radius: 15px;
             overflow: hidden;
-            opacity: 0.35;
-            filter: blur(1px) grayscale(0.5);
-            transition: 0.5s;
-        }
-
-        .side-card img { width: 100%; height: 100%; object-fit: cover; }
-
-        /* Tarjeta Principal: El "Héroe" */
-        .main-card {
-            width: 210px;
-            height: 210px;
-            border-radius: 28px;
             position: relative;
-            padding: 3px;
-            background: linear-gradient(135deg, var(--accent), transparent);
-            box-shadow: 0 0 40px var(--accent-glow);
+            touch-action: pan-y;
         }
 
-        .main-card .inner-img {
-            width: 100%;
-            height: 100%;
-            border-radius: 25px;
+        .cards-container {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
+            will-change: transform;
+        }
+
+        .card {
+            width: 100px;
+            height: 100px;
+            border-radius: 20px;
             overflow: hidden;
-            border: 2px solid rgba(255,255,255,0.1);
+            opacity: 0.2;
+            transition: all 0.5s ease;
+            flex-shrink: 0;
+            transform: scale(0.8);
         }
 
-        .main-card img { width: 100%; height: 100%; object-fit: cover; }
+        .card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* Badge de Ranking: Estilo exacto de la foto */
-        .rank-badge {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: white;
-            color: #000;
-            width: 42px;
-            height: 42px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-            z-index: 5;
-        }
-
-        /* BOTTOM DOCK: Barra de navegación moderna */
-        .bottom-dock {
-            position: fixed;
-            bottom: 35px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 88%;
-            height: 72px;
-            background: rgba(20, 40, 45, 0.4);
-            backdrop-filter: blur(25px) saturate(1.5);
-            -webkit-backdrop-filter: blur(25px) saturate(1.5);
-            border-radius: 35px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            z-index: 100;
-            padding: 0 10px;
-        }
-
-        .dock-icon {
-            width: 24px;
-            height: 24px;
-            opacity: 0.4;
-            transition: 0.3s;
-            cursor: pointer;
-        }
-
-        .dock-icon.active {
+        .card.active {
+            width: 280px;
+            height: 280px;
             opacity: 1;
-            filter: drop-shadow(0 0 8px var(--accent));
+            border: 5px solid var(--accent);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
+            position: relative;
+            transform: scale(1);
         }
 
-        /* SVG Icons Simulation */
-        .icon-shape { fill: white; }
-        .active .icon-shape { fill: var(--accent); }
+        .badge {
+            position: absolute;
+            top: -12px; right: -12px;
+            background: white; color: black;
+            width: 45px; height: 45px; border-radius: 50%;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 22px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+        }
 
+        .dock {
+            position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%);
+            width: 90%; height: 70px; background: rgba(15, 20, 30, 0.85);
+            backdrop-filter: blur(25px); border-radius: 35px;
+            display: flex; justify-content: space-around; align-items: center;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .dock-btn { font-size: 28px; opacity: 0.3; text-decoration: none; color: white; }
+        .dock-btn.active { opacity: 1; color: var(--accent); }
     </style>
 </head>
 <body>
 
-    <div class="bg-container">
-        <div class="bg-blur"></div>
-    </div>
+    <div class="bg-blur" id="bgBlur"></div>
 
     <header>
-        <a href="#" class="nav-item active">LIBRARY <span class="nav-badge">2</span></a>
+        <a href="#" class="nav-item active">LIBRARY</a>
         <a href="#" class="nav-item">ADD NEW</a>
-        <a href="#" class="nav-item">SETTINGS</a>
     </header>
 
     <main class="hero">
-        <h1>Top 10 más jugados</h1>
-        <p>TOP 10 Explorá los juegos más virales y con más jugadores de este mes en la plataforma. <span>[LEER MAS]</span></p>
+        <h1 id="gameTitle">Top 10 más jugados</h1>
+        <p id="gameDesc">Deslizá para ver el ranking.</p>
     </main>
 
-    <div class="main-display">
-        <div class="side-card">
-            <img src="https://i.pinimg.com/736x/8e/1e/8a/8e1e8a2a0a2f1c3a7a9a1a1a1a1a1a1a.jpg">
-        </div>
-        
-        <div class="main-card">
-            <div class="rank-badge">1</div>
-            <div class="inner-img">
+    <div class="slider-wrapper" id="sliderWrapper">
+        <div class="cards-container" id="cardsContainer">
+            
+            <div class="card" 
+                 data-title="Roblox" 
+                 data-desc="<b>TOP 10</b> Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" 
+                 data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
                 <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+                <div class="badge">10</div>
             </div>
-        </div>
 
-        <div class="side-card">
-            <img src="https://m.media-amazon.com/images/I/61m1-v2B8vL._AC_UF894,1000_QL80_.jpg">
+            <div class="card" 
+                 data-title="Minecraft" 
+                 data-desc="<b>TOP 9</b> ¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" 
+                 data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+                <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+                <div class="badge">9</div>
+            </div>
+
         </div>
     </div>
 
-    <nav class="bottom-dock">
-        <div class="dock-icon active">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path class="icon-shape" d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-        </div>
-        <div class="dock-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path class="icon-shape" d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
-        </div>
-        <div class="dock-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path class="icon-shape" d="M21 3H3c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h5v2h8v-2h5c1.1 0 1.99-.9 1.99-2L23 5c0-1.1-.9-2-2-2zm0 14H3V5h18v12z"/></svg>
-        </div>
-        <div class="dock-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path class="icon-shape" d="M20 2H4c-1.1 0-1.99.9-1.99 2L2 22l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-        </div>
-        <div class="dock-icon">
-            <svg viewBox="0 0 24 24" width="28" height="28"><path class="icon-shape" d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>
-        </div>
+    <nav class="dock">
+        <a href="index.html" class="dock-btn active">🏠</a>
+        <a href="#" class="dock-btn">⭐</a>
+        <a href="#" class="dock-btn">📺</a>
+        <a href="#" class="dock-btn">💬</a>
+        <a href="#" class="dock-btn">👤</a>
     </nav>
 
+    <script>
+        const container = document.getElementById('cardsContainer');
+        const cards = document.querySelectorAll('.card');
+        const bgBlur = document.getElementById('bgBlur');
+        const gameTitle = document.getElementById('gameTitle');
+        const gameDesc = document.getElementById('gameDesc');
+        
+        let currentIndex = 0;
+        let startX = 0;
+
+        function updateSlider() {
+            cards.forEach((card, i) => {
+                card.classList.toggle('active', i === currentIndex);
+            });
+            
+            // Cálculo para centrar el elemento activo
+            const cardWidth = 100; 
+            const gap = 25;
+            const screenCenter = window.innerWidth / 2;
+            const offset = screenCenter - (currentIndex * (cardWidth + gap)) - (280 / 2);
+            
+            container.style.transform = `translateX(${offset}px)`;
+            
+            // Actualizar contenido
+            const activeCard = cards[currentIndex];
+            bgBlur.style.backgroundImage = `url('${activeCard.getAttribute('data-img')}')`;
+            gameTitle.innerText = activeCard.getAttribute('data-title');
+            gameDesc.innerHTML = activeCard.getAttribute('data-desc');
+        }
+
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+        });
+
+        container.addEventListener('touchend', (e) => {
+            const endX = e.changedTouches[0].clientX;
+            const diff = startX - endX;
+
+            if (diff > 50 && currentIndex < cards.length - 1) {
+                currentIndex++;
+            } else if (diff < -50 && currentIndex > 0) {
+                currentIndex--;
+            }
+            updateSlider();
+        });
+
+        // Inicializar
+        window.onload = updateSlider;
+        // Ajustar si se rota la pantalla
+        window.onresize = updateSlider;
+    </script>
 </body>
 </html>
