@@ -3,13 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Top 10 más jugados - GDR</title>
+    <title>Top 10 GDR</title>
     <style>
-        :root {
-            --accent: #00ffff;
-            --text-sub: rgba(255, 255, 255, 0.6);
-        }
-
+        :root { --accent: #00ffff; --text-sub: rgba(255, 255, 255, 0.6); }
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
 
         body {
@@ -20,7 +16,6 @@
             overflow: hidden;
             display: flex;
             flex-direction: column;
-            position: relative;
         }
 
         .bg-blur {
@@ -28,209 +23,176 @@
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            filter: blur(60px) brightness(0.2);
+            filter: blur(60px) brightness(0.25);
             z-index: -1;
-            transition: background-image 0.6s ease-in-out;
+            transition: background-image 0.5s ease;
         }
 
-        header { padding: 40px 25px 5px; display: flex; gap: 20px; z-index: 10; }
-        .nav-item { font-size: 13px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; position: relative; }
-        .nav-item.active { color: white; }
-        .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
+        header { padding: 45px 25px 10px; display: flex; gap: 20px; z-index: 10; }
+        .nav-item { font-size: 13px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; }
+        .nav-item.active { color: white; border-bottom: 3px solid var(--accent); padding-bottom: 5px; }
 
-        .hero { padding: 25px 25px 0; z-index: 10; min-height: 140px; }
-        .hero h1 { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
-        .hero p { font-size: 15px; color: var(--text-sub); line-height: 1.3; max-width: 90%; }
+        .hero { padding: 20px 25px; z-index: 10; height: 160px; }
+        .hero h1 { font-size: 42px; font-weight: 900; }
+        .hero p { font-size: 14px; color: var(--text-sub); margin-top: 5px; line-height: 1.4; }
 
-        /* AJUSTE PARA QUE NO SE CORTE */
+        /* NUEVO SISTEMA DE CARRUSEL CENTRADO */
         .slider-wrapper {
             flex: 1;
             display: flex;
             align-items: center;
-            overflow: visible; 
-            position: relative;
-            touch-action: pan-y;
-            width: 100%;
+            overflow-x: auto; /* Scroll horizontal natural */
+            scroll-snap-type: x mandatory; /* Ajuste automático al centro */
+            padding: 0 15%; /* Espacio para que el primero y último queden centrados */
+            scrollbar-width: none; /* Ocultar scroll en Firefox */
         }
+        .slider-wrapper::-webkit-scrollbar { display: none; } /* Ocultar scroll en Chrome/Safari */
 
         .cards-container {
             display: flex;
             align-items: center;
-            gap: 40px; 
-            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
-            will-change: transform;
-            padding: 0 50px; /* Espacio extra a los lados */
+            gap: 20px;
         }
 
         .card {
-            width: 120px; 
-            height: 120px;
+            width: 260px; /* Tamaño fijo para evitar errores de cálculo */
+            height: 260px;
             border-radius: 25px;
             overflow: hidden;
-            opacity: 0.25;
-            transition: all 0.5s ease;
             flex-shrink: 0;
+            scroll-snap-align: center; /* Cada carta se imanta al centro */
+            transition: all 0.4s ease;
+            opacity: 0.3;
             transform: scale(0.8);
-            position: relative;
+            border: 2px solid rgba(255,255,255,0.1);
         }
 
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* TAMAÑO DEL CUADRO CENTRADO */
+        /* CUANDO LA CARTA ESTÁ EN EL CENTRO */
         .card.active {
-            width: 290px; 
-            height: 290px;
             opacity: 1;
+            transform: scale(1.1);
             border: 5px solid var(--accent);
             box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
-            transform: scale(1);
         }
 
         .badge {
-            position: absolute;
-            top: -10px; right: -10px;
+            position: absolute; top: 10px; right: 10px;
             background: white; color: black;
-            width: 45px; height: 45px; border-radius: 50%;
+            width: 40px; height: 40px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 22px;
-            z-index: 5;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            font-weight: 900; font-size: 20px;
         }
 
         .dock {
-            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            width: 90%; height: 75px; background: rgba(15, 20, 30, 0.85);
-            backdrop-filter: blur(30px); border-radius: 40px;
-            display: flex; justify-content: space-around; align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 100;
+            padding: 20px; display: flex; justify-content: space-around;
+            background: rgba(15, 20, 30, 0.8); backdrop-filter: blur(20px);
+            border-radius: 40px 40px 0 0; border-top: 1px solid rgba(255,255,255,0.1);
         }
-
-        .dock-btn { font-size: 30px; opacity: 0.3; text-decoration: none; color: white; }
-        .dock-btn.active { opacity: 1; color: var(--accent); }
+        .dock-btn { font-size: 28px; text-decoration: none; opacity: 0.4; }
+        .dock-btn.active { opacity: 1; filter: drop-shadow(0 0 5px var(--accent)); }
     </style>
 </head>
 <body>
 
-    <div class="bg-blur" id="bgBlur"></div>
+<div class="bg-blur" id="bgBlur"></div>
 
-    <header>
-        <a href="#" class="nav-item active">LIBRARY</a>
-        <a href="#" class="nav-item">ADD NEW</a>
-    </header>
+<header>
+    <a href="#" class="nav-item active">LIBRARY</a>
+    <a href="#" class="nav-item">ADD NEW</a>
+</header>
 
-    <main class="hero">
-        <h1 id="gameTitle">Cargando...</h1>
-        <p id="gameDesc">Deslizá para ver el ranking.</p>
-    </main>
+<main class="hero">
+    <h1 id="gameTitle">Top 10</h1>
+    <p id="gameDesc">Deslizá para navegar el ranking.</p>
+</main>
 
-    <div class="slider-wrapper" id="sliderWrapper">
-        <div class="cards-container" id="cardsContainer">
-            
-            <div class="card" data-title="Roblox" data-desc="<b>TOP 10</b> Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
-                <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
-                <div class="badge">10</div>
-            </div>
-
-            <div class="card" data-title="Minecraft" data-desc="<b>TOP 9</b> ¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
-                <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
-                <div class="badge">9</div>
-            </div>
-
-            <div class="card" data-title="Free Fire" data-desc="<b>TOP 8</b> ¿Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
-                <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
-                <div class="badge">8</div>
-            </div>
-
-            <div class="card" data-title="Fortnite" data-desc="<b>TOP 7</b> ¿Por qué está acá? Es un parque de diversiones gigante. Ya es más una red social que un juego. [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
-                <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
-                <div class="badge">7</div>
-            </div>
-
-            <div class="card" data-title="PUBG Mobile" data-desc="<b>TOP 6</b> ¿Por qué está acá? El padre del género. El favorito de los que buscan algo más táctico. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
-                <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
-                <div class="badge">6</div>
-            </div>
-
-            <div class="card" data-title="Genshin Impact" data-desc="<b>TOP 5</b> ¿Por qué está acá? Metió un juego de consola adentro de un celular. Visualmente es una bestia. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
-                <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
-                <div class="badge">5</div>
-            </div>
-
-            <div class="card" data-title="Warzone Mobile" data-desc="<b>TOP 4</b> ¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Guerra definitiva y unificada. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
-                <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
-                <div class="badge">4</div>
-            </div>
-
-            <div class="card" data-title="Wild Rift" data-desc="<b>TOP 3</b> ¿Por qué está acá? Es la cara de los Esports. Riot domina el móvil con la versión más pulida. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-                <div class="badge">3</div>
-            </div>
-
-            <div class="card" data-title="Among Us" data-desc="<b>TOP 2</b> ¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-                <div class="badge">2</div>
-            </div>
-
-            <div class="card" data-title="Honor of Kings" data-desc="<b>TOP 1</b> ¿Por qué está acá? Es el MOBA que más plata recauda. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-                <div class="badge">1</div>
-            </div>
-
+<div class="slider-wrapper" id="slider">
+    <div class="cards-container">
+        <div class="card" data-title="Honor of Kings" data-desc="TOP 1: El MOBA más exitoso del mundo." data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+            <div class="badge">1</div>
+        </div>
+        <div class="card" data-title="Among Us" data-desc="TOP 2: El juego social que corre en cualquier lado." data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+            <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+            <div class="badge">2</div>
+        </div>
+        <div class="card" data-title="Wild Rift" data-desc="TOP 3: La versión más pulida de League of Legends." data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+            <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+            <div class="badge">3</div>
+        </div>
+        <div class="card" data-title="Warzone Mobile" data-desc="TOP 4: Experiencia unificada con PC y consola." data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+            <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+            <div class="badge">4</div>
+        </div>
+        <div class="card" data-title="Genshin Impact" data-desc="TOP 5: Calidad de consola en la palma de tu mano." data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+            <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+            <div class="badge">5</div>
+        </div>
+        <div class="card" data-title="PUBG Mobile" data-desc="TOP 6: El padre del Battle Royale táctico." data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+            <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+            <div class="badge">6</div>
+        </div>
+        <div class="card" data-title="Fortnite" data-desc="TOP 7: Un parque de diversiones y red social gigante." data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+            <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+            <div class="badge">7</div>
+        </div>
+        <div class="card" data-title="Free Fire" data-desc="TOP 8: El rey indiscutido de la gama baja." data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+            <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+            <div class="badge">8</div>
+        </div>
+        <div class="card" data-title="Minecraft" data-desc="TOP 9: Creatividad infinita sin fronteras." data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+            <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+            <div class="badge">9</div>
+        </div>
+        <div class="card" data-title="Roblox" data-desc="TOP 10: Millones de experiencias en una plataforma." data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+            <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+            <div class="badge">10</div>
         </div>
     </div>
+</div>
 
-    <nav class="dock">
-        <a href="index.html" class="dock-btn active">🏠</a>
-        <a href="#" class="dock-btn">⭐</a>
-        <a href="#" class="dock-btn">📺</a>
-        <a href="#" class="dock-btn">💬</a>
-        <a href="#" class="dock-btn">👤</a>
-    </nav>
+<nav class="dock">
+    <a href="index.html" class="dock-btn active">🏠</a>
+    <a href="#" class="dock-btn">⭐</a>
+    <a href="#" class="dock-btn">📺</a>
+    <a href="#" class="dock-btn">💬</a>
+    <a href="#" class="dock-btn">👤</a>
+</nav>
 
-    <script>
-        const container = document.getElementById('cardsContainer');
-        const cards = document.querySelectorAll('.card');
-        const bgBlur = document.getElementById('bgBlur');
-        const gameTitle = document.getElementById('gameTitle');
-        const gameDesc = document.getElementById('gameDesc');
+<script>
+    const slider = document.getElementById('slider');
+    const cards = document.querySelectorAll('.card');
+    const bgBlur = document.getElementById('bgBlur');
+    const gameTitle = document.getElementById('gameTitle');
+    const gameDesc = document.getElementById('gameDesc');
+
+    const updateActiveCard = () => {
+        const sliderCenter = slider.scrollLeft + (slider.offsetWidth / 2);
         
-        let currentIndex = 0;
-        let startX = 0;
-
-        function updateSlider() {
-            cards.forEach((card, i) => {
-                card.classList.toggle('active', i === currentIndex);
-            });
+        cards.forEach(card => {
+            const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+            const distance = Math.abs(sliderCenter - cardCenter);
             
-            // LÓGICA DE CENTRADO CORREGIDA
-            const screenWidth = window.innerWidth;
-            const cardWidth = 120; 
-            const activeCardWidth = 290;
-            const gap = 40;
-            
-            // Calculamos cuánto se debe mover para que la carta activa esté en el centro exacto
-            const offset = (screenWidth / 2) - (currentIndex * (cardWidth + gap)) - (activeCardWidth / 2);
-            
-            container.style.transform = `translateX(${offset}px)`;
-            
-            const activeCard = cards[currentIndex];
-            bgBlur.style.backgroundImage = `url('${activeCard.getAttribute('data-img')}')`;
-            gameTitle.innerText = activeCard.getAttribute('data-title');
-            gameDesc.innerHTML = activeCard.getAttribute('data-desc');
-        }
-
-        container.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
-        container.addEventListener('touchend', (e) => {
-            const endX = e.changedTouches[0].clientX;
-            const diff = startX - endX;
-            if (diff > 45 && currentIndex < cards.length - 1) currentIndex++;
-            else if (diff < -45 && currentIndex > 0) currentIndex--;
-            updateSlider();
+            if (distance < 150) { // Si la carta está cerca del centro
+                cards.forEach(c => c.classList.remove('active'));
+                card.classList.add('active');
+                
+                // Actualizar info
+                bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
+                gameTitle.innerText = card.dataset.title;
+                gameDesc.innerText = card.dataset.desc;
+            }
         });
+    };
 
-        window.onload = updateSlider;
-        window.onresize = updateSlider;
-    </script>
+    slider.addEventListener('scroll', updateActiveCard);
+    window.onload = () => {
+        slider.scrollLeft = 0; // Empezar en el Top 1
+        updateActiveCard();
+    };
+</script>
+
 </body>
 </html>
