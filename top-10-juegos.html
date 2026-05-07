@@ -32,7 +32,9 @@ body{
     flex-direction:column;
 }
 
-/* ===== FONDO ===== */
+/* ========================= */
+/* FONDO */
+/* ========================= */
 
 .bg-blur{
     position:fixed;
@@ -45,18 +47,18 @@ body{
 
     filter:
         blur(5px)
-        brightness(.72)
+        brightness(.70)
         saturate(1.3)
         contrast(1.12);
 
-    z-index:-4;
+    z-index:-5;
 
     transition:
         background-image .45s ease,
         filter .45s ease;
 }
 
-/* OSCURECE */
+/* OSCURECE CENTRO */
 .dark-layer{
     position:fixed;
     inset:0;
@@ -64,65 +66,65 @@ body{
     background:
         linear-gradient(
             to bottom,
-            rgba(0,0,0,.15),
+            rgba(0,0,0,.18),
             rgba(0,0,0,.30),
-            rgba(0,0,0,.42)
+            rgba(0,0,0,.45)
         );
 
-    z-index:-3;
+    z-index:-4;
 }
 
-/* NIEBLA ARRIBA */
+/* NIEBLA SUPERIOR */
 .top-fog{
     position:fixed;
 
-    top:-120px;
-    left:-20%;
+    top:-140px;
+    left:-25%;
 
-    width:140%;
-    height:420px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,255,255,.22) 0%,
-            rgba(0,180,255,.13) 35%,
-            rgba(0,0,0,0) 72%
-        );
-
-    filter:blur(45px);
-
-    z-index:-2;
-
-    pointer-events:none;
-}
-
-/* NIEBLA ABAJO */
-.bottom-fog{
-    position:fixed;
-
-    bottom:-180px;
-    left:-20%;
-
-    width:140%;
-    height:520px;
+    width:150%;
+    height:430px;
 
     background:
         radial-gradient(
             circle,
             rgba(0,255,255,.24) 0%,
-            rgba(0,180,255,.14) 32%,
+            rgba(0,180,255,.12) 35%,
             rgba(0,0,0,0) 72%
         );
 
-    filter:blur(70px);
+    filter:blur(55px);
 
-    z-index:-2;
+    z-index:-3;
 
     pointer-events:none;
 }
 
-/* BRILLO */
+/* NIEBLA INFERIOR */
+.bottom-fog{
+    position:fixed;
+
+    bottom:-200px;
+    left:-25%;
+
+    width:150%;
+    height:560px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,255,255,.28) 0%,
+            rgba(0,180,255,.14) 35%,
+            rgba(0,0,0,0) 72%
+        );
+
+    filter:blur(80px);
+
+    z-index:-3;
+
+    pointer-events:none;
+}
+
+/* BRILLO GENERAL */
 .light-overlay{
     position:fixed;
     inset:0;
@@ -136,12 +138,63 @@ body{
             rgba(255,255,255,.05)
         );
 
-    z-index:-1;
+    z-index:-2;
 
     pointer-events:none;
 }
 
-/* ===== HEADER ===== */
+/* ========================= */
+/* NUEVO DEGRADADO CELESTE */
+/* ========================= */
+
+.edge-glow{
+    position:fixed;
+    inset:0;
+
+    pointer-events:none;
+
+    z-index:-1;
+
+    background:
+
+    /* SUPERIOR */
+    linear-gradient(
+        to bottom,
+
+        rgba(0,255,255,.36) 0%,
+
+        rgba(0,220,255,.24) 10%,
+
+        rgba(0,180,255,.13) 20%,
+
+        rgba(0,120,255,.06) 30%,
+
+        rgba(0,0,0,0) 44%
+    ),
+
+    /* INFERIOR */
+    linear-gradient(
+        to top,
+
+        rgba(0,255,255,.38) 0%,
+
+        rgba(0,220,255,.24) 10%,
+
+        rgba(0,180,255,.13) 20%,
+
+        rgba(0,120,255,.06) 30%,
+
+        rgba(0,0,0,0) 44%
+    );
+
+    mix-blend-mode:screen;
+
+    opacity:.95;
+}
+
+/* ========================= */
+/* HEADER */
+/* ========================= */
 
 header{
     padding:38px 25px 0;
@@ -165,7 +218,9 @@ header{
     padding-bottom:6px;
 }
 
-/* ===== HERO ===== */
+/* ========================= */
+/* HERO */
+/* ========================= */
 
 .hero{
     padding:18px 25px;
@@ -193,7 +248,7 @@ header{
 
     font-weight:500;
 
-    color:rgba(255,255,255,.86);
+    color:rgba(255,255,255,.88);
 
     max-width:94%;
 
@@ -201,7 +256,9 @@ header{
         0 3px 10px rgba(0,0,0,.65);
 }
 
-/* ===== SLIDER ===== */
+/* ========================= */
+/* SLIDER */
+/* ========================= */
 
 .slider-wrapper{
     flex:1;
@@ -230,7 +287,9 @@ header{
     gap:24px;
 }
 
-/* ===== CARDS ===== */
+/* ========================= */
+/* CARDS */
+/* ========================= */
 
 .card{
     width:285px;
@@ -273,7 +332,9 @@ header{
         0 0 80px rgba(0,255,255,.24);
 }
 
-/* ===== BADGE ===== */
+/* ========================= */
+/* BADGE */
+/* ========================= */
 
 .badge{
     position:absolute;
@@ -300,7 +361,9 @@ header{
     z-index:5;
 }
 
-/* ===== DOCK ===== */
+/* ========================= */
+/* DOCK */
+/* ========================= */
 
 .dock{
     position:fixed;
@@ -367,17 +430,24 @@ header{
 
 <div class="light-overlay"></div>
 
+<div class="edge-glow"></div>
+
 <header>
     <a href="#" class="nav-item active">LIBRARY</a>
     <a href="#" class="nav-item">ADD NEW</a>
+    <a href="#" class="nav-item">SETTINGS</a>
 </header>
 
 <main class="hero">
-    <h1 id="gameTitle">Top 10 más jugados</h1>
+
+    <h1 id="gameTitle">
+        Top 10 más jugados
+    </h1>
 
     <p id="gameDesc">
-        Explorá los juegos más virales y con más jugadores de este mes en la plataforma.
+        TOP 10 Explorá los juegos más virales y con más jugadores de este mes en la plataforma.
     </p>
+
 </main>
 
 <div class="slider-wrapper" id="slider">
