@@ -14,7 +14,6 @@
             --accent: cyan;
         }
 
-        /* RESET PARA PANTALLA COMPLETA */
         * { box-sizing: border-box; }
         
         body {
@@ -25,7 +24,6 @@
             padding: 0;
             width: 100vw;
             min-height: 100vh;
-            display: block; /* Cambiado para que no centre el contenedor */
         }
 
         .app-background-glow {
@@ -48,80 +46,41 @@
             z-index: 2;
         }
 
-        header { 
-            padding: 20px 16px 10px 16px; 
-        }
-        
-        .profile-header { 
-            display: flex; 
-            align-items: center; 
-            gap: 12px; 
-        }
-        
-        .avatar { 
-            width: 45px; 
-            height: 45px; 
-            border-radius: 50%; 
-            background: #2a1740; 
-            border: 2px solid var(--accent); 
-        }
-
+        header { padding: 20px 16px 10px 16px; }
+        .profile-header { display: flex; align-items: center; gap: 12px; }
+        .avatar { width: 45px; height: 45px; border-radius: 50%; border: 2px solid var(--accent); }
         .user-meta h3 { margin: 0; font-size: 18px; font-weight: 700; }
         .user-meta p { margin: 0; font-size: 12px; color: var(--text-sub); }
         .icon-btn { margin-left: auto; background: none; border: none; font-size: 22px; color: var(--text-sub); }
 
-        main { 
-            padding: 0 16px; 
-        }
+        main { padding: 0 16px; }
 
-        /* BANNER PRINCIPAL GRANDE */
         .hero-banner {
             position: relative;
             background-color: var(--bg-panel);
             border-radius: 24px;
             overflow: hidden;
             margin: 16px 0;
-            height: 220px;
+            height: 200px;
             border: 1px solid rgba(255,255,255,0.05);
         }
         .hero-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
         .hero-content { position: absolute; bottom: 16px; left: 16px; right: 16px; }
-        .hero-content h2 { margin: 0; font-size: 24px; color: #fff; }
-        .hero-content p { margin: 6px 0; font-size: 13px; color: #ccc; line-height: 1.4; }
-        .price-tag { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
-        .discount { background-color: #28a745; color: white; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
+        .hero-content h2 { margin: 0; font-size: 22px; color: #fff; }
+        .hero-content p { margin: 4px 0; font-size: 12px; color: #ccc; }
+        .discount { background-color: #28a745; color: white; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; display: inline-block; margin-top: 5px;}
 
-        /* FILTROS */
-        .filters-nav { 
-            display: flex; 
-            gap: 12px; 
-            margin: 20px 0; 
-            overflow-x: auto; 
-            padding-bottom: 5px;
-            scrollbar-width: none; 
-        }
+        .filters-nav { display: flex; gap: 12px; margin: 20px 0; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
         .filters-nav::-webkit-scrollbar { display: none; }
-        .pill { 
-            background: rgba(255,255,255,0.05); 
-            border: none; 
-            color: var(--text-sub); 
-            font-size: 13px; 
-            white-space: nowrap; 
-            padding: 10px 20px; 
-            border-radius: 50px; 
-        }
-        .pill.active { 
-            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); 
-            color: white; 
-            font-weight: 600;
-        }
+        .pill { background: rgba(255,255,255,0.05); border: none; color: var(--text-sub); font-size: 13px; white-space: nowrap; padding: 10px 20px; border-radius: 50px; }
+        .pill.active { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); color: white; }
 
-        /* GRILLA DE TARJETAS (UNA SOLA COLUMNA PARA QUE SE VEA GRANDE) */
+        /* GRILLA DE TARJETAS MODIFICADA */
         .wiki-grid { 
             display: grid; 
             grid-template-columns: 1fr; 
             gap: 20px; 
-            padding-bottom: 120px; /* Espacio para el dock */
+            padding-bottom: 120px; 
         }
 
         .wiki-card {
@@ -130,23 +89,18 @@
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
         }
-        .wiki-card img { 
-            width: 100%; 
-            height: 200px; 
-            object-fit: cover; 
-        }
+        .wiki-card img { width: 100%; height: 180px; object-fit: cover; }
         .card-info { padding: 16px; }
-        .card-info h4 { margin: 0; font-size: 16px; color: var(--text-main); }
+        .card-info h4 { margin: 0; font-size: 17px; color: var(--text-main); }
         .card-info p { margin: 6px 0 0 0; font-size: 13px; color: var(--text-sub); line-height: 1.4; }
 
-        /* BARRA INFERIOR (DOCK) */
         .dock-bar {
             position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             width: 90%;
-            background-color: rgba(26, 29, 46, 0.85);
+            background-color: rgba(26, 29, 46, 0.9);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             border-radius: 30px;
@@ -180,15 +134,15 @@
       <img src="https://fastcdn.hoyoverse.com/content-v2/plat/123439/c39dd0699f78411122c6c9797d57a592_7063500647883927830.jpeg" alt="Genshin Impact" class="hero-img">
       <div class="hero-content">
         <h2>Genshin Impact</h2>
-        <p>Mundo abierto inspirado en diversas culturas reales.</p>
-        <div class="price-tag"><span class="discount">Dato Pro</span> Wiki Activa</div>
+        <p>Wiki activa: Guías de personajes y farmeo.</p>
+        <div class="discount">Dato Pro</div>
       </div>
     </div>
 
     <nav class="filters-nav">
-      <button class="pill active">Top Tendencias</button>
-      <button class="pill">Más Comprados</button>
-      <button class="pill">Roblox Scripts</button>
+      <button class="pill active">Tendencias</button>
+      <button class="pill">Roblox</button>
+      <button class="pill">Setups</button>
     </nav>
 
     <div class="wiki-grid">
@@ -196,24 +150,32 @@
       <div class="wiki-card">
         <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" alt="Roblox">
         <div class="card-info">
-          <h4>Roblox Dev</h4>
-          <p>Trucos de scripting y GFX para creadores. Aprende a monetizar tus juegos.</p>
+          <h4>Top 10 Juegos más famosos</h4>
+          <p>Descubrí cuáles son los títulos que están rompiendo récords en Roblox este mes.</p>
         </div>
       </div>
 
       <div class="wiki-card">
-        <img src="https://www.eclypse.com.ar/Temp/App_WebSite/App_PictureFiles/Content/21_800.jpg" alt="PC Gaming">
+        <img src="https://www.eclypse.com.ar/Temp/App_WebSite/App_PictureFiles/Content/21_800.jpg" alt="Set Up">
         <div class="card-info">
-          <h4>Builds 2026</h4>
-          <p>Las mejores configuraciones calidad-precio para armar tu PC este año.</p>
+          <h4>Set Up</h4>
+          <p>Mejores Set Up calidad-precio del 2026 para potenciar tu espacio.</p>
         </div>
       </div>
 
       <div class="wiki-card">
-        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600" alt="Hardware">
+        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600" alt="Componentes">
         <div class="card-info">
-          <h4>Componentes Pro</h4>
-          <p>Análisis de los últimos procesadores y placas de video del mercado.</p>
+          <h4>Productos más comprados</h4>
+          <p>El hardware y los periféricos que todos los gamers están eligiendo hoy.</p>
+        </div>
+      </div>
+
+      <div class="wiki-card">
+        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&q=80&w=600" alt="Juegos">
+        <div class="card-info">
+          <h4>Top 10 Juegos destacados</h4>
+          <p>Los juegos imprescindibles que tenés que probar en tu nueva configuración.</p>
         </div>
       </div>
 
