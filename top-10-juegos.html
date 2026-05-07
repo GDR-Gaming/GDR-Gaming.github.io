@@ -38,8 +38,8 @@
         .nav-item.active { color: white; }
         .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
-        .hero { padding: 30px 30px 0; z-index: 10; min-height: 160px; }
-        .hero h1 { font-size: 42px; font-weight: 900; line-height: 1; transition: all 0.3s; }
+        .hero { padding: 30px 30px 0; z-index: 10; min-height: 180px; }
+        .hero h1 { font-size: 40px; font-weight: 900; line-height: 1; transition: all 0.3s; }
         .hero p { font-size: 14px; color: var(--text-sub); margin-top: 10px; max-width: 85%; line-height: 1.4; }
         .hero p b { color: white; }
 
@@ -92,6 +92,7 @@
             display: flex; align-items: center; justify-content: center;
             font-weight: 900; font-size: 22px;
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+            z-index: 2;
         }
 
         .dock {
@@ -117,26 +118,60 @@
 
     <main class="hero">
         <h1 id="gameTitle">Top 10 más jugados</h1>
-        <p id="gameDesc">Deslizá para ver el ranking.</p>
+        <p id="gameDesc">Deslizá para ver el ranking completo.</p>
     </main>
 
     <div class="slider-wrapper" id="sliderWrapper">
         <div class="cards-container" id="cardsContainer">
             
-            <div class="card" 
-                 data-title="Roblox" 
-                 data-desc="<b>TOP 10</b> Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" 
-                 data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+            <div class="card" data-title="Roblox" data-desc="<b>TOP 10</b> Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
                 <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
                 <div class="badge">10</div>
             </div>
 
-            <div class="card" 
-                 data-title="Minecraft" 
-                 data-desc="<b>TOP 9</b> ¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" 
-                 data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+            <div class="card" data-title="Minecraft" data-desc="<b>TOP 9</b> ¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
                 <img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
                 <div class="badge">9</div>
+            </div>
+
+            <div class="card" data-title="Free Fire" data-desc="<b>TOP 8</b> ¿Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar si tienen un celu viejo [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+                <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+                <div class="badge">8</div>
+            </div>
+
+            <div class="card" data-title="Fortnite" data-desc="<b>TOP 7</b> ¿Por qué está acá? Es un parque de diversiones gigante. Entre el modo LEGO y los conciertos, ya es más una red social que un juego [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+                <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+                <div class="badge">7</div>
+            </div>
+
+            <div class="card" data-title="PUBG Mobile" data-desc="<b>TOP 6</b> ¿Por qué está acá? El padre del género. Su comunidad es gigantesca y es el favorito de los que buscan un Battle Royale más táctico. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+                <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+                <div class="badge">6</div>
+            </div>
+
+            <div class="card" data-title="Genshin Impact" data-desc="<b>TOP 5</b> ¿Por qué está acá? Fue el primero en meter un juego de consola adentro de un celular. Visualmente es una bestia que no baja del top. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+                <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+                <div class="badge">5</div>
+            </div>
+
+            <div class="card" data-title="Warzone Mobile" data-desc="<b>TOP 4</b> ¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Es la experiencia de guerra definitiva y unificada en 2026. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+                <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+                <div class="badge">4</div>
+            </div>
+
+            <div class="card" data-title="Wild Rift" data-desc="<b>TOP 3</b> ¿Por qué está acá? Es la cara de los Esports. Riot domina la PC con el original y el móvil con la versión más pulida que existe. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+                <div class="badge">3</div>
+            </div>
+
+            <div class="card" data-title="Among Us" data-desc="<b>TOP 2</b> ¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente de PC y celu. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+                <div class="badge">2</div>
+            </div>
+
+            <div class="card" data-title="Honor of Kings" data-desc="<b>TOP 1</b> ¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+                <div class="badge">1</div>
             </div>
 
         </div>
@@ -165,7 +200,6 @@
                 card.classList.toggle('active', i === currentIndex);
             });
             
-            // Cálculo para centrar el elemento activo
             const cardWidth = 100; 
             const gap = 25;
             const screenCenter = window.innerWidth / 2;
@@ -173,32 +207,22 @@
             
             container.style.transform = `translateX(${offset}px)`;
             
-            // Actualizar contenido
             const activeCard = cards[currentIndex];
             bgBlur.style.backgroundImage = `url('${activeCard.getAttribute('data-img')}')`;
             gameTitle.innerText = activeCard.getAttribute('data-title');
             gameDesc.innerHTML = activeCard.getAttribute('data-desc');
         }
 
-        container.addEventListener('touchstart', (e) => {
-            startX = e.touches[0].clientX;
-        });
-
+        container.addEventListener('touchstart', (e) => startX = e.touches[0].clientX);
         container.addEventListener('touchend', (e) => {
             const endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-
-            if (diff > 50 && currentIndex < cards.length - 1) {
-                currentIndex++;
-            } else if (diff < -50 && currentIndex > 0) {
-                currentIndex--;
-            }
+            if (diff > 50 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff < -50 && currentIndex > 0) currentIndex--;
             updateSlider();
         });
 
-        // Inicializar
         window.onload = updateSlider;
-        // Ajustar si se rota la pantalla
         window.onresize = updateSlider;
     </script>
 </body>
