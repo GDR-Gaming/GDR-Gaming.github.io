@@ -39,50 +39,50 @@
         .nav-item.active::after { content: ''; position: absolute; bottom: -8px; left: 0; width: 100%; height: 3px; background: var(--accent); box-shadow: 0 0 15px var(--accent); }
 
         .hero { padding: 25px 25px 0; z-index: 10; min-height: 140px; }
-        .hero h1 { font-size: 48px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
+        .hero h1 { font-size: 44px; font-weight: 900; line-height: 1; margin-bottom: 8px; }
         .hero p { font-size: 15px; color: var(--text-sub); line-height: 1.3; max-width: 90%; }
-        .hero p b { color: white; }
 
-        /* AJUSTE DEL TAMAÑO DEL CARRUSEL */
+        /* AJUSTE PARA QUE NO SE CORTE */
         .slider-wrapper {
             flex: 1;
             display: flex;
             align-items: center;
-            overflow: visible; /* Para que no corte las sombras */
+            overflow: visible; 
             position: relative;
             touch-action: pan-y;
+            width: 100%;
         }
 
         .cards-container {
             display: flex;
             align-items: center;
-            gap: 35px; /* Más espacio entre juegos */
-            transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); /* Efecto rebote suave */
+            gap: 40px; 
+            transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1);
             will-change: transform;
-            padding-left: 50%; /* Ayuda al centrado */
+            padding: 0 50px; /* Espacio extra a los lados */
         }
 
         .card {
-            width: 140px; /* Mucho más grandes que antes */
-            height: 140px;
+            width: 120px; 
+            height: 120px;
             border-radius: 25px;
             overflow: hidden;
-            opacity: 0.3;
+            opacity: 0.25;
             transition: all 0.5s ease;
             flex-shrink: 0;
-            transform: scale(0.85);
+            transform: scale(0.8);
             position: relative;
         }
 
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* EL JUEGO SELECCIONADO: AHORA SÍ ES GRANDE */
+        /* TAMAÑO DEL CUADRO CENTRADO */
         .card.active {
-            width: 310px; /* Tamaño máximo para que destaque */
-            height: 310px;
+            width: 290px; 
+            height: 290px;
             opacity: 1;
-            border: 6px solid var(--accent);
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.5);
+            border: 5px solid var(--accent);
+            box-shadow: 0 0 40px rgba(0, 255, 255, 0.4);
             transform: scale(1);
         }
 
@@ -90,23 +90,23 @@
             position: absolute;
             top: -10px; right: -10px;
             background: white; color: black;
-            width: 50px; height: 50px; border-radius: 50%;
+            width: 45px; height: 45px; border-radius: 50%;
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 24px;
+            font-weight: 900; font-size: 22px;
             z-index: 5;
             box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         .dock {
             position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%);
-            width: 92%; height: 75px; background: rgba(15, 20, 30, 0.85);
+            width: 90%; height: 75px; background: rgba(15, 20, 30, 0.85);
             backdrop-filter: blur(30px); border-radius: 40px;
             display: flex; justify-content: space-around; align-items: center;
             border: 1px solid rgba(255, 255, 255, 0.1);
             z-index: 100;
         }
 
-        .dock-btn { font-size: 32px; opacity: 0.3; text-decoration: none; color: white; }
+        .dock-btn { font-size: 30px; opacity: 0.3; text-decoration: none; color: white; }
         .dock-btn.active { opacity: 1; color: var(--accent); }
     </style>
 </head>
@@ -203,11 +203,14 @@
                 card.classList.toggle('active', i === currentIndex);
             });
             
-            const cardWidth = 140; 
-            const gap = 35;
-            const screenCenter = window.innerWidth / 2;
-            // Cálculo para que el centro de la carta activa coincida con el centro de la pantalla
-            const offset = screenCenter - (currentIndex * (cardWidth + gap)) - (310 / 2);
+            // LÓGICA DE CENTRADO CORREGIDA
+            const screenWidth = window.innerWidth;
+            const cardWidth = 120; 
+            const activeCardWidth = 290;
+            const gap = 40;
+            
+            // Calculamos cuánto se debe mover para que la carta activa esté en el centro exacto
+            const offset = (screenWidth / 2) - (currentIndex * (cardWidth + gap)) - (activeCardWidth / 2);
             
             container.style.transform = `translateX(${offset}px)`;
             
@@ -221,8 +224,8 @@
         container.addEventListener('touchend', (e) => {
             const endX = e.changedTouches[0].clientX;
             const diff = startX - endX;
-            if (diff > 40 && currentIndex < cards.length - 1) currentIndex++;
-            else if (diff < -40 && currentIndex > 0) currentIndex--;
+            if (diff > 45 && currentIndex < cards.length - 1) currentIndex++;
+            else if (diff < -45 && currentIndex > 0) currentIndex--;
             updateSlider();
         });
 
