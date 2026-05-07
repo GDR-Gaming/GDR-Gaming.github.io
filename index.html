@@ -14,105 +14,149 @@
             --accent: cyan;
         }
 
+        /* RESET PARA PANTALLA COMPLETA */
+        * { box-sizing: border-box; }
+        
         body {
             background-color: var(--bg-deep);
             color: var(--text-main);
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
             margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+            padding: 0;
+            width: 100vw;
             min-height: 100vh;
-            /* Quitamos el overflow hidden para que se pueda scrollear en el celu */
+            display: block; /* Cambiado para que no centre el contenedor */
         }
 
         .app-background-glow {
             position: fixed;
-            top: -100px;
-            left: -100px;
-            width: 300px;
-            height: 300px;
-            background: radial-gradient(circle, rgba(0, 255, 255, 0.15) 0%, rgba(112, 0, 255, 0.05) 50%, rgba(0, 0, 0, 0) 70%);
-            filter: blur(50px);
+            top: -50px;
+            right: -50px;
+            width: 250px;
+            height: 250px;
+            background: radial-gradient(circle, rgba(0, 255, 255, 0.1) 0%, rgba(0, 0, 0, 0) 70%);
+            filter: blur(40px);
             z-index: 1;
+            pointer-events: none;
         }
 
         .app-container {
             width: 100%;
-            max-width: 450px; /* Un poco más ancho para que luzca en PC */
-            height: 95vh;
+            min-height: 100vh;
             background-color: var(--bg-deep);
-            border-radius: 30px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
-            overflow: hidden;
             position: relative;
             z-index: 2;
-            border: 1px solid rgba(255,255,255,0.05);
         }
 
-        header { padding: 20px; padding-bottom: 0; }
-        .profile-header { display: flex; align-items: center; gap: 12px; }
-        .avatar { width: 42px; height: 42px; border-radius: 50%; background: #2a1740; border: 1px solid var(--accent); }
-        .user-meta h3 { margin: 0; font-size: 16px; }
+        header { 
+            padding: 20px 16px 10px 16px; 
+        }
+        
+        .profile-header { 
+            display: flex; 
+            align-items: center; 
+            gap: 12px; 
+        }
+        
+        .avatar { 
+            width: 45px; 
+            height: 45px; 
+            border-radius: 50%; 
+            background: #2a1740; 
+            border: 2px solid var(--accent); 
+        }
+
+        .user-meta h3 { margin: 0; font-size: 18px; font-weight: 700; }
         .user-meta p { margin: 0; font-size: 12px; color: var(--text-sub); }
-        .icon-btn { margin-left: auto; background: none; border: none; font-size: 18px; color: var(--text-sub); cursor: pointer; }
+        .icon-btn { margin-left: auto; background: none; border: none; font-size: 22px; color: var(--text-sub); }
 
-        main { padding: 0 16px; overflow-y: auto; height: calc(100% - 140px); scrollbar-width: none; }
-        main::-webkit-scrollbar { display: none; }
+        main { 
+            padding: 0 16px; 
+        }
 
+        /* BANNER PRINCIPAL GRANDE */
         .hero-banner {
             position: relative;
             background-color: var(--bg-panel);
-            border-radius: 20px;
+            border-radius: 24px;
             overflow: hidden;
             margin: 16px 0;
-            height: 180px;
+            height: 220px;
             border: 1px solid rgba(255,255,255,0.05);
         }
         .hero-img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.6); }
-        .hero-content { position: absolute; bottom: 12px; left: 16px; right: 16px; }
-        .hero-content h2 { margin: 0; font-size: 20px; color: #fff; }
-        .hero-content p { margin: 4px 0; font-size: 11px; color: #ccc; }
-        .price-tag { display: flex; align-items: center; gap: 6px; font-size: 12px; font-weight: bold; margin-top: 5px; }
-        .discount { background-color: #28a745; color: white; padding: 2px 6px; border-radius: 4px; font-size: 10px; }
+        .hero-content { position: absolute; bottom: 16px; left: 16px; right: 16px; }
+        .hero-content h2 { margin: 0; font-size: 24px; color: #fff; }
+        .hero-content p { margin: 6px 0; font-size: 13px; color: #ccc; line-height: 1.4; }
+        .price-tag { display: flex; align-items: center; gap: 8px; margin-top: 8px; }
+        .discount { background-color: #28a745; color: white; padding: 3px 8px; border-radius: 6px; font-size: 11px; font-weight: bold; }
 
-        .filters-nav { display: flex; gap: 10px; margin: 16px 0; overflow-x: auto; padding-bottom: 5px; scrollbar-width: none; }
-        .pill { background: rgba(255,255,255,0.05); border: none; color: var(--text-sub); font-size: 12px; white-space: nowrap; padding: 8px 16px; cursor: pointer; border-radius: 50px; }
-        .pill.active { background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); color: white; }
+        /* FILTROS */
+        .filters-nav { 
+            display: flex; 
+            gap: 12px; 
+            margin: 20px 0; 
+            overflow-x: auto; 
+            padding-bottom: 5px;
+            scrollbar-width: none; 
+        }
+        .filters-nav::-webkit-scrollbar { display: none; }
+        .pill { 
+            background: rgba(255,255,255,0.05); 
+            border: none; 
+            color: var(--text-sub); 
+            font-size: 13px; 
+            white-space: nowrap; 
+            padding: 10px 20px; 
+            border-radius: 50px; 
+        }
+        .pill.active { 
+            background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); 
+            color: white; 
+            font-weight: 600;
+        }
 
-        .wiki-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding-bottom: 100px; }
+        /* GRILLA DE TARJETAS (UNA SOLA COLUMNA PARA QUE SE VEA GRANDE) */
+        .wiki-grid { 
+            display: grid; 
+            grid-template-columns: 1fr; 
+            gap: 20px; 
+            padding-bottom: 120px; /* Espacio para el dock */
+        }
+
         .wiki-card {
             background-color: var(--bg-panel);
-            border-radius: 16px;
+            border-radius: 20px;
             overflow: hidden;
             border: 1px solid rgba(255,255,255,0.05);
-            transition: transform 0.2s;
-            cursor: pointer;
         }
-        .wiki-card:hover { transform: translateY(-5px); border-color: var(--accent); }
-        .wiki-card img { width: 100%; height: 110px; object-fit: cover; }
-        .card-info { padding: 10px; }
-        .card-info h4 { margin: 0; font-size: 13px; color: var(--text-main); }
-        .card-info p { margin: 4px 0; font-size: 10px; color: var(--text-sub); line-height: 1.3; }
+        .wiki-card img { 
+            width: 100%; 
+            height: 200px; 
+            object-fit: cover; 
+        }
+        .card-info { padding: 16px; }
+        .card-info h4 { margin: 0; font-size: 16px; color: var(--text-main); }
+        .card-info p { margin: 6px 0 0 0; font-size: 13px; color: var(--text-sub); line-height: 1.4; }
 
+        /* BARRA INFERIOR (DOCK) */
         .dock-bar {
-            position: absolute;
+            position: fixed;
             bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 85%;
-            background-color: rgba(26, 29, 46, 0.8);
+            width: 90%;
+            background-color: rgba(26, 29, 46, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
-            border-radius: 50px;
+            border-radius: 30px;
             display: flex;
             justify-content: space-around;
-            padding: 12px;
+            padding: 15px;
             border: 1px solid rgba(255,255,255,0.1);
-            z-index: 10;
+            z-index: 100;
         }
-        .dock-icon { cursor: pointer; }
-        .dock-icon i { font-size: 22px; color: var(--text-sub); opacity: 0.6; transition: 0.3s; }
+        .dock-icon i { font-size: 24px; color: var(--text-sub); opacity: 0.6; }
         .dock-icon.active i { opacity: 1; color: var(--accent); }
     </style>
 </head>
@@ -153,7 +197,7 @@
         <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" alt="Roblox">
         <div class="card-info">
           <h4>Roblox Dev</h4>
-          <p>Trucos de scripting y GFX para creadores.</p>
+          <p>Trucos de scripting y GFX para creadores. Aprende a monetizar tus juegos.</p>
         </div>
       </div>
 
@@ -161,23 +205,15 @@
         <img src="https://www.eclypse.com.ar/Temp/App_WebSite/App_PictureFiles/Content/21_800.jpg" alt="PC Gaming">
         <div class="card-info">
           <h4>Builds 2026</h4>
-          <p>Las mejores configuraciones calidad-precio.</p>
+          <p>Las mejores configuraciones calidad-precio para armar tu PC este año.</p>
         </div>
       </div>
 
       <div class="wiki-card">
-        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=300" alt="Hardware">
+        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600" alt="Hardware">
         <div class="card-info">
-          <h4>Componentes</h4>
-          <p>Lo último en procesadores y GPUs.</p>
-        </div>
-      </div>
-
-      <div class="wiki-card">
-        <img src="https://images.unsplash.com/photo-1612287230202-1ff1d85d1bdf?auto=format&fit=crop&q=80&w=300" alt="Setup">
-        <div class="card-info">
-          <h4>Setups Gamers</h4>
-          <p>Inspiración para tu zona de juego.</p>
+          <h4>Componentes Pro</h4>
+          <p>Análisis de los últimos procesadores y placas de video del mercado.</p>
         </div>
       </div>
 
