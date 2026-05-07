@@ -6,30 +6,29 @@
     <title>Top 10 más jugados - GDR</title>
     <style>
         :root {
-            --bg-color: #0b0d17;
-            --text-main: #ffffff;
-            --text-sub: rgba(255, 255, 255, 0.6);
             --accent: #00ffff;
+            --text-sub: rgba(255, 255, 255, 0.7);
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
         }
 
         body {
-            background-color: var(--bg-color);
-            color: var(--text-main);
+            background-color: #05070a;
+            color: white;
             width: 100vw;
             height: 100vh;
             overflow: hidden;
             display: flex;
             flex-direction: column;
+            position: relative;
         }
 
-        /* FONDO DIFUMINADO EXACTO A LA IMAGEN */
+        /* FONDO DIFUMINADO DINÁMICO */
         .bg-blur {
             position: fixed;
             top: 0;
@@ -39,125 +38,101 @@
             background-image: url('https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png');
             background-size: cover;
             background-position: center;
-            filter: blur(40px) brightness(0.4);
+            filter: blur(50px) brightness(0.3);
             z-index: -1;
             transform: scale(1.2);
         }
 
-        .main-container {
-            padding: 40px 24px;
+        /* NAVEGACIÓN SUPERIOR (MÁS CHICA) */
+        header {
             display: flex;
-            flex-direction: column;
-            height: 100%;
-        }
-
-        /* NAVEGACIÓN SUPERIOR (LIBRARY, ADD NEW, SETTINGS) */
-        .top-nav {
-            display: flex;
-            justify-content: flex-start;
-            gap: 25px;
-            margin-bottom: 50px;
+            gap: 20px;
+            padding: 25px 20px 10px;
         }
 
         .nav-item {
-            font-size: 13px;
-            font-weight: 800;
+            font-size: 11px;
+            font-weight: 900;
             color: var(--text-sub);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
+            letter-spacing: 1px;
             text-decoration: none;
             position: relative;
         }
 
         .nav-item.active {
-            color: var(--text-main);
+            color: white;
         }
 
         .nav-item.active::after {
             content: '';
             position: absolute;
-            bottom: -6px;
+            bottom: -5px;
             left: 0;
             width: 100%;
             height: 2px;
             background: var(--accent);
-            box-shadow: 0 0 10px var(--accent);
+            box-shadow: 0 0 8px var(--accent);
         }
 
-        .badge {
-            font-size: 10px;
-            background: var(--accent);
-            color: #000;
-            padding: 2px 5px;
-            border-radius: 10px;
-            position: absolute;
-            top: -8px;
-            right: -15px;
+        /* TÍTULO Y DESCRIPCIÓN (AJUSTADOS) */
+        .hero {
+            padding: 20px 20px;
         }
 
-        /* TÍTULO Y DESCRIPCIÓN */
-        .content-header h1 {
-            font-size: 52px;
+        .hero h1 {
+            font-size: 42px; /* Reducido para que no ocupe toda la pantalla */
             font-weight: 900;
+            margin-bottom: 8px;
             line-height: 1;
-            margin-bottom: 15px;
-            letter-spacing: -1px;
         }
 
-        .content-header p {
-            font-size: 15px;
+        .hero p {
+            font-size: 13px;
             color: var(--text-sub);
-            line-height: 1.5;
-            max-width: 90%;
+            line-height: 1.4;
+            max-width: 85%;
         }
 
-        .content-header p span {
-            color: var(--text-main);
-            font-weight: bold;
-        }
+        .hero p b { color: white; }
 
-        /* GRILLA DE JUEGOS (EL CARRUSEL CENTRAL) */
-        .game-selector {
+        /* CARRUSEL DE JUEGOS (POSICIÓN CENTRAL) */
+        .game-carousel {
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 15px;
-            margin-top: auto;
-            margin-bottom: 100px;
+            gap: 12px;
+            margin-top: 20px;
         }
 
-        .game-card {
-            width: 80px;
-            height: 80px;
-            border-radius: 18px;
+        .card {
+            width: 85px;
+            height: 85px;
+            border-radius: 15px;
             overflow: hidden;
-            opacity: 0.4;
-            transition: all 0.3s ease;
+            opacity: 0.3;
         }
 
-        .game-card.main {
-            width: 160px;
-            height: 160px;
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* EL CUADRADO CENTRAL GRANDE */
+        .card.active {
+            width: 145px;
+            height: 145px;
             opacity: 1;
             border: 3px solid var(--accent);
-            box-shadow: 0 0 25px rgba(0, 255, 255, 0.4);
+            box-shadow: 0 0 20px rgba(0, 255, 255, 0.4);
             position: relative;
         }
 
-        .game-card img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .notif-bubble {
+        .notif {
             position: absolute;
-            top: -8px;
-            right: -8px;
-            background: #fff;
-            color: #000;
-            width: 28px;
-            height: 28px;
+            top: -10px;
+            right: -10px;
+            background: white;
+            color: black;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
@@ -166,41 +141,25 @@
             font-size: 14px;
         }
 
-        /* DOCK INFERIOR (ESTILO IOS/CONSOLE) */
-        .bottom-dock {
+        /* DOCK INFERIOR (MÁS ALTO PARA QUE SE VEA) */
+        .dock {
             position: fixed;
-            bottom: 25px;
+            bottom: 30px;
             left: 50%;
             transform: translateX(-50%);
-            width: 90%;
-            height: 65px;
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(20px);
-            border-radius: 35px;
+            width: 85%;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            border-radius: 30px;
             display: flex;
             justify-content: space-around;
             align-items: center;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
 
-        .dock-icon {
-            font-size: 24px;
-            opacity: 0.4;
-            color: white;
-            text-decoration: none;
-        }
-
-        .dock-icon.active {
-            opacity: 1;
-            color: var(--accent);
-            background: rgba(0, 255, 255, 0.1);
-            width: 45px;
-            height: 45px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 15px;
-        }
+        .dock-btn { font-size: 22px; opacity: 0.5; text-decoration: none; color: white; }
+        .dock-btn.active { opacity: 1; color: var(--accent); }
 
     </style>
 </head>
@@ -208,41 +167,39 @@
 
 <div class="bg-blur"></div>
 
-<div class="main-container">
-    <nav class="top-nav">
-        <a href="#" class="nav-item active">LIBRARY <span class="badge">2</span></a>
-        <a href="#" class="nav-item">ADD NEW</a>
-        <a href="#" class="nav-item">SETTINGS</a>
-    </nav>
+<header>
+    <a href="#" class="nav-item active">LIBRARY</a>
+    <a href="#" class="nav-item">ADD NEW</a>
+    <a href="#" class="nav-item">SETTINGS</a>
+</header>
 
-    <div class="content-header">
-        <h1>Top 10 más jugados</h1>
-        <p><span>TOP 10</span> Explorá los juegos más virales y con más jugadores de este mes en la plataforma. [LEER MAS]</p>
+<main class="hero">
+    <h1>Top 10 más jugados</h1>
+    <p><b>TOP 10</b> Explorá los juegos más virales y con más jugadores de este mes en la plataforma. [LEER MAS]</p>
+</main>
+
+<div class="game-carousel">
+    <div class="card">
+        <img src="https://i.pinimg.com/736x/0a/7b/7e/0a7b7e8d1a2b3c4d5e6f7g8h9i0j1k2l.jpg" alt="Prev">
     </div>
 
-    <div class="game-selector">
-        <div class="game-card">
-            <img src="https://i.pinimg.com/736x/8e/1e/8a/8e1e8a2a0a2f1c3a7a9a1a1a1a1a1a1a.jpg" alt="Anterior">
-        </div>
-
-        <div class="game-card main">
-            <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" alt="Roblox">
-            <div class="notif-bubble">1</div>
-        </div>
-
-        <div class="game-card">
-            <img src="https://m.media-amazon.com/images/I/61m1-v2B8vL._AC_UF894,1000_QL80_.jpg" alt="Siguiente">
-        </div>
+    <div class="card active">
+        <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" alt="Roblox">
+        <div class="notif">1</div>
     </div>
 
-    <div class="bottom-dock">
-        <a href="index.html" class="dock-icon active">🏠</a>
-        <a href="#" class="dock-icon">★</a>
-        <a href="#" class="dock-icon">🖥️</a>
-        <a href="#" class="dock-icon">💬</a>
-        <a href="#" class="dock-icon">👤</a>
+    <div class="card">
+        <img src="https://m.media-amazon.com/images/I/61m1-v2B8vL._AC_UF894,1000_QL80_.jpg" alt="Next">
     </div>
 </div>
+
+<nav class="dock">
+    <a href="index.html" class="dock-btn active">🏠</a>
+    <a href="#" class="dock-btn">★</a>
+    <a href="#" class="dock-btn">📺</a>
+    <a href="#" class="dock-btn">💬</a>
+    <a href="#" class="dock-btn">👤</a>
+</nav>
 
 </body>
 </html>
