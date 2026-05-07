@@ -18,19 +18,17 @@
             flex-direction: column;
         }
 
-        /* EFECTO DE FONDO: RECONOCIBLE PERO SUAVE */
         .bg-blur {
             position: fixed;
             top: 0; left: 0; width: 100%; height: 100%;
             background-size: cover;
             background-position: center;
-            /* Bajamos el desenfoque para que se note la foto de fondo */
-            filter: blur(10px) brightness(0.3); 
+            filter: blur(60px) brightness(0.25);
             z-index: -1;
-            transition: background-image 0.6s ease-in-out;
-            transform: scale(1.1);
+            transition: background-image 0.5s ease;
         }
 
+        /* SUBIMOS TODO EL TEXTO PARA GANAR ESPACIO ABAJO */
         header { padding: 30px 25px 0; display: flex; gap: 20px; z-index: 10; }
         .nav-item { font-size: 11px; font-weight: 900; color: var(--text-sub); text-decoration: none; text-transform: uppercase; }
         .nav-item.active { color: white; border-bottom: 2px solid var(--accent); padding-bottom: 3px; }
@@ -39,20 +37,22 @@
         .hero h1 { font-size: 36px; font-weight: 900; line-height: 1; }
         .hero p { font-size: 13px; color: var(--text-sub); margin-top: 5px; line-height: 1.3; }
 
+        /* SUBIMOS EL CARRUSEL */
         .slider-wrapper {
             flex: 1;
             display: flex;
             align-items: center;
             overflow-x: auto;
             scroll-snap-type: x mandatory;
-            padding: 0 15% 120px; 
+            padding: 0 15% 120px; /* Mucho espacio abajo para que el dock no tape nada */
             scrollbar-width: none;
-            margin-top: -20px;
+            margin-top: -20px; /* Lo empujamos hacia arriba */
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
 
         .cards-container { display: flex; align-items: center; gap: 20px; }
 
+        /* MANTENEMOS EL TAMAÑO QUE TE GUSTA */
         .card {
             width: 280px; 
             height: 280px;
@@ -85,9 +85,10 @@
             z-index: 5;
         }
 
+        /* DOCK FIJO Y MÁS ALTO */
         .dock {
             position: fixed;
-            bottom: 25px; 
+            bottom: 25px; /* Subimos el dock para que se vea completo */
             left: 20px;
             right: 20px;
             padding: 15px 10px; 
@@ -123,38 +124,47 @@
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
             <div class="badge">1</div>
         </div>
+
         <div class="card" data-title="Among Us" data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
             <div class="badge">2</div>
         </div>
+
         <div class="card" data-title="League of Legends / Wild Rift" data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC y el móvil con Wild Rift. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
             <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
             <div class="badge">3</div>
         </div>
-        <div class="card" data-title="Call of Duty: Warzone" data-desc="¿Por qué está acá? Experiencia de guerra definitiva y unificada en PC y Mobile. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+
+        <div class="card" data-title="Call of Duty: Warzone / Mobile" data-desc="¿Por qué está acá? Experiencia de guerra definitiva y unificada en PC y Mobile. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <div class="badge">4</div>
         </div>
+
         <div class="card" data-title="Genshin Impact" data-desc="¿Por qué está acá? Calidad de consola en un celular. Visualmente es una bestia. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
             <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
             <div class="badge">5</div>
         </div>
+
         <div class="card" data-title="PUBG Mobile" data-desc="¿Por qué está acá? El padre del Battle Royale. Comunidad gigantesca y táctica. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
             <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
             <div class="badge">6</div>
         </div>
+
         <div class="card" data-title="Fortnite" data-desc="¿Por qué está acá? Un parque de diversiones gigante y red social. [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
             <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
             <div class="badge">7</div>
         </div>
+
         <div class="card" data-title="Free Fire" data-desc="¿Por qué está acá? El rey de los gama baja. Todos lo pueden jugar. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <div class="badge">8</div>
         </div>
+
         <div class="card" data-title="Minecraft" data-desc="¿Por qué está acá? El más vendido de la historia. Jugá con cualquiera. [leer más]" data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <div class="badge">9</div>
         </div>
+
         <div class="card" data-title="Roblox" data-desc="Mundos creados por la comunidad. La mayor variedad de la actualidad. [leer más]" data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
             <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
             <div class="badge">10</div>
