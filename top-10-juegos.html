@@ -34,10 +34,10 @@
         .nav-item.active { color: white; border-bottom: 3px solid var(--accent); padding-bottom: 5px; }
 
         .hero { padding: 20px 25px; z-index: 10; height: 170px; }
-        .hero h1 { font-size: 42px; font-weight: 900; }
+        .hero h1 { font-size: 38px; font-weight: 900; line-height: 1; }
         .hero p { font-size: 14px; color: var(--text-sub); margin-top: 5px; line-height: 1.4; }
 
-        /* EL CARRUSEL QUE SÍ FUNCIONA FLUIDO */
+        /* CARRUSEL FLUIDO */
         .slider-wrapper {
             flex: 1;
             display: flex;
@@ -88,7 +88,6 @@
             box-shadow: 0 4px 10px rgba(0,0,0,0.5);
         }
 
-        /* DOCK CON ÍCONOS RECUPERADOS */
         .dock {
             padding: 20px 10px 30px; 
             display: flex; 
@@ -120,81 +119,52 @@
 <div class="slider-wrapper" id="slider">
     <div class="cards-container">
         
-        <div class="card" 
-             data-title="Honor of Kings" 
-             data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios y su reciente salto global lo hicieron imparable. [leer más]" 
-             data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+        <div class="card" data-title="Honor of Kings" data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable. [leer más]" data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
             <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
             <div class="badge">1</div>
         </div>
 
-        <div class="card" 
-             data-title="Among Us" 
-             data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente de PC y celu sin drama [leer más]" 
-             data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+        <div class="card" data-title="Among Us" data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. El juego social por excelencia para unir gente. [leer más]" data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
             <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
             <div class="badge">2</div>
         </div>
 
-        <div class="card" 
-             data-title="Wild Rift" 
-             data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC con el original y el móvil con la versión más pulida que existe del género. [leer más]" 
-             data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+        <div class="card" data-title="League of Legends / Wild Rift" data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC con el original y el móvil con la versión Wild Rift. [leer más]" data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
             <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
             <div class="badge">3</div>
         </div>
 
-        <div class="card" 
-             data-title="Warzone Mobile" 
-             data-desc="¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Es la experiencia de guerra definitiva y unificada en 2026. [leer más]" 
-             data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
+        <div class="card" data-title="Call of Duty: Warzone / Mobile" data-desc="¿Por qué está acá? Todo lo que hacés en PC se guarda. Es la experiencia de guerra definitiva y unificada, ya sea Warzone o Mobile. [leer más]" data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
             <div class="badge">4</div>
         </div>
 
-        <div class="card" 
-             data-title="Genshin Impact" 
-             data-desc="¿Por qué está acá? Fue el primero en meter un juego de consola adentro de un celular. Visualmente es una bestia que no baja del top. [leer más]" 
-             data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
+        <div class="card" data-title="Genshin Impact" data-desc="¿Por qué está acá? Metió un juego de consola adentro de un celular. Visualmente es una bestia que no baja del top. [leer más]" data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
             <img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
             <div class="badge">5</div>
         </div>
 
-        <div class="card" 
-             data-title="PUBG Mobile" 
-             data-desc="¿Por qué está acá? El padre del género. Su comunidad es gigantesca y es el favorito de los que buscan un Battle Royale más táctico. [leer más]" 
-             data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
+        <div class="card" data-title="PUBG Mobile" data-desc="¿Por qué está acá? El padre del género. Su comunidad es gigantesca y es el favorito de los tácticos. [leer más]" data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
             <img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
             <div class="badge">6</div>
         </div>
 
-        <div class="card" 
-             data-title="Fortnite" 
-             data-desc="¿Por qué está acá? Es un parque de diversiones gigante. Entre el modo LEGO y los conciertos, ya es más una red social que un juego [leer más]" 
-             data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
+        <div class="card" data-title="Fortnite" data-desc="¿Por qué está acá? Es un parque de diversiones gigante. Ya es más una red social que un juego. [leer más]" data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
             <img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
             <div class="badge">7</div>
         </div>
 
-        <div class="card" 
-             data-title="Free Fire" 
-             data-desc="Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar si tienen un celu viejo o leer más [leer más]" 
-             data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
+        <div class="card" data-title="Free Fire" data-desc="Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar el celu. [leer más]" data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
             <div class="badge">8</div>
         </div>
 
-        <div class="card" 
-             data-title="Minecraft" 
-             data-desc="¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" 
-             data-img="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864<img src="https://www.minecraft.net/content/dam/minecraftnet/games/minecraft/key-art/Homepage_Discover-our-games_MC-Vanilla-KeyArt_864x864.jpg">
+        <div class="card" data-title="Minecraft" data-desc="¿Por qué está acá? El juego más vendido de la historia. Podés estar en la PC y jugar con alguien [leer más]" data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
+            <img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
             <div class="badge">9</div>
         </div>
 
-        <div class="card" 
-             data-title="Roblox" 
-             data-desc="Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" 
-             data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
+        <div class="card" data-title="Roblox" data-desc="Explorá los mundos creados por la comunidad. El juego con más variedad de la actualidad. [leer más]" data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
             <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
             <div class="badge">10</div>
         </div>
@@ -223,22 +193,20 @@
             const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
             const distance = Math.abs(sliderCenter - cardCenter);
             
-            // Si la carta está cerca del centro
             if (distance < 150) { 
                 cards.forEach(c => c.classList.remove('active'));
                 card.classList.add('active');
                 
-                // Actualizar info
                 bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
                 gameTitle.innerText = card.dataset.title;
-                gameDesc.innerText = card.dataset.desc;
+                gameDesc.innerHTML = card.dataset.desc;
             }
         });
     };
 
     slider.addEventListener('scroll', updateActiveCard);
     window.onload = () => {
-        slider.scrollLeft = 0; // Empezar en el Top 1
+        slider.scrollLeft = 0;
         updateActiveCard();
     };
 </script>
