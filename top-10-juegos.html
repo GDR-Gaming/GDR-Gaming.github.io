@@ -8,16 +8,18 @@
 
 <style>
 
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap');
+
 :root{
-    --accent:#00ffff;
-    --text-sub:rgba(255,255,255,0.75);
+    --accent:#00f0ff;
+    --text-sub:rgba(255,255,255,.78);
 }
 
 *{
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI',sans-serif;
+    font-family:'Inter',sans-serif;
 }
 
 body{
@@ -30,7 +32,8 @@ body{
     flex-direction:column;
 }
 
-/* FONDO PREMIUM MÁS NÍTIDO */
+/* ===== FONDO ===== */
+
 .bg-blur{
     position:fixed;
     inset:0;
@@ -38,42 +41,99 @@ body{
     background-size:cover;
     background-position:center;
 
-    transform:scale(1.05);
+    transform:scale(1.08);
 
-    /* MÁS DEFINICIÓN */
     filter:
-        blur(3px)
-        brightness(0.9)
-        saturate(1.5)
-        contrast(1.2);
+        blur(5px)
+        brightness(.72)
+        saturate(1.3)
+        contrast(1.12);
 
-    opacity:1;
-
-    z-index:-2;
+    z-index:-4;
 
     transition:
         background-image .45s ease,
         filter .45s ease;
 }
 
-/* OVERLAY */
-.bg-overlay{
+/* OSCURECE */
+.dark-layer{
     position:fixed;
     inset:0;
 
     background:
-        radial-gradient(circle at top,
-            rgba(0,255,255,0.08),
-            transparent 35%),
-
-        radial-gradient(circle at bottom,
-            rgba(0,255,255,0.10),
-            transparent 45%),
-
         linear-gradient(
             to bottom,
-            rgba(0,0,0,0.08),
-            rgba(0,0,0,0.35)
+            rgba(0,0,0,.15),
+            rgba(0,0,0,.30),
+            rgba(0,0,0,.42)
+        );
+
+    z-index:-3;
+}
+
+/* NIEBLA ARRIBA */
+.top-fog{
+    position:fixed;
+
+    top:-120px;
+    left:-20%;
+
+    width:140%;
+    height:420px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,255,255,.22) 0%,
+            rgba(0,180,255,.13) 35%,
+            rgba(0,0,0,0) 72%
+        );
+
+    filter:blur(45px);
+
+    z-index:-2;
+
+    pointer-events:none;
+}
+
+/* NIEBLA ABAJO */
+.bottom-fog{
+    position:fixed;
+
+    bottom:-180px;
+    left:-20%;
+
+    width:140%;
+    height:520px;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(0,255,255,.24) 0%,
+            rgba(0,180,255,.14) 32%,
+            rgba(0,0,0,0) 72%
+        );
+
+    filter:blur(70px);
+
+    z-index:-2;
+
+    pointer-events:none;
+}
+
+/* BRILLO */
+.light-overlay{
+    position:fixed;
+    inset:0;
+
+    background:
+        linear-gradient(
+            130deg,
+            rgba(255,255,255,.10),
+            transparent 18%,
+            transparent 82%,
+            rgba(255,255,255,.05)
         );
 
     z-index:-1;
@@ -81,58 +141,68 @@ body{
     pointer-events:none;
 }
 
+/* ===== HEADER ===== */
+
 header{
-    padding:30px 25px 0;
+    padding:38px 25px 0;
     display:flex;
-    gap:20px;
+    gap:28px;
     z-index:10;
 }
 
 .nav-item{
-    font-size:12px;
-    font-weight:900;
-    color:var(--text-sub);
+    font-size:13px;
+    font-weight:700;
+    color:rgba(255,255,255,.65);
     text-decoration:none;
     text-transform:uppercase;
+    letter-spacing:.3px;
 }
 
 .nav-item.active{
     color:white;
-    border-bottom:2px solid var(--accent);
-    padding-bottom:4px;
+    border-bottom:3px solid var(--accent);
+    padding-bottom:6px;
 }
 
+/* ===== HERO ===== */
+
 .hero{
-    padding:10px 25px;
+    padding:18px 25px;
     z-index:10;
-    height:165px;
-    margin-top:5px;
+    min-height:220px;
 }
 
 .hero h1{
-    font-size:42px;
+    font-size:64px;
     font-weight:900;
-    line-height:.95;
-
-    text-shadow:
-        0 4px 25px rgba(0,0,0,0.55);
-}
-
-.hero p{
-    font-size:14px;
-    color:white;
-
-    margin-top:12px;
-
-    line-height:1.45;
-
+    line-height:.92;
+    letter-spacing:-2.5px;
     max-width:95%;
 
     text-shadow:
-        0 2px 10px rgba(0,0,0,0.7);
+        0 6px 20px rgba(0,0,0,.55);
 }
 
-/* SLIDER */
+.hero p{
+    margin-top:16px;
+
+    font-size:16px;
+
+    line-height:1.45;
+
+    font-weight:500;
+
+    color:rgba(255,255,255,.86);
+
+    max-width:94%;
+
+    text-shadow:
+        0 3px 10px rgba(0,0,0,.65);
+}
+
+/* ===== SLIDER ===== */
+
 .slider-wrapper{
     flex:1;
 
@@ -157,15 +227,16 @@ header{
 .cards-container{
     display:flex;
     align-items:center;
-    gap:22px;
+    gap:24px;
 }
 
-/* CARDS */
-.card{
-    width:280px;
-    height:280px;
+/* ===== CARDS ===== */
 
-    border-radius:28px;
+.card{
+    width:285px;
+    height:285px;
+
+    border-radius:30px;
 
     overflow:hidden;
 
@@ -175,11 +246,11 @@ header{
 
     transition:all .38s ease;
 
-    opacity:.4;
+    opacity:.34;
 
     transform:scale(.82);
 
-    border:2px solid rgba(255,255,255,.08);
+    border:2px solid rgba(255,255,255,.06);
 
     position:relative;
 }
@@ -190,7 +261,6 @@ header{
     object-fit:cover;
 }
 
-/* CARD ACTIVA */
 .card.active{
     opacity:1;
 
@@ -199,64 +269,78 @@ header{
     border:5px solid var(--accent);
 
     box-shadow:
-        0 0 25px rgba(0,255,255,.55),
-        0 0 60px rgba(0,255,255,.20);
+        0 0 25px rgba(0,255,255,.65),
+        0 0 80px rgba(0,255,255,.24);
 }
 
-/* BADGE */
+/* ===== BADGE ===== */
+
 .badge{
     position:absolute;
 
     top:12px;
     right:12px;
 
-    background:white;
-    color:black;
-
-    width:48px;
-    height:48px;
+    width:52px;
+    height:52px;
 
     border-radius:50%;
+
+    background:white;
+
+    color:black;
 
     display:flex;
     align-items:center;
     justify-content:center;
 
-    font-weight:900;
     font-size:24px;
+    font-weight:900;
 
     z-index:5;
 }
 
-/* DOCK */
+/* ===== DOCK ===== */
+
 .dock{
     position:fixed;
 
-    bottom:22px;
-    left:20px;
-    right:20px;
+    left:18px;
+    right:18px;
+    bottom:24px;
 
-    padding:15px 10px;
+    padding:16px 10px;
 
     display:flex;
     justify-content:space-around;
 
-    background:rgba(10,15,25,.72);
+    border-radius:34px;
 
-    backdrop-filter:blur(25px);
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(20,25,35,.72),
+            rgba(8,12,20,.82)
+        );
 
-    border-radius:30px;
+    backdrop-filter:blur(26px);
 
     border:1px solid rgba(255,255,255,.08);
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.35);
 
     z-index:100;
 }
 
 .dock-btn{
-    font-size:32px;
+    font-size:34px;
+
     text-decoration:none;
-    opacity:.45;
+
     color:white;
+
+    opacity:.42;
 
     transition:.25s;
 }
@@ -274,7 +358,14 @@ header{
 <body>
 
 <div class="bg-blur" id="bgBlur"></div>
-<div class="bg-overlay"></div>
+
+<div class="dark-layer"></div>
+
+<div class="top-fog"></div>
+
+<div class="bottom-fog"></div>
+
+<div class="light-overlay"></div>
 
 <header>
     <a href="#" class="nav-item active">LIBRARY</a>
@@ -282,8 +373,11 @@ header{
 </header>
 
 <main class="hero">
-    <h1 id="gameTitle">Cargando...</h1>
-    <p id="gameDesc">Navegá el ranking.</p>
+    <h1 id="gameTitle">Top 10 más jugados</h1>
+
+    <p id="gameDesc">
+        Explorá los juegos más virales y con más jugadores de este mes en la plataforma.
+    </p>
 </main>
 
 <div class="slider-wrapper" id="slider">
