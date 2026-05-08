@@ -1,709 +1,218 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-
-<meta charset="UTF-8">
-
-<meta name="viewport"
-content="width=device-width,
-initial-scale=1.0,
-maximum-scale=1.0,
-user-scalable=no">
-
-<title>Top 10 GDR</title>
-
-<style>
-
-@import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&display=swap');
-
-:root{
-    --accent:#00f0ff;
-    --text-sub:rgba(255,255,255,.78);
-}
-
-*{
-    margin:0;
-    padding:0;
-    box-sizing:border-box;
-    font-family:'Inter Tight',sans-serif;
-}
-
-body{
-    background:#05070a;
-    color:white;
-    width:100vw;
-    height:100vh;
-    overflow:hidden;
-    display:flex;
-    flex-direction:column;
-}
-
-/* ========================= */
-/* FONDO */
-/* ========================= */
-
-.bg-blur{
-    position:fixed;
-    inset:0;
-
-    background-size:cover;
-    background-position:center;
-
-    transform:scale(1.12);
-
-    filter:
-        blur(7px)
-        brightness(.68)
-        saturate(1.35)
-        contrast(1.08);
-
-    z-index:-8;
-
-    transition:
-        background-image .45s ease,
-        filter .45s ease;
-}
-
-/* OSCURECE LEVEMENTE */
-.dark-layer{
-    position:fixed;
-    inset:0;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(0,0,0,.15),
-            rgba(0,0,0,.26),
-            rgba(0,0,0,.38)
-        );
-
-    z-index:-7;
-}
-
-/* BRILLO SUPERIOR */
-.top-fog{
-    position:fixed;
-
-    top:-180px;
-    left:-20%;
-
-    width:140%;
-    height:420px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,255,255,.26) 0%,
-            rgba(0,180,255,.13) 35%,
-            rgba(0,0,0,0) 74%
-        );
-
-    filter:blur(70px);
-
-    z-index:-6;
-
-    pointer-events:none;
-}
-
-/* BRILLO INFERIOR */
-.bottom-fog{
-    position:fixed;
-
-    bottom:-240px;
-    left:-20%;
-
-    width:140%;
-    height:620px;
-
-    background:
-        radial-gradient(
-            circle,
-            rgba(0,255,255,.34) 0%,
-            rgba(0,180,255,.15) 35%,
-            rgba(0,0,0,0) 74%
-        );
-
-    filter:blur(90px);
-
-    z-index:-6;
-
-    pointer-events:none;
-}
-
-/* NIEBLA CELESTE ARRIBA Y ABAJO */
-.edge-glow{
-    position:fixed;
-    inset:0;
-
-    pointer-events:none;
-
-    z-index:-5;
-
-    background:
-
-    linear-gradient(
-        to bottom,
-
-        rgba(0,255,255,.42) 0%,
-
-        rgba(0,220,255,.26) 10%,
-
-        rgba(0,180,255,.13) 20%,
-
-        rgba(0,120,255,.05) 32%,
-
-        rgba(0,0,0,0) 46%
-    ),
-
-    linear-gradient(
-        to top,
-
-        rgba(0,255,255,.45) 0%,
-
-        rgba(0,220,255,.24) 10%,
-
-        rgba(0,180,255,.12) 20%,
-
-        rgba(0,120,255,.05) 32%,
-
-        rgba(0,0,0,0) 46%
-    );
-
-    mix-blend-mode:screen;
-}
-
-/* BRILLO DE VIDRIO */
-.light-overlay{
-    position:fixed;
-    inset:0;
-
-    background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.10),
-            transparent 18%,
-            transparent 82%,
-            rgba(255,255,255,.05)
-        );
-
-    z-index:-4;
-}
-
-/* ========================= */
-/* HEADER */
-/* ========================= */
-
-header{
-    padding:34px 25px 0;
-
-    display:flex;
-
-    gap:28px;
-
-    z-index:10;
-}
-
-.nav-item{
-    font-size:13px;
-
-    font-weight:700;
-
-    text-decoration:none;
-
-    color:rgba(255,255,255,.65);
-
-    letter-spacing:.3px;
-
-    text-transform:uppercase;
-}
-
-.nav-item.active{
-    color:white;
-
-    border-bottom:3px solid var(--accent);
-
-    padding-bottom:5px;
-}
-
-/* ========================= */
-/* HERO */
-/* ========================= */
-
-.hero{
-    padding:18px 25px;
-
-    z-index:10;
-
-    min-height:235px;
-}
-
-/* TITULO NUEVO */
-
-.hero h1{
-
-    font-family:'Inter Tight',sans-serif;
-
-    font-size:64px;
-
-    font-weight:800;
-
-    line-height:.88;
-
-    letter-spacing:-3px;
-
-    text-transform:none;
-
-    color:#ffffff;
-
-    max-width:95%;
-
-    transform:scaleX(.96);
-
-    text-shadow:
-        0 2px 8px rgba(0,0,0,.30),
-        0 1px 2px rgba(0,0,0,.18);
-}
-
-/* DESCRIPCION NUEVA */
-
-.hero p{
-
-    font-family:'Inter Tight',sans-serif;
-
-    margin-top:16px;
-
-    font-size:17px;
-
-    font-weight:500;
-
-    line-height:1.22;
-
-    letter-spacing:-0.4px;
-
-    color:rgba(255,255,255,.90);
-
-    max-width:94%;
-
-    text-shadow:
-        0 2px 6px rgba(0,0,0,.45);
-}
-
-/* ========================= */
-/* SLIDER */
-/* ========================= */
-
-.slider-wrapper{
-    flex:1;
-
-    display:flex;
-
-    align-items:center;
-
-    overflow-x:auto;
-
-    scroll-snap-type:x mandatory;
-
-    padding:0 18% 120px;
-
-    scrollbar-width:none;
-
-    margin-top:-5px;
-}
-
-.slider-wrapper::-webkit-scrollbar{
-    display:none;
-}
-
-.cards-container{
-    display:flex;
-
-    align-items:center;
-
-    gap:24px;
-}
-
-/* ========================= */
-/* CARDS */
-/* ========================= */
-
-.card{
-    width:285px;
-
-    height:285px;
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    flex-shrink:0;
-
-    scroll-snap-align:center;
-
-    transition:all .38s ease;
-
-    opacity:.34;
-
-    transform:scale(.82);
-
-    border:2px solid rgba(255,255,255,.06);
-
-    position:relative;
-}
-
-.card img{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-.card.active{
-    opacity:1;
-
-    transform:scale(1.1);
-
-    border:5px solid var(--accent);
-
-    box-shadow:
-        0 0 25px rgba(0,255,255,.65),
-        0 0 80px rgba(0,255,255,.22);
-}
-
-/* ========================= */
-/* BADGE */
-/* ========================= */
-
-.badge{
-    position:absolute;
-
-    top:12px;
-    right:12px;
-
-    width:52px;
-    height:52px;
-
-    border-radius:50%;
-
-    background:white;
-
-    color:black;
-
-    display:flex;
-    align-items:center;
-    justify-content:center;
-
-    font-size:24px;
-
-    font-weight:900;
-
-    z-index:5;
-}
-
-/* ========================= */
-/* DOCK */
-/* ========================= */
-
-.dock{
-    position:fixed;
-
-    left:18px;
-    right:18px;
-    bottom:24px;
-
-    padding:16px 10px;
-
-    display:flex;
-    justify-content:space-around;
-
-    border-radius:34px;
-
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(20,25,35,.72),
-            rgba(8,12,20,.82)
-        );
-
-    backdrop-filter:blur(26px);
-
-    border:1px solid rgba(255,255,255,.08);
-
-    box-shadow:
-        0 8px 30px rgba(0,0,0,.35);
-
-    z-index:100;
-}
-
-.dock-btn{
-    font-size:34px;
-
-    text-decoration:none;
-
-    color:white;
-
-    opacity:.42;
-
-    transition:.25s;
-}
-
-.dock-btn.active{
-    opacity:1;
-
-    filter:
-        drop-shadow(0 0 10px var(--accent));
-}
-
-</style>
-</head>
-
-<body>
-
-<div class="bg-blur" id="bgBlur"></div>
-
-<div class="dark-layer"></div>
-
-<div class="top-fog"></div>
-
-<div class="bottom-fog"></div>
-
-<div class="edge-glow"></div>
-
-<div class="light-overlay"></div>
-
-<header>
-
-<a href="#" class="nav-item active">
-LIBRARY
-</a>
-
-<a href="#" class="nav-item">
-ADD NEW
-</a>
-
-<a href="#" class="nav-item">
-SETTINGS
-</a>
-
-</header>
-
-<main class="hero">
-
-<h1 id="gameTitle">
-Top 10 más jugados
-</h1>
-
-<p id="gameDesc">
-TOP 10 Explorá los juegos más virales y con más jugadores de este mes en la plataforma.
-</p>
-
-</main>
-
-<div class="slider-wrapper" id="slider">
-
-<div class="cards-container">
-
-<!-- TOP 1 -->
-<div class="card active"
-data-title="Honor of Kings"
-data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios y su reciente salto global lo hicieron imparable."
-data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-
-<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-
-<div class="badge">1</div>
-</div>
-
-<!-- TOP 2 -->
-<div class="card"
-data-title="Among Us"
-data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente de PC y celu sin drama."
-data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-
-<img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-
-<div class="badge">2</div>
-</div>
-
-<!-- TOP 3 -->
-<div class="card"
-data-title="League of Legends / Wild Rift"
-data-desc="¿Por qué está acá? Es la cara de los Esports. Riot domina la PC con el original y el móvil con la versión más pulida que existe del género."
-data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-
-<img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-
-<div class="badge">3</div>
-</div>
-
-<!-- TOP 4 -->
-<div class="card"
-data-title="Call of Duty: Warzone"
-data-desc="¿Por qué está acá? Todo lo que hacés en PC se guarda en tu celu. Es la experiencia de guerra definitiva y unificada en 2026."
-data-img="https://i.blogs.es/954c69/cod6/840_560.jpeg">
-
-<img src="https://i.blogs.es/954c69/cod6/840_560.jpeg">
-
-<div class="badge">4</div>
-</div>
-
-<!-- TOP 5 -->
-<div class="card"
-data-title="Genshin Impact"
-data-desc="¿Por qué está acá? Fue el primero en meter un juego de consola adentro de un celular. Visualmente es una bestia que no baja del top."
-data-img="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
-
-<img src="https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png">
-
-<div class="badge">5</div>
-</div>
-
-<!-- TOP 6 -->
-<div class="card"
-data-title="PUBG Mobile / Battlegrounds"
-data-desc="¿Por qué está acá? El padre del género. Su comunidad es gigantesca y es el favorito de los que buscan un Battle Royale más táctico."
-data-img="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
-
-<img src="https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg">
-
-<div class="badge">6</div>
-</div>
-
-<!-- TOP 7 -->
-<div class="card"
-data-title="Fortnite"
-data-desc="¿Por qué está acá? Es un parque de diversiones gigante. Entre el modo LEGO y los conciertos, ya es más una red social que un juego."
-data-img="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
-
-<img src="https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k">
-
-<div class="badge">7</div>
-</div>
-
-<!-- TOP 8 -->
-<div class="card"
-data-title="Free Fire"
-data-desc="¿Por qué está acá? El rey de los gama baja. Domina porque todos tus amigos lo pueden jugar, sin importar si tienen un celu viejo o nuevo."
-data-img="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
-
-<img src="https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg">
-
-<div class="badge">8</div>
-</div>
-
-<!-- TOP 9 -->
-<div class="card"
-data-title="Minecraft"
-data-desc="¿Por qué está acá? El más vendido de la historia. Jugá con cualquiera desde cualquier plataforma y nunca pasa de moda."
-data-img="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
-
-<img src="https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320">
-
-<div class="badge">9</div>
-</div>
-
-<!-- TOP 10 -->
-<div class="card"
-data-title="Roblox 👑"
-data-desc="¿Por qué está acá? Es el número 1 indiscutible. No es un juego, son millones de juegos en uno donde podés jugar, crear y ganar plata."
-data-img="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
-
-<img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png">
-
-<div class="badge">10</div>
-</div>
-
-</div>
-</div>
-
-<nav class="dock">
-
-<a href="#" class="dock-btn active">
-🏠
-</a>
-
-<a href="#" class="dock-btn">
-⭐
-</a>
-
-<a href="#" class="dock-btn">
-📺
-</a>
-
-<a href="#" class="dock-btn">
-💬
-</a>
-
-<a href="#" class="dock-btn">
-👤
-</a>
-
-</nav>
-
-<script>
-
-const slider =
-document.getElementById('slider');
-
-const cards =
-document.querySelectorAll('.card');
-
-const bgBlur =
-document.getElementById('bgBlur');
-
-const gameTitle =
-document.getElementById('gameTitle');
-
-const gameDesc =
-document.getElementById('gameDesc');
-
-function updateActiveCard(){
-
-    const sliderCenter =
-        slider.scrollLeft +
-        (slider.offsetWidth / 2);
-
-    cards.forEach(card => {
-
-        const cardCenter =
-            card.offsetLeft +
-            (card.offsetWidth / 2);
-
-        const distance =
-            Math.abs(sliderCenter - cardCenter);
-
-        if(distance < 160){
-
-            cards.forEach(c =>
-                c.classList.remove('active')
-            );
-
-            card.classList.add('active');
-
-            bgBlur.style.backgroundImage =
-                `url('${card.dataset.img}')`;
-
-            gameTitle.innerText =
-                card.dataset.title;
-
-            gameDesc.innerText =
-                card.dataset.desc;
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Top 10 GDR - Tematizado</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=Cinzel:wght@700&display=swap');
+
+        /* === VARIABLES DINÁMICAS === */
+        :root {
+            --accent: #00f0ff;
+            --text-sub: rgba(255,255,255,.78);
+            --main-font: 'Inter Tight', sans-serif;
+            --card-border: rgba(255,255,255,.06);
+            --card-shadow: rgba(0,255,255,.65);
         }
-    });
-}
 
-slider.addEventListener(
-'scroll',
-updateActiveCard
-);
+        /* --- TEMA HONOR (FANTASY) --- */
+        body.theme-honor {
+            --accent: #ffd700; /* Dorado */
+            --main-font: 'Cinzel', serif;
+            --card-border: #ffd700;
+            --card-shadow: rgba(255, 215, 0, 0.5);
+        }
 
-window.onload = () => {
+        /* --- TEMA AMONG (SPACE) --- */
+        body.theme-among {
+            --accent: #00ffcc; /* Neón Espacial */
+            --main-font: 'Inter Tight', sans-serif;
+            --card-border: #00ffcc;
+            --card-shadow: rgba(0, 255, 204, 0.7);
+        }
 
-    bgBlur.style.backgroundImage =
-    `url('${cards[0].dataset.img}')`;
+        /* === ESTILOS GENERALES === */
+        * {
+            margin: 0; padding: 0; box-sizing: border-box;
+            font-family: var(--main-font);
+            transition: all 0.5s ease; /* Transición suave para el cambio de tema */
+        }
 
-    updateActiveCard();
-};
+        body {
+            background: #05070a; color: white;
+            width: 100vw; height: 100vh;
+            overflow: hidden; display: flex; flex-direction: column;
+        }
 
-</script>
+        /* FONDO Y NIEBLA */
+        .bg-blur {
+            position: fixed; inset: 0; background-size: cover; background-position: center;
+            transform: scale(1.12); filter: blur(7px) brightness(.5); z-index: -8;
+        }
 
+        .edge-glow {
+            position: fixed; inset: 0; pointer-events: none; z-index: -5;
+            background: linear-gradient(to bottom, var(--accent) 0%, transparent 40%),
+                        linear-gradient(to top, var(--accent) 0%, transparent 40%);
+            mix-blend-mode: screen; opacity: 0.3;
+        }
+
+        /* HERO SECTION */
+        .hero { padding: 18px 25px; z-index: 10; min-height: 235px; }
+        .hero h1 {
+            font-size: 58px; font-weight: 800; line-height: .9;
+            letter-spacing: -2px; color: #ffffff;
+            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+        }
+        .hero p {
+            margin-top: 12px; font-size: 16px; font-weight: 500;
+            color: rgba(255,255,255,.9); max-width: 90%;
+        }
+
+        /* SLIDER Y CARDS */
+        .slider-wrapper {
+            flex: 1; display: flex; align-items: center;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 0 18% 120px; scrollbar-width: none;
+        }
+        .slider-wrapper::-webkit-scrollbar { display: none; }
+        .cards-container { display: flex; align-items: center; gap: 24px; }
+
+        .card {
+            width: 280px; height: 280px; border-radius: 30px;
+            overflow: hidden; flex-shrink: 0; scroll-snap-align: center;
+            opacity: .34; transform: scale(.8);
+            border: 2px solid var(--card-border); position: relative;
+        }
+
+        .card.active {
+            opacity: 1; transform: scale(1.1);
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 30px var(--card-shadow);
+        }
+
+        .card img { width: 100%; height: 100%; object-fit: cover; }
+
+        .badge {
+            position: absolute; top: 12px; right: 12px;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; color: black;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 20px; font-weight: 900;
+        }
+
+        /* DOCK */
+        .dock {
+            position: fixed; bottom: 24px; left: 18px; right: 18px;
+            padding: 15px; display: flex; justify-content: space-around;
+            border-radius: 30px; background: rgba(10,15,25,0.8);
+            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .dock-btn { font-size: 28px; text-decoration: none; opacity: 0.4; }
+        .dock-btn.active { 
+            opacity: 1; 
+            filter: drop-shadow(0 0 8px var(--accent)); 
+        }
+
+    </style>
+</head>
+<body class="theme-honor"> <div class="bg-blur" id="bgBlur"></div>
+    <div class="edge-glow"></div>
+
+    <header style="padding: 30px 25px; display: flex; gap: 20px; z-index: 10;">
+        <a href="#" class="nav-item" style="color: white; text-decoration: none; font-weight: 700; font-size: 12px;">LIBRARY</a>
+        <a href="#" class="nav-item" style="opacity: 0.5; color: white; text-decoration: none; font-size: 12px;">SETTINGS</a>
+    </header>
+
+    <main class="hero">
+        <h1 id="gameTitle">Honor of Kings</h1>
+        <p id="gameDesc">Cargando descripción...</p>
+    </main>
+
+    <div class="slider-wrapper" id="slider">
+        <div class="cards-container">
+            
+            <div class="card active" 
+                 data-theme="honor"
+                 data-title="Honor of Kings" 
+                 data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable."
+                 data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
+                <div class="badge">1</div>
+            </div>
+
+            <div class="card" 
+                 data-theme="among"
+                 data-title="Among Us" 
+                 data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente."
+                 data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
+                <div class="badge">2</div>
+            </div>
+
+            <div class="card" 
+                 data-theme="among"
+                 data-title="League of Legends" 
+                 data-desc="Es la cara de los Esports. Riot domina la PC con el original y el móvil con Wild Rift."
+                 data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
+                <div class="badge">3</div>
+            </div>
+
+        </div>
+    </div>
+
+    <nav class="dock">
+        <a href="#" class="dock-btn active">🏠</a>
+        <a href="#" class="dock-btn">⭐</a>
+        <a href="#" class="dock-btn">📺</a>
+        <a href="#" class="dock-btn">👤</a>
+    </nav>
+
+    <script>
+        const slider = document.getElementById('slider');
+        const cards = document.querySelectorAll('.card');
+        const bgBlur = document.getElementById('bgBlur');
+        const gameTitle = document.getElementById('gameTitle');
+        const gameDesc = document.getElementById('gameDesc');
+        const body = document.body;
+
+        function updateActiveCard(){
+            const sliderCenter = slider.scrollLeft + (slider.offsetWidth / 2);
+
+            cards.forEach(card => {
+                const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
+                const distance = Math.abs(sliderCenter - cardCenter);
+
+                if(distance < 150){
+                    // Quitar activo de todos
+                    cards.forEach(c => c.classList.remove('active'));
+                    
+                    // Activar actual
+                    card.classList.add('active');
+
+                    // Cambiar Contenido
+                    bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
+                    gameTitle.innerText = card.dataset.title;
+                    gameDesc.innerText = card.dataset.desc;
+
+                    // CAMBIO DE TEMA MÁGICO ✨
+                    const theme = card.dataset.theme;
+                    body.className = ''; // Limpiar clases
+                    body.classList.add('theme-' + theme); 
+                }
+            });
+        }
+
+        slider.addEventListener('scroll', updateActiveCard);
+
+        // Inicialización
+        window.onload = () => {
+            bgBlur.style.backgroundImage = `url('${cards[0].dataset.img}')`;
+            updateActiveCard();
+        };
+    </script>
 </body>
 </html>
