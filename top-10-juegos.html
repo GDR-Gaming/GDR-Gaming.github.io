@@ -3,132 +3,228 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Top 10 GDR - Tematizado</title>
+    <title>GDR Top 10 - Honor of Kings</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;700;800;900&family=Cinzel:wght@700&display=swap');
+        /* === FUENTES Y VARIABLES === */
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700&display=swap');
 
-        /* === VARIABLES DINÁMICAS === */
         :root {
-            --accent: #00f0ff;
-            --text-sub: rgba(255,255,255,.78);
-            --main-font: 'Inter Tight', sans-serif;
-            --card-border: rgba(255,255,255,.06);
-            --card-shadow: rgba(0,255,255,.65);
+            /* Colores de Honor of Kings (Basados en la imagen) */
+            --hk-gold-dark: #b69865;
+            --hk-gold-light: #e6dcc6;
+            --hk-scroll: #f5e9d2;
+            --hk-teal: #00f0ff;
+            --hk-teal-dim: rgba(0, 240, 255, 0.4);
+            --hk-bg-dark: #12100d;
+            --hk-text-light: #fefdfb;
+            
+            /* Fuentes Temáticas */
+            --font-title: 'Cinzel', serif;
+            --font-body: 'Playfair Display', serif;
+            --font-nav: 'Inter', sans-serif;
         }
 
-        /* --- TEMA HONOR (FANTASY) --- */
-        body.theme-honor {
-            --accent: #ffd700; /* Dorado */
-            --main-font: 'Cinzel', serif;
-            --card-border: #ffd700;
-            --card-shadow: rgba(255, 215, 0, 0.5);
-        }
-
-        /* --- TEMA AMONG (SPACE) --- */
-        body.theme-among {
-            --accent: #00ffcc; /* Neón Espacial */
-            --main-font: 'Inter Tight', sans-serif;
-            --card-border: #00ffcc;
-            --card-shadow: rgba(0, 255, 204, 0.7);
-        }
-
-        /* === ESTILOS GENERALES === */
-        * {
-            margin: 0; padding: 0; box-sizing: border-box;
-            font-family: var(--main-font);
-            transition: all 0.5s ease; /* Transición suave para el cambio de tema */
-        }
-
+        /* === RESET Y ESTILOS DE BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            background: #05070a; color: white;
+            background-color: var(--hk-bg-dark);
+            color: var(--hk-text-light);
+            font-family: var(--font-body);
             width: 100vw; height: 100vh;
-            overflow: hidden; display: flex; flex-direction: column;
+            display: flex; flex-direction: column;
+            overflow: hidden;
         }
 
-        /* FONDO Y NIEBLA */
+        /* === FONDO DINÁMICO (TEMPLO) === */
         .bg-blur {
-            position: fixed; inset: 0; background-size: cover; background-position: center;
-            transform: scale(1.12); filter: blur(7px) brightness(.5); z-index: -8;
+            position: fixed; inset: 0;
+            background-image: url('https://w0.peakpx.com/wallpaper/479/476/HD-wallpaper-palace-hall-temple-architecture-ancient-building.jpg');
+            background-size: cover; background-position: center;
+            filter: blur(5px) brightness(0.4) saturate(1.2);
+            z-index: -10;
+        }
+        .dark-overlay {
+            position: fixed; inset: 0;
+            background: linear-gradient(to bottom, rgba(182, 152, 101, 0.1), rgba(18, 16, 13, 0.9));
+            z-index: -9;
         }
 
+        /* === NIEBLA CIAN MÍSTICA === */
         .edge-glow {
-            position: fixed; inset: 0; pointer-events: none; z-index: -5;
-            background: linear-gradient(to bottom, var(--accent) 0%, transparent 40%),
-                        linear-gradient(to top, var(--accent) 0%, transparent 40%);
-            mix-blend-mode: screen; opacity: 0.3;
+            position: fixed; inset: 0;
+            background: radial-gradient(circle at top, var(--hk-teal-dim), transparent 60%),
+                        radial-gradient(circle at bottom, var(--hk-teal-dim), transparent 60%);
+            mix-blend-mode: screen; opacity: 0.3; z-index: -8;
+            pointer-events: none;
         }
 
-        /* HERO SECTION */
-        .hero { padding: 18px 25px; z-index: 10; min-height: 235px; }
+        /* === HERO SECTION (TITULO Y DESC) === */
+        .hero { padding: 30px 25px 0; text-align: center; }
         .hero h1 {
-            font-size: 58px; font-weight: 800; line-height: .9;
-            letter-spacing: -2px; color: #ffffff;
-            text-shadow: 0 4px 15px rgba(0,0,0,0.5);
+            font-family: var(--font-title); font-size: 52px; font-weight: 900;
+            color: var(--hk-gold-light); text-shadow: 0 4px 10px rgba(0,0,0,0.8);
+            position: relative; display: inline-block;
+        }
+        /* Runas Cian a la derecha del título */
+        .hero h1::after {
+            content: 'ᚱ'; color: var(--hk-teal); font-size: 24px; font-weight: 400;
+            position: absolute; right: -30px; top: 10px; opacity: 0.8;
+            filter: drop-shadow(0 0 5px var(--hk-teal));
         }
         .hero p {
-            margin-top: 12px; font-size: 16px; font-weight: 500;
-            color: rgba(255,255,255,.9); max-width: 90%;
+            margin-top: 15px; font-size: 14px; line-height: 1.4;
+            color: rgba(254, 253, 251, 0.9);
+            padding: 0 10%; max-width: 400px; margin-left: auto; margin-right: auto;
+        }
+        /* Runas Cian dentro del texto descriptivo */
+        .hero p .hk-rune {
+            color: var(--hk-teal); font-weight: 700;
+            filter: drop-shadow(0 0 3px var(--hk-teal));
         }
 
-        /* SLIDER Y CARDS */
+        /* === SLIDER SLIDER Y CARDS === */
         .slider-wrapper {
             flex: 1; display: flex; align-items: center;
             overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 0 18% 120px; scrollbar-width: none;
+            padding: 20px 18% 120px; scrollbar-width: none;
+            margin-top: 10px;
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
-        .cards-container { display: flex; align-items: center; gap: 24px; }
+        .cards-container { display: flex; align-items: center; gap: 30px; }
 
-        .card {
-            width: 280px; height: 280px; border-radius: 30px;
+        /* Estilos de la tarjeta 'active' (Honor of Kings) */
+        .card.active {
+            width: 270px; height: 270px; /* Tamaño final */
+            border-radius: 20px;
             overflow: hidden; flex-shrink: 0; scroll-snap-align: center;
-            opacity: .34; transform: scale(.8);
-            border: 2px solid var(--card-border); position: relative;
+            position: relative;
+            /* Marco Ornamental Turquesa y Dorado */
+            border: 5px solid;
+            border-image: linear-gradient(135deg, #00f0ff 0%, #b69865 50%, #00f0ff 100%) 1;
+            box-shadow: 0 0 35px var(--hk-teal);
+            transform: scale(1.1);
+            transition: all 0.6s ease;
         }
 
-        .card.active {
-            opacity: 1; transform: scale(1.1);
-            border: 4px solid var(--accent);
-            box-shadow: 0 0 30px var(--card-shadow);
+        /* Estilos de las tarjetas 'inactivas' */
+        .card.inactive {
+            width: 250px; height: 250px;
+            border-radius: 20px; overflow: hidden;
+            flex-shrink: 0; scroll-snap-align: center;
+            opacity: 0.3; transform: scale(0.9);
+            border: 2px solid rgba(182, 152, 101, 0.4);
+            transition: all 0.6s ease;
         }
 
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
-        .badge {
-            position: absolute; top: 12px; right: 12px;
-            width: 45px; height: 45px; border-radius: 50%;
-            background: white; color: black;
+        /* === PERGAMINO "HACÉ CLIC" === */
+        .hk-scroll-block {
+            position: absolute; top: -50px; left: 50%;
+            transform: translateX(-50%); width: 230px; z-index: 5;
+            transition: top 0.5s ease 0.3s;
+        }
+        .hk-scroll-inner {
+            background-color: var(--hk-scroll);
+            border: 2px solid #b69865;
+            padding: 10px 15px 15px; border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            /* Bordes quemados */
+            position: relative;
+        }
+        /* Sello de cera */
+        .hk-scroll-seal {
+            position: absolute; top: -20px; left: 50%;
+            transform: translateX(-50%);
+            width: 50px; height: 50px; border-radius: 50%;
+            background-color: #8c6a46; /* Marrón sello */
+            border: 3px solid #6d5135;
             display: flex; align-items: center; justify-content: center;
-            font-size: 20px; font-weight: 900;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
+        }
+        .hk-scroll-seal i { color: rgba(255,255,255,0.7); font-size: 24px; }
+
+        .hk-scroll-text {
+            margin-top: 25px;
+            font-family: var(--font-body); font-size: 13px; font-weight: 700;
+            color: #5c4a37; text-align: center;
         }
 
-        /* DOCK */
+        /* Ocultar el pergamino si no es Honor of Kings */
+        body.theme-among .hk-scroll-block { top: -150px; }
+
+
+        /* === ELEMENTOS INTERNOS DE LA TARJETA === */
+        /* Pergamino Número 1 */
+        .hk-number-scroll {
+            position: absolute; top: 10px; right: 10px;
+            width: 40px; height: 50px;
+            background-color: var(--hk-scroll);
+            border-left: 2px solid #b69865;
+            display: flex; align-items: center; justify-content: center;
+            border-radius: 0 0 5px 5px;
+            z-index: 3; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
+        }
+        .hk-number-scroll span {
+            font-family: var(--font-title); font-size: 20px; font-weight: 900; color: #5c4a37;
+        }
+
+        /* Emblema Cristal */
+        .hk-crystal-emblem {
+            position: absolute; bottom: 8px; right: 8px;
+            width: 50px; height: 50px;
+            display: flex; align-items: center; justify-content: center;
+            z-index: 3;
+        }
+        .hk-crystal-emblem img {
+            width: 100%; height: auto;
+            filter: drop-shadow(0 0 10px var(--hk-teal)) brightness(1.2);
+        }
+
+        /* === DOCK MADERA TALLADA === */
         .dock {
-            position: fixed; bottom: 24px; left: 18px; right: 18px;
-            padding: 15px; display: flex; justify-content: space-around;
-            border-radius: 30px; background: rgba(10,15,25,0.8);
-            backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.1);
+            position: fixed; bottom: 15px; left: 15px; right: 15px;
+            height: 70px;
+            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzR70tE5-bYF37H5nI3S0r9E-wVfS3yv5tS1f1-e_o-w&s');
+            background-size: cover; background-position: center;
+            border-radius: 20px 20px 30px 30px;
+            display: flex; justify-content: space-around; align-items: center;
+            border: 2px solid var(--hk-gold-dark);
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
+            z-index: 100; padding: 0 10px;
         }
+        .dock-btn {
+            text-decoration: none; display: flex; flex-direction: column;
+            align-items: center; position: relative;
+        }
+        .dock-btn i { font-size: 26px; color: var(--hk-gold-light); opacity: 0.6; }
+        .dock-btn span { font-family: var(--font-nav); font-size: 9px; color: var(--hk-gold-light); opacity: 0.5; margin-top: 2px; }
 
-        .dock-btn { font-size: 28px; text-decoration: none; opacity: 0.4; }
-        .dock-btn.active { 
-            opacity: 1; 
-            filter: drop-shadow(0 0 8px var(--accent)); 
+        /* Botón Activo con Llama Cian */
+        .dock-btn.active i, .dock-btn.active span { opacity: 1; }
+        .dock-btn.active::before {
+            content: '🔥'; font-size: 10px;
+            position: absolute; top: -12px;
+            color: var(--hk-teal);
+            filter: drop-shadow(0 0 5px var(--hk-teal)) brightness(1.3);
         }
 
     </style>
 </head>
 <body class="theme-honor"> <div class="bg-blur" id="bgBlur"></div>
+    <div class="dark-overlay"></div>
     <div class="edge-glow"></div>
 
-    <header style="padding: 30px 25px; display: flex; gap: 20px; z-index: 10;">
-        <a href="#" class="nav-item" style="color: white; text-decoration: none; font-weight: 700; font-size: 12px;">LIBRARY</a>
-        <a href="#" class="nav-item" style="opacity: 0.5; color: white; text-decoration: none; font-size: 12px;">SETTINGS</a>
+    <header style="padding: 20px 25px; display: flex; justify-content: space-between; z-index: 10;">
+        <span style="font-family: var(--font-title); color: var(--hk-gold-light); font-size: 14px;">GDR Top 10</span>
     </header>
 
     <main class="hero">
         <h1 id="gameTitle">Honor of Kings</h1>
-        <p id="gameDesc">Cargando descripción...</p>
+        <p id="gameDesc">
+            Cargando...
+        </p>
     </main>
 
     <div class="slider-wrapper" id="slider">
@@ -137,38 +233,70 @@
             <div class="card active" 
                  data-theme="honor"
                  data-title="Honor of Kings" 
-                 data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable."
-                 data-img="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10">
-                <div class="badge">1</div>
+                 data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo <span class='hk-rune'>ᚱ</span>. Sus torneos millonarios lo hicieron imparable <span class='hk-rune'>ᚱ</span>."
+                 data-img="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=Fabian"> <div class="hk-number-scroll">
+                     <span>1</span>
+                 </div>
+
+                 <div class="hk-crystal-emblem">
+                     <img src="https://w7.pngwing.com/pngs/434/461/png-transparent-video-games-league-of-legends-hextech-hextech-icon-blue-thumbnail.png" alt="Crystal">
+                 </div>
+
+                <img src="https://fastcdn.hoyoverse.com/content-v2/plat/123439/c39dd0699f78411122c6c9797d57a592_7063500647883927830.jpeg" alt="Honor of Kings">
+
+                 <div class="hk-scroll-block">
+                    <div class="hk-scroll-seal">
+                        <i class="ri-cursor-fill"></i>
+                    </div>
+                    <div class="hk-scroll-inner">
+                        <div class="hk-scroll-text">
+                            Hacé clic para saber más
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
-            <div class="card" 
+            <div class="card inactive" 
                  data-theme="among"
                  data-title="Among Us" 
                  data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente."
                  data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
                 <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-                <div class="badge">2</div>
             </div>
 
-            <div class="card" 
+            <div class="card inactive" 
                  data-theme="among"
                  data-title="League of Legends" 
                  data-desc="Es la cara de los Esports. Riot domina la PC con el original y el móvil con Wild Rift."
                  data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
                 <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-                <div class="badge">3</div>
             </div>
 
         </div>
     </div>
 
     <nav class="dock">
-        <a href="#" class="dock-btn active">🏠</a>
-        <a href="#" class="dock-btn">⭐</a>
-        <a href="#" class="dock-btn">📺</a>
-        <a href="#" class="dock-btn">👤</a>
+        <a href="#" class="dock-btn active">
+            <i class="ri-home-5-fill"></i>
+            <span>INICIO</span>
+        </a>
+        <a href="#" class="dock-btn">
+            <i class="ri-star-fill"></i>
+            <span>TOP 10</span>
+        </a>
+        <a href="#" class="dock-btn">
+            <i class="ri-tv-2-fill"></i>
+            <span>VIDEOS</span>
+        </a>
+        <a href="#" class="dock-btn">
+            <i class="ri-chat-3-fill"></i>
+            <span>CHAT</span>
+        </a>
+        <a href="#" class="dock-btn">
+            <i class="ri-user-6-fill"></i>
+            <span>PERFIL</span>
+        </a>
     </nav>
 
     <script>
@@ -188,15 +316,19 @@
 
                 if(distance < 150){
                     // Quitar activo de todos
-                    cards.forEach(c => c.classList.remove('active'));
+                    cards.forEach(c => {
+                        c.classList.remove('active');
+                        c.classList.add('inactive');
+                    });
                     
                     // Activar actual
                     card.classList.add('active');
+                    card.classList.remove('inactive');
 
                     // Cambiar Contenido
                     bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
                     gameTitle.innerText = card.dataset.title;
-                    gameDesc.innerText = card.dataset.desc;
+                    gameDesc.innerHTML = card.dataset.desc; // Usamos innerHTML para las runas
 
                     // CAMBIO DE TEMA MÁGICO ✨
                     const theme = card.dataset.theme;
@@ -210,9 +342,12 @@
 
         // Inicialización
         window.onload = () => {
-            bgBlur.style.backgroundImage = `url('${cards[0].dataset.img}')`;
-            updateActiveCard();
+            if(cards.length > 0) {
+                bgBlur.style.backgroundImage = `url('${cards[0].dataset.img}')`;
+                updateActiveCard();
+            }
         };
     </script>
 </body>
-</html>
+        </html>
+                     
