@@ -151,9 +151,7 @@
 <body>
 
 <div id="loader">
-    <video id="loaderVideo" autoplay muted playsinline>
-        <source src="77218d9e-341c-4a58-a77c-aeb553f8083c.mp4~2.mp4" type="video/mp4">
-    </video>
+    <video id="loaderVideo" autoplay muted playsinline></video>
 </div>
 
 <div class="app-background-glow"></div>
@@ -227,15 +225,32 @@
     const loader = document.getElementById('loader');
     const video = document.getElementById('loaderVideo');
 
+    // 1. LISTA DE VIDEOS (Asegurate que los nombres en GitHub sean EXACTAMENTE estos)
+    const videosDeCarga = [
+        "77218d9e-341c-4a58-a77c-aeb553f8083c.mp4~2.mp4",
+        "Minecraft Sunset Live Wallpaper(MP4).mp4",
+        "Pin de Natália Elizete Franco Pedroso em pretérito imperfeito _ Cartazes gráficos_ Wallpaper animes_ Arte 8 bits(MP4).mp4",
+        "_hollowknight _silksong _games _edits _ Illustrazioni d_arte_ Sfondi_ Immagini(MP4).mp4",
+        "✱(MP4).mp4"
+    ];
+
+    // 2. ELEGIR UNO AL AZAR
+    const videoElegido = videosDeCarga[Math.floor(Math.random() * videosDeCarga.length)];
+    
+    // 3. ASIGNAR EL VIDEO AL REPRODUCTOR
+    video.src = videoElegido;
+
     // Quita el cargador cuando termina el video
     video.onended = () => {
         loader.classList.add('loader-hidden');
     };
 
-    // Respaldo por si el video falla (se quita a los 5 segundos)
+    // Respaldo por si el video falla (se quita a los 7 segundos por si son videos largos)
     setTimeout(() => {
-        loader.classList.add('loader-hidden');
-    }, 5000);
+        if (!loader.classList.contains('loader-hidden')) {
+            loader.classList.add('loader-hidden');
+        }
+    }, 7000);
 </script>
 
 </body>
