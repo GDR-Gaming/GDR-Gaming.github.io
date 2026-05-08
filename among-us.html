@@ -24,7 +24,6 @@
             min-height: 100vh;
         }
 
-        /* FONDO FIJO Y FLUIDO */
         .background-blur {
             position: fixed;
             top: 0; left: 0; 
@@ -39,13 +38,12 @@
             width: 100%;
             max-width: 420px;
             margin: 0 auto;
-            padding: 110px 20px 120px 20px; 
+            padding: 110px 20px 140px 20px; 
             display: flex;
             flex-direction: column;
             gap: 25px;
         }
 
-        /* TARJETA PRINCIPAL */
         .main-card {
             position: relative;
             width: 100%;
@@ -70,7 +68,6 @@
         .card-overlay h1 { font-size: 28px; font-weight: 800; text-transform: uppercase; }
         .card-overlay p { font-size: 14px; color: #cbd5e1; margin-top: 5px; }
 
-        /* ICONOS LATERALES */
         .side-stats {
             position: absolute;
             top: 25px; right: 20px;
@@ -94,7 +91,6 @@
         .ri-eye-fill { color: #facc15; }
         .stat-bubble span { font-size: 10px; font-weight: 700; }
 
-        /* BOTONES AJUSTADOS */
         .action-row { display: flex; gap: 10px; }
 
         .btn {
@@ -106,19 +102,31 @@
             color: white;
             font-size: 9px;
             font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            text-decoration: none;
-            text-transform: uppercase;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
+            text-decoration: none; text-transform: uppercase;
         }
 
         .btn-highlight { border-color: var(--accent-yellow); color: var(--accent-yellow); }
 
-        /* INFO SECCIÓN */
-        .desc-text { font-size: 14px; line-height: 1.6; color: #cbd5e1; }
-        .ver-mas { color: var(--accent-yellow); font-weight: 800; }
+        /* ESTILOS PARA EL TEXTO DESPLEGABLE */
+        .description-container {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #cbd5e1;
+        }
+
+        #extra-text {
+            display: none; /* Oculto al inicio */
+            margin-top: 10px;
+        }
+
+        .ver-mas {
+            color: var(--accent-yellow);
+            font-weight: 800;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 5px;
+        }
 
         .meta-tags { display: flex; gap: 8px; margin: 15px 0; }
         .tag {
@@ -129,7 +137,6 @@
             font-weight: 700;
         }
 
-        /* NAVEGACIÓN */
         .nav-dock {
             position: fixed;
             bottom: 25px; left: 25px; right: 25px;
@@ -137,9 +144,7 @@
             background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(25px);
             border-radius: 35px;
-            display: flex;
-            justify-content: space-around;
-            align-items: center;
+            display: flex; justify-content: space-around; align-items: center;
             border: 1px solid rgba(255,255,255,0.1);
             z-index: 100;
         }
@@ -171,20 +176,30 @@
             <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" class="btn">
                 <i class="ri-play-fill"></i> PLAY
             </a>
-            
             <button class="btn" onclick="alert('Iniciando anuncio...')">
                 <i class="ri-vidicon-line"></i> ADS / WATCH
             </button>
-            
             <button class="btn btn-highlight" onclick="compartir()">
                 <i class="ri-share-forward-line"></i> RECOMMEND
             </button>
         </div>
 
         <div class="info-section">
-            <p class="desc-text">
-                Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor... <span class="ver-mas">ver más</span>
-            </p>
+            <div class="description-container">
+                <p id="main-description">
+                    Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor...
+                </p>
+                
+                <div id="extra-text">
+                    Among Us nació el 15 de junio de 2018 de la mano de InnerSloth, un equipo de apenas tres personas. Al principio fue un fracaso total, con tan pocos jugadores que los desarrolladores debían entrar a sus propias partidas para que los servidores no murieran. Dos años después, en 2020, la pandemia y la exposición de grandes streamers como Ibai, AuronPlay y ElRubius lo convirtieron en el fenómeno mundial que es hoy, pasando de 50 jugadores a millones en semanas.<br><br>
+                    La jugabilidad se basa en la deducción social. Entre 4 y 15 jugadores se dividen en tripulantes e impostores. Los tripulantes deben completar tareas técnicas en la nave o base para ganar, mientras que los impostores deben sabotear las instalaciones y asesinar a la tripulación sin ser detectados. Cuando se encuentra un cuerpo o se pulsa el botón de emergencia, se abre un chat de discusión donde se decide por votación quién es el sospechoso para expulsarlo al espacio.<br><br>
+                    Con el tiempo el juego evolucionó y se agregaron roles con habilidades especiales. El Científico puede ver los signos vitales de todos, el Ingeniero puede usar las alcantarillas, el Ángel Guardián protege a los vivos después de morir, y el Cambiaformas permite al impostor disfrazarse de otro jugador para generar confusión. Los mapas también crecieron, empezando por la nave The Skeld, pasando por la base aérea Mira HQ, el planeta helado Polus, el gigante Airship y finalmente la isla selvática The Fungle.<br><br>
+                    En cuanto a la seguridad, el juego tuvo una crisis grave con los hackers en 2020. Aparecieron usuarios que usaban programas para matar a todos al instante, moverse a velocidad infinita o llenar el chat con spam. Esto obligó a los creadores a implementar un sistema de cuentas y reportes que antes no existía. Respecto al contenido audiovisual, no hay una película de cine oficial pero ya está en producción una serie animada realizada por CBS Studios y Titmouse.<br><br>
+                    Hoy el impacto cultural es gigante. El éxito se mantiene gracias a que es un juego donde la mentira y la manipulación psicológica son tan importantes como la habilidad con los dedos.
+                </div>
+                
+                <span id="btn-toggle" class="ver-mas" onclick="toggleText()">ver más</span>
+            </div>
             
             <div class="meta-tags">
                 <div class="tag">Disney+</div>
@@ -209,6 +224,19 @@
     </nav>
 
     <script>
+        function toggleText() {
+            var extraText = document.getElementById("extra-text");
+            var btnText = document.getElementById("btn-toggle");
+
+            if (extraText.style.display === "none" || extraText.style.display === "") {
+                extraText.style.display = "block";
+                btnText.innerHTML = "ver menos";
+            } else {
+                extraText.style.display = "none";
+                btnText.innerHTML = "ver más";
+            }
+        }
+
         function compartir() {
             if (navigator.share) {
                 navigator.share({
