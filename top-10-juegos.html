@@ -2,138 +2,110 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Top 10 GDR - Completo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>Top 10 GDR - Premium</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
-        /* === FUENTES Y VARIABLES === */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter+Tight:wght@400;700;800&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap');
 
         :root {
-            --accent: #00f0ff;
-            --hk-gold: #b69865;
-            --hk-scroll: #f5e9d2;
-            --bg-dark: #05070a;
-            --main-font: 'Inter Tight', sans-serif;
+            --accent: #facc15;
+            --bg-dark: #090c13;
+            --card-w: 280px;
+            --card-h: 420px;
         }
 
-        /* === RESET Y BASE === */
-        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s ease; }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1); }
         
         body {
             background-color: var(--bg-dark);
             color: white;
-            font-family: var(--main-font);
-            width: 100vw; 
-            height: 100vh;
+            font-family: 'Inter', sans-serif;
+            width: 100vw; height: 100vh;
             overflow: hidden; 
-            display: flex; 
-            flex-direction: column;
-            /* AJUSTE: Espacio para la muesca/notch del móvil */
-            padding-top: env(safe-area-inset-top, 20px);
+            display: flex; flex-direction: column;
         }
 
-        /* === FONDO Y EFECTOS === */
+        /* FONDO DINÁMICO MEJORADO */
         .bg-blur {
             position: fixed; inset: 0; background-size: cover; background-position: center;
-            filter: blur(8px) brightness(0.5); z-index: -10; transform: scale(1.1);
+            filter: blur(50px) brightness(0.35); z-index: -10; transform: scale(1.3);
         }
 
-        .edge-glow {
-            position: fixed; inset: 0; pointer-events: none; z-index: -5;
-            background: linear-gradient(to bottom, var(--accent) 0%, transparent 40%),
-                        linear-gradient(to top, var(--accent) 0%, transparent 40%);
-            mix-blend-mode: screen; opacity: 0.2;
-        }
-
-        /* === TEMAS DINÁMICOS === */
-        body.theme-honor { 
-            --accent: #ffd700; 
-            font-family: 'Playfair Display', serif;
-        }
-        body.theme-honor #gameTitle { font-family: 'Cinzel', serif; color: #e6dcc6; }
-
-        /* === CONTENIDO === */
+        /* HEADER ESTILO MODERNO */
         header { 
-            padding: 10px 25px; 
-            z-index: 10; 
-            font-size: 12px; 
-            font-weight: 800; 
-            letter-spacing: 2px; 
-            opacity: 0.6;
+            padding: 50px 30px 10px; 
+            font-size: 11px; font-weight: 700; 
+            letter-spacing: 2px; opacity: 0.5;
+            text-transform: uppercase;
         }
 
-        .hero { 
-            padding: 10px 25px; 
-            z-index: 10; 
-            min-height: 160px; 
-        }
-        .hero h1 { font-size: 42px; font-weight: 800; line-height: 1; margin-bottom: 8px; }
-        .hero p { font-size: 14px; color: rgba(255,255,255,0.7); max-width: 90%; line-height: 1.4; }
+        .hero { padding: 0 30px; margin-bottom: 20px; }
+        .hero h1 { font-size: 40px; font-weight: 800; letter-spacing: -1.5px; line-height: 1; }
+        .hero p { font-size: 15px; color: rgba(255,255,255,0.6); margin-top: 8px; line-height: 1.4; }
 
-        /* === SLIDER === */
+        /* SLIDER RECONSTRUIDO */
         .slider-wrapper {
-            flex: 1; 
-            display: flex; 
-            align-items: center;
-            overflow-x: auto; 
-            scroll-snap-type: x mandatory;
-            padding: 0 15% 80px; 
+            flex: 1; display: flex; align-items: center;
+            overflow-x: auto; scroll-snap-type: x mandatory;
+            padding: 0 12% 130px; 
             scrollbar-width: none;
-            -webkit-overflow-scrolling: touch; /* Scroll suave en iOS */
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
         
-        .cards-container { display: flex; align-items: center; gap: 20px; }
+        .cards-container { display: flex; align-items: center; gap: 25px; }
 
         .card {
-            width: 240px; height: 320px; border-radius: 25px;
+            width: var(--card-w); height: var(--card-h); 
+            border-radius: 45px; /* Súper redondeado como la foto 2 */
             overflow: hidden; flex-shrink: 0; scroll-snap-align: center;
-            opacity: 0.3; transform: scale(0.85);
-            border: 2px solid rgba(255,255,255,0.1); position: relative;
+            opacity: 0.4; transform: scale(0.88);
+            position: relative;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
         }
+        
         .card.active {
             opacity: 1; transform: scale(1);
-            border: 4px solid var(--accent);
-            box-shadow: 0 0 30px var(--accent);
-            cursor: pointer;
+            box-shadow: 0 35px 70px -10px rgba(0, 0, 0, 0.9);
         }
+
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
+        /* BADGE FLOTANTE */
         .badge {
-            position: absolute; top: 15px; right: 15px;
-            width: 40px; height: 40px; border-radius: 50%;
-            background: white; color: black;
+            position: absolute; top: 25px; right: 25px;
+            width: 45px; height: 45px; border-radius: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(15px);
             display: flex; align-items: center; justify-content: center;
-            font-weight: 900; font-size: 18px;
+            font-weight: 800; font-size: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
         }
 
-        /* === DOCK (BARRA INFERIOR) === */
+        /* DOCK ESTILO CÁPSULA (Foto 2) */
         .dock {
             position: fixed; 
-            /* AJUSTE: Sube la barra si el móvil tiene controles abajo */
-            bottom: calc(20px + env(safe-area-inset-bottom, 0px)); 
-            left: 20px; right: 20px;
-            height: 70px; border-radius: 25px;
-            background: rgba(15,20,30,0.85); backdrop-filter: blur(20px);
+            bottom: 30px; left: 30px; right: 30px;
+            height: 75px; border-radius: 38px;
+            background: rgba(18, 22, 32, 0.8); 
+            backdrop-filter: blur(25px);
             display: flex; justify-content: space-around; align-items: center;
-            border: 1px solid rgba(255,255,255,0.1); z-index: 100;
+            border: 1px solid rgba(255,255,255,0.08); z-index: 100;
         }
-        .dock-btn { font-size: 24px; color: white; opacity: 0.4; text-decoration: none; }
-        .dock-btn.active { opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); }
+        .dock-btn { font-size: 26px; color: white; opacity: 0.3; text-decoration: none; }
+        .dock-btn.active { opacity: 1; color: var(--accent); }
 
     </style>
 </head>
 <body>
 
     <div class="bg-blur" id="bgBlur"></div>
-    <div class="edge-glow"></div>
 
-    <header>GDR GAMING • TOP 10</header>
+    <header>GDR Gaming • Top 10</header>
 
     <main class="hero">
         <h1 id="gameTitle">Cargando...</h1>
-        <p id="gameDesc">Selecciona un juego para ver más detalles.</p>
+        <p id="gameDesc">Explora los juegos más épicos de la semana.</p>
     </main>
 
     <div class="slider-wrapper" id="slider">
@@ -142,23 +114,24 @@
 
     <nav class="dock">
         <a href="#" class="dock-btn active"><i class="ri-home-5-fill"></i></a>
-        <a href="#" class="dock-btn"><i class="ri-star-fill"></i></a>
-        <a href="#" class="dock-btn"><i class="ri-tv-2-fill"></i></a>
-        <a href="#" class="dock-btn"><i class="ri-user-fill"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-compass-3-line"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-heart-3-line"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-user-6-line"></i></a>
     </nav>
 
     <script>
+        // Mantenemos tus datos originales de la lista
         const games = [
-            { id: 1, theme: 'honor', title: "Honor of Kings", desc: "El MOBA más jugado del mundo. Estrategia intensa y héroes legendarios en la palma de tu mano.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10", link: "#" },
-            { id: 2, theme: 'default', title: "Among Us", desc: "Trabaja en equipo para preparar la nave, ¡pero cuidado con los impostores entre nosotros!", img: "1778216047984~2.jpg", link: "among-us.html" },
-            { id: 3, theme: 'default', title: "Wild Rift", desc: "La experiencia de League of Legends optimizada para móviles con controles ultra precisos.", img: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg", link: "#" },
-            { id: 4, theme: 'default', title: "Warzone Mobile", desc: "Battle Royale masivo con progresión compartida. El combate real de CoD en tu bolsillo.", img: "https://i.blogs.es/954c69/cod6/840_560.jpeg", link: "#" },
-            { id: 5, theme: 'default', title: "Genshin Impact", desc: "Un mundo abierto masivo y hermoso. Explora Teyvat y domina los elementos en esta aventura épica.", img: "https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png", link: "#" },
-            { id: 6, theme: 'default', title: "PUBG Mobile", desc: "El Battle Royale original. Sobrevive en mapas realistas y demuestra quién es el último en pie.", img: "https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", link: "#" },
-            { id: 7, theme: 'default', title: "Fortnite", desc: "Construye, lucha y crea. Más que un juego, es una plataforma social con eventos en vivo increíbles.", img: "https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k", link: "#" },
-            { id: 8, theme: 'default', title: "Free Fire", desc: "Partidas rápidas de 10 minutos. El Battle Royale más ligero y accesible para todos.", img: "https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg", link: "#" },
-            { id: 9, theme: 'default', title: "Minecraft", desc: "Construye cualquier cosa que imagines. Supervivencia o creatividad infinita en un mundo de bloques.", img: "https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320", link: "#" },
-            { id: 10, theme: 'default', title: "Roblox", desc: "Crea mundos y juega millones de experiencias creadas por la comunidad. El metaverso real.", img: "https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png", link: "#" }
+            { id: 1, title: "Honor of Kings", desc: "El MOBA más jugado del mundo.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10", link: "#" },
+            { id: 2, title: "Among Us", desc: "Trabaja en equipo... o traiciona a todos.", img: "1778216047984~2.jpg", link: "among-us.html" },
+            { id: 3, title: "Wild Rift", desc: "La experiencia de LoL en tu móvil.", img: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg", link: "#" },
+            { id: 4, title: "Warzone Mobile", desc: "Acción intensa de Battle Royale.", img: "https://i.blogs.es/954c69/cod6/840_560.jpeg", link: "#" },
+            { id: 5, title: "Genshin Impact", desc: "Un mundo abierto lleno de magia.", img: "https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png", link: "#" },
+            { id: 6, title: "PUBG Mobile", desc: "El Battle Royale original.", img: "https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg", link: "#" },
+            { id: 7, title: "Fortnite", desc: "Construye y sobrevive.", img: "https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k", link: "#" },
+            { id: 8, title: "Free Fire", desc: "Partidas rápidas y emocionantes.", img: "https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg", link: "#" },
+            { id: 9, title: "Minecraft", desc: "Crea tu propio mundo infinito.", img: "https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320", link: "#" },
+            { id: 10, title: "Roblox", desc: "Millones de mundos por descubrir.", img: "https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png", link: "#" }
         ];
 
         const container = document.getElementById('cardsContainer');
@@ -170,16 +143,11 @@
         games.forEach(g => {
             const card = document.createElement('div');
             card.className = 'card';
-            card.dataset.theme = g.theme;
             card.dataset.title = g.title;
             card.dataset.desc = g.desc;
             card.dataset.img = g.img;
             card.dataset.link = g.link;
-            
-            card.innerHTML = `
-                <img src="${g.img}">
-                <div class="badge">${g.id}</div>
-            `;
+            card.innerHTML = `<img src="${g.img}"><div class="badge">${g.id}</div>`;
             container.appendChild(card);
         });
 
@@ -189,26 +157,21 @@
             const center = slider.scrollLeft + (slider.offsetWidth / 2);
             cards.forEach(card => {
                 const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-                if (Math.abs(center - cardCenter) < 130) {
+                if (Math.abs(center - cardCenter) < 150) {
                     cards.forEach(c => c.classList.remove('active'));
                     card.classList.add('active');
-                    
                     bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
                     gameTitle.innerText = card.dataset.title;
                     gameDesc.innerText = card.dataset.desc;
-                    document.body.className = 'theme-' + card.dataset.theme;
                 }
             });
         }
 
-        // Detectar clic en la tarjeta central
         container.addEventListener('click', (e) => {
             const card = e.target.closest('.card');
             if (card && card.classList.contains('active')) {
                 const link = card.dataset.link;
-                if (link !== "#") {
-                    window.location.href = link;
-                }
+                if (link !== "#") window.location.href = link;
             }
         });
 
