@@ -24,6 +24,7 @@
             min-height: 100vh;
         }
 
+        /* FONDO FLUIDO */
         .background-blur {
             position: fixed;
             top: 0; left: 0; 
@@ -44,6 +45,7 @@
             gap: 25px;
         }
 
+        /* TARJETA */
         .main-card {
             position: relative;
             width: 100%;
@@ -66,7 +68,6 @@
         }
 
         .card-overlay h1 { font-size: 28px; font-weight: 800; text-transform: uppercase; }
-        .card-overlay p { font-size: 14px; color: #cbd5e1; margin-top: 5px; }
 
         .side-stats {
             position: absolute;
@@ -91,6 +92,7 @@
         .ri-eye-fill { color: #facc15; }
         .stat-bubble span { font-size: 10px; font-weight: 700; }
 
+        /* BOTONES */
         .action-row { display: flex; gap: 10px; }
 
         .btn {
@@ -108,24 +110,29 @@
 
         .btn-highlight { border-color: var(--accent-yellow); color: var(--accent-yellow); }
 
-        /* ESTILOS PARA EL TEXTO DESPLEGABLE */
+        /* DISEÑO DE TEXTO (IGUAL A LA CAPTURA) */
         .description-container {
-            font-size: 14px;
+            width: 100%;
+            font-size: 15px; /* Tamaño un poco más grande para lectura */
             line-height: 1.6;
-            color: #cbd5e1;
+            color: #ffffff;
+            text-align: left;
         }
 
         #extra-text {
-            display: none; /* Oculto al inicio */
-            margin-top: 10px;
+            display: none;
+            margin-top: 15px;
+        }
+
+        #extra-text p {
+            margin-bottom: 15px; /* Espacio entre párrafos como en la foto */
         }
 
         .ver-mas {
             color: var(--accent-yellow);
             font-weight: 800;
             cursor: pointer;
-            display: inline-block;
-            margin-top: 5px;
+            text-decoration: none;
         }
 
         .meta-tags { display: flex; gap: 8px; margin: 15px 0; }
@@ -137,6 +144,7 @@
             font-weight: 700;
         }
 
+        /* NAVEGACIÓN */
         .nav-dock {
             position: fixed;
             bottom: 25px; left: 25px; right: 25px;
@@ -186,19 +194,20 @@
 
         <div class="info-section">
             <div class="description-container">
-                <p id="main-description">
-                    Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor...
-                </p>
+                <span id="main-text">Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor...</span>
+                <span id="btn-toggle" class="ver-mas" onclick="toggleText()">ver más</span>
                 
                 <div id="extra-text">
-                    Among Us nació el 15 de junio de 2018 de la mano de InnerSloth, un equipo de apenas tres personas. Al principio fue un fracaso total, con tan pocos jugadores que los desarrolladores debían entrar a sus propias partidas para que los servidores no murieran. Dos años después, en 2020, la pandemia y la exposición de grandes streamers como Ibai, AuronPlay y ElRubius lo convirtieron en el fenómeno mundial que es hoy, pasando de 50 jugadores a millones en semanas.<br><br>
-                    La jugabilidad se basa en la deducción social. Entre 4 y 15 jugadores se dividen en tripulantes e impostores. Los tripulantes deben completar tareas técnicas en la nave o base para ganar, mientras que los impostores deben sabotear las instalaciones y asesinar a la tripulación sin ser detectados. Cuando se encuentra un cuerpo o se pulsa el botón de emergencia, se abre un chat de discusión donde se decide por votación quién es el sospechoso para expulsarlo al espacio.<br><br>
-                    Con el tiempo el juego evolucionó y se agregaron roles con habilidades especiales. El Científico puede ver los signos vitales de todos, el Ingeniero puede usar las alcantarillas, el Ángel Guardián protege a los vivos después de morir, y el Cambiaformas permite al impostor disfrazarse de otro jugador para generar confusión. Los mapas también crecieron, empezando por la nave The Skeld, pasando por la base aérea Mira HQ, el planeta helado Polus, el gigante Airship y finalmente la isla selvática The Fungle.<br><br>
-                    En cuanto a la seguridad, el juego tuvo una crisis grave con los hackers en 2020. Aparecieron usuarios que usaban programas para matar a todos al instante, moverse a velocidad infinita o llenar el chat con spam. Esto obligó a los creadores a implementar un sistema de cuentas y reportes que antes no existía. Respecto al contenido audiovisual, no hay una película de cine oficial pero ya está en producción una serie animada realizada por CBS Studios y Titmouse.<br><br>
-                    Hoy el impacto cultural es gigante. El éxito se mantiene gracias a que es un juego donde la mentira y la manipulación psicológica son tan importantes como la habilidad con los dedos.
+                    <p>Among Us nació el 15 de junio de 2018 de la mano de InnerSloth, un equipo de apenas tres personas. Al principio fue un fracaso total, con tan pocos jugadores que los desarrolladores debían entrar a sus propias partidas para que los servidores no murieran. Dos años después, en 2020, la pandemia y la exposición de grandes streamers como Ibai, AuronPlay y ElRubius lo convirtieron en el fenómeno mundial que es hoy, pasando de 50 jugadores a millones en semanas.</p>
+                    
+                    <p>La jugabilidad se basa en la deducción social. Entre 4 y 15 jugadores se dividen en tripulantes e impostores. Los tripulantes deben completar tareas técnicas en la nave o base para ganar, mientras que los impostores deben sabotear las instalaciones y asesinar a la tripulación sin ser detectados. Cuando se encuentra un cuerpo o se pulsa el botón de emergencia, se abre un chat de discusión donde se decide por votación quién es el sospechoso para expulsarlo al espacio. Las partidas suelen durar entre 10 y 15 minutos, dependiendo de la configuración de velocidad y tiempo de recarga de los asesinatos.</p>
+                    
+                    <p>Con el tiempo el juego evolucionó y se agregaron roles con habilidades especiales. El Científico puede ver los signos vitales de todos, el Ingeniero puede usar las alcantarillas, el Ángel Guardián protege a los vivos después de morir, y el Cambiaformas permite al impostor disfrazarse de otro jugador para generar confusión. Los mapas también crecieron, empezando por la nave The Skeld, pasando por la base aérea Mira HQ, el planeta helado Polus, el gigante Airship y finalmente la isla selvática The Fungle.</p>
+                    
+                    <p>En cuanto a la seguridad, el juego tuvo una crisis grave con los hackers en 2020. Aparecieron usuarios que usaban programas para matar a todos al instante, moverse a velocidad infinita o llenar el chat con spam. Esto obligó a los creadores a implementar un sistema de cuentas y reportes que antes no existía. Respecto al contenido audiovisual, no hay una película de cine oficial pero ya está en producción una serie animada realizada por CBS Studios y Titmouse, que contará con actores de voz reconocidos y mantendrá el estilo de sospecha y humor negro del juego original.</p>
+                    
+                    <p>Hoy el impacto cultural es gigante. El término "Sus" se usa en todo el mundo y el juego tiene versiones en Realidad Virtual, además de colaboraciones con franquicias de primer nivel. El éxito se mantiene gracias a que es un juego donde la mentira y la manipulación psicológica son tan importantes como la habilidad con los dedos.</p>
                 </div>
-                
-                <span id="btn-toggle" class="ver-mas" onclick="toggleText()">ver más</span>
             </div>
             
             <div class="meta-tags">
@@ -227,12 +236,15 @@
         function toggleText() {
             var extraText = document.getElementById("extra-text");
             var btnText = document.getElementById("btn-toggle");
+            var mainText = document.getElementById("main-text");
 
             if (extraText.style.display === "none" || extraText.style.display === "") {
                 extraText.style.display = "block";
+                mainText.style.display = "none"; /* Oculta el resumen corto */
                 btnText.innerHTML = "ver menos";
             } else {
                 extraText.style.display = "none";
+                mainText.style.display = "inline"; /* Vuelve a mostrar el resumen */
                 btnText.innerHTML = "ver más";
             }
         }
@@ -245,7 +257,7 @@
                     url: window.location.href
                 });
             } else {
-                alert('Enlace copiado al portapapeles');
+                alert('Enlace copiado');
             }
         }
     </script>
