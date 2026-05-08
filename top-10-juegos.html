@@ -3,351 +3,199 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>GDR Top 10 - Honor of Kings</title>
+    <title>Top 10 GDR - Completo</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
         /* === FUENTES Y VARIABLES === */
-        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@700;900&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter+Tight:wght@400;700;800&display=swap');
 
         :root {
-            /* Colores de Honor of Kings (Basados en la imagen) */
-            --hk-gold-dark: #b69865;
-            --hk-gold-light: #e6dcc6;
+            --accent: #00f0ff;
+            --hk-gold: #b69865;
             --hk-scroll: #f5e9d2;
-            --hk-teal: #00f0ff;
-            --hk-teal-dim: rgba(0, 240, 255, 0.4);
-            --hk-bg-dark: #12100d;
-            --hk-text-light: #fefdfb;
-            
-            /* Fuentes Temáticas */
-            --font-title: 'Cinzel', serif;
-            --font-body: 'Playfair Display', serif;
-            --font-nav: 'Inter', sans-serif;
+            --bg-dark: #05070a;
+            --main-font: 'Inter Tight', sans-serif;
         }
 
-        /* === RESET Y ESTILOS DE BASE === */
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+        /* === RESET Y BASE === */
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: all 0.4s ease; }
         body {
-            background-color: var(--hk-bg-dark);
-            color: var(--hk-text-light);
-            font-family: var(--font-body);
+            background-color: var(--bg-dark);
+            color: white;
+            font-family: var(--main-font);
             width: 100vw; height: 100vh;
-            display: flex; flex-direction: column;
-            overflow: hidden;
+            overflow: hidden; display: flex; flex-direction: column;
         }
 
-        /* === FONDO DINÁMICO (TEMPLO) === */
+        /* === FONDO Y EFECTOS === */
         .bg-blur {
-            position: fixed; inset: 0;
-            background-image: url('https://w0.peakpx.com/wallpaper/479/476/HD-wallpaper-palace-hall-temple-architecture-ancient-building.jpg');
-            background-size: cover; background-position: center;
-            filter: blur(5px) brightness(0.4) saturate(1.2);
-            z-index: -10;
-        }
-        .dark-overlay {
-            position: fixed; inset: 0;
-            background: linear-gradient(to bottom, rgba(182, 152, 101, 0.1), rgba(18, 16, 13, 0.9));
-            z-index: -9;
+            position: fixed; inset: 0; background-size: cover; background-position: center;
+            filter: blur(8px) brightness(0.5); z-index: -10; transform: scale(1.1);
         }
 
-        /* === NIEBLA CIAN MÍSTICA === */
         .edge-glow {
-            position: fixed; inset: 0;
-            background: radial-gradient(circle at top, var(--hk-teal-dim), transparent 60%),
-                        radial-gradient(circle at bottom, var(--hk-teal-dim), transparent 60%);
-            mix-blend-mode: screen; opacity: 0.3; z-index: -8;
-            pointer-events: none;
+            position: fixed; inset: 0; pointer-events: none; z-index: -5;
+            background: linear-gradient(to bottom, var(--accent) 0%, transparent 40%),
+                        linear-gradient(to top, var(--accent) 0%, transparent 40%);
+            mix-blend-mode: screen; opacity: 0.2;
         }
 
-        /* === HERO SECTION (TITULO Y DESC) === */
-        .hero { padding: 30px 25px 0; text-align: center; }
-        .hero h1 {
-            font-family: var(--font-title); font-size: 52px; font-weight: 900;
-            color: var(--hk-gold-light); text-shadow: 0 4px 10px rgba(0,0,0,0.8);
-            position: relative; display: inline-block;
+        /* === TEMAS DINÁMICOS === */
+        /* Estilo para Honor of Kings (Templo) */
+        body.theme-honor { 
+            --accent: #ffd700; 
+            font-family: 'Playfair Display', serif;
         }
-        /* Runas Cian a la derecha del título */
-        .hero h1::after {
-            content: 'ᚱ'; color: var(--hk-teal); font-size: 24px; font-weight: 400;
-            position: absolute; right: -30px; top: 10px; opacity: 0.8;
-            filter: drop-shadow(0 0 5px var(--hk-teal));
-        }
-        .hero p {
-            margin-top: 15px; font-size: 14px; line-height: 1.4;
-            color: rgba(254, 253, 251, 0.9);
-            padding: 0 10%; max-width: 400px; margin-left: auto; margin-right: auto;
-        }
-        /* Runas Cian dentro del texto descriptivo */
-        .hero p .hk-rune {
-            color: var(--hk-teal); font-weight: 700;
-            filter: drop-shadow(0 0 3px var(--hk-teal));
-        }
+        body.theme-honor .edge-glow { opacity: 0.4; background: radial-gradient(circle at center, rgba(0,240,255,0.2), transparent); }
+        body.theme-honor #gameTitle { font-family: 'Cinzel', serif; color: #e6dcc6; }
 
-        /* === SLIDER SLIDER Y CARDS === */
+        /* Estilo Estándar (Moderna) */
+        body.theme-default { --accent: #00f0ff; }
+
+        /* === CONTENIDO === */
+        header { padding: 30px 25px; z-index: 10; font-size: 12px; font-weight: 800; letter-spacing: 1px; }
+        .hero { padding: 0 25px; z-index: 10; min-height: 200px; }
+        .hero h1 { font-size: 50px; font-weight: 800; line-height: 1; margin-bottom: 10px; }
+        .hero p { font-size: 15px; color: rgba(255,255,255,0.8); max-width: 90%; line-height: 1.3; }
+
+        /* === SLIDER === */
         .slider-wrapper {
             flex: 1; display: flex; align-items: center;
             overflow-x: auto; scroll-snap-type: x mandatory;
-            padding: 20px 18% 120px; scrollbar-width: none;
-            margin-top: 10px;
+            padding: 0 15% 100px; scrollbar-width: none;
         }
         .slider-wrapper::-webkit-scrollbar { display: none; }
-        .cards-container { display: flex; align-items: center; gap: 30px; }
+        .cards-container { display: flex; align-items: center; gap: 20px; }
 
-        /* Estilos de la tarjeta 'active' (Honor of Kings) */
-        .card.active {
-            width: 270px; height: 270px; /* Tamaño final */
-            border-radius: 20px;
+        .card {
+            width: 260px; height: 260px; border-radius: 25px;
             overflow: hidden; flex-shrink: 0; scroll-snap-align: center;
-            position: relative;
-            /* Marco Ornamental Turquesa y Dorado */
-            border: 5px solid;
-            border-image: linear-gradient(135deg, #00f0ff 0%, #b69865 50%, #00f0ff 100%) 1;
-            box-shadow: 0 0 35px var(--hk-teal);
-            transform: scale(1.1);
-            transition: all 0.6s ease;
+            opacity: 0.3; transform: scale(0.8);
+            border: 2px solid rgba(255,255,255,0.1); position: relative;
         }
-
-        /* Estilos de las tarjetas 'inactivas' */
-        .card.inactive {
-            width: 250px; height: 250px;
-            border-radius: 20px; overflow: hidden;
-            flex-shrink: 0; scroll-snap-align: center;
-            opacity: 0.3; transform: scale(0.9);
-            border: 2px solid rgba(182, 152, 101, 0.4);
-            transition: all 0.6s ease;
+        .card.active {
+            opacity: 1; transform: scale(1.1);
+            border: 4px solid var(--accent);
+            box-shadow: 0 0 30px var(--accent);
         }
-
         .card img { width: 100%; height: 100%; object-fit: cover; }
 
-        /* === PERGAMINO "HACÉ CLIC" === */
+        /* Badge de número */
+        .badge {
+            position: absolute; top: 12px; right: 12px;
+            width: 45px; height: 45px; border-radius: 50%;
+            background: white; color: black;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 900; font-size: 20px;
+        }
+
+        /* Elementos exclusivos HoK */
+        .hok-only { display: none; }
+        body.theme-honor .hok-only { display: block; }
+
         .hk-scroll-block {
-            position: absolute; top: -50px; left: 50%;
-            transform: translateX(-50%); width: 230px; z-index: 5;
-            transition: top 0.5s ease 0.3s;
-        }
-        .hk-scroll-inner {
-            background-color: var(--hk-scroll);
-            border: 2px solid #b69865;
-            padding: 10px 15px 15px; border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.5);
-            /* Bordes quemados */
-            position: relative;
-        }
-        /* Sello de cera */
-        .hk-scroll-seal {
-            position: absolute; top: -20px; left: 50%;
-            transform: translateX(-50%);
-            width: 50px; height: 50px; border-radius: 50%;
-            background-color: #8c6a46; /* Marrón sello */
-            border: 3px solid #6d5135;
-            display: flex; align-items: center; justify-content: center;
-            box-shadow: 0 3px 6px rgba(0,0,0,0.4);
-        }
-        .hk-scroll-seal i { color: rgba(255,255,255,0.7); font-size: 24px; }
-
-        .hk-scroll-text {
-            margin-top: 25px;
-            font-family: var(--font-body); font-size: 13px; font-weight: 700;
-            color: #5c4a37; text-align: center;
+            position: absolute; top: -45px; left: 50%; transform: translateX(-50%);
+            background: var(--hk-scroll); color: #5c4a37;
+            padding: 8px 15px; border-radius: 8px; font-size: 11px; font-weight: 800;
+            border: 2px solid var(--hk-gold); width: 180px; text-align: center;
         }
 
-        /* Ocultar el pergamino si no es Honor of Kings */
-        body.theme-among .hk-scroll-block { top: -150px; }
-
-
-        /* === ELEMENTOS INTERNOS DE LA TARJETA === */
-        /* Pergamino Número 1 */
-        .hk-number-scroll {
-            position: absolute; top: 10px; right: 10px;
-            width: 40px; height: 50px;
-            background-color: var(--hk-scroll);
-            border-left: 2px solid #b69865;
-            display: flex; align-items: center; justify-content: center;
-            border-radius: 0 0 5px 5px;
-            z-index: 3; box-shadow: 2px 2px 5px rgba(0,0,0,0.3);
-        }
-        .hk-number-scroll span {
-            font-family: var(--font-title); font-size: 20px; font-weight: 900; color: #5c4a37;
-        }
-
-        /* Emblema Cristal */
-        .hk-crystal-emblem {
-            position: absolute; bottom: 8px; right: 8px;
-            width: 50px; height: 50px;
-            display: flex; align-items: center; justify-content: center;
-            z-index: 3;
-        }
-        .hk-crystal-emblem img {
-            width: 100%; height: auto;
-            filter: drop-shadow(0 0 10px var(--hk-teal)) brightness(1.2);
-        }
-
-        /* === DOCK MADERA TALLADA === */
+        /* === DOCK === */
         .dock {
-            position: fixed; bottom: 15px; left: 15px; right: 15px;
-            height: 70px;
-            background-image: url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzR70tE5-bYF37H5nI3S0r9E-wVfS3yv5tS1f1-e_o-w&s');
-            background-size: cover; background-position: center;
-            border-radius: 20px 20px 30px 30px;
+            position: fixed; bottom: 20px; left: 20px; right: 20px;
+            height: 70px; border-radius: 25px;
+            background: rgba(15,20,30,0.8); backdrop-filter: blur(15px);
             display: flex; justify-content: space-around; align-items: center;
-            border: 2px solid var(--hk-gold-dark);
-            box-shadow: 0 -5px 20px rgba(0,0,0,0.6);
-            z-index: 100; padding: 0 10px;
+            border: 1px solid rgba(255,255,255,0.1); z-index: 100;
         }
-        .dock-btn {
-            text-decoration: none; display: flex; flex-direction: column;
-            align-items: center; position: relative;
-        }
-        .dock-btn i { font-size: 26px; color: var(--hk-gold-light); opacity: 0.6; }
-        .dock-btn span { font-family: var(--font-nav); font-size: 9px; color: var(--hk-gold-light); opacity: 0.5; margin-top: 2px; }
-
-        /* Botón Activo con Llama Cian */
-        .dock-btn.active i, .dock-btn.active span { opacity: 1; }
-        .dock-btn.active::before {
-            content: '🔥'; font-size: 10px;
-            position: absolute; top: -12px;
-            color: var(--hk-teal);
-            filter: drop-shadow(0 0 5px var(--hk-teal)) brightness(1.3);
-        }
+        .dock-btn { font-size: 24px; color: white; opacity: 0.4; text-decoration: none; }
+        .dock-btn.active { opacity: 1; filter: drop-shadow(0 0 8px var(--accent)); }
 
     </style>
 </head>
-<body class="theme-honor"> <div class="bg-blur" id="bgBlur"></div>
-    <div class="dark-overlay"></div>
+<body class="theme-honor">
+
+    <div class="bg-blur" id="bgBlur"></div>
     <div class="edge-glow"></div>
 
-    <header style="padding: 20px 25px; display: flex; justify-content: space-between; z-index: 10;">
-        <span style="font-family: var(--font-title); color: var(--hk-gold-light); font-size: 14px;">GDR Top 10</span>
-    </header>
+    <header>LIBRARY</header>
 
     <main class="hero">
-        <h1 id="gameTitle">Honor of Kings</h1>
-        <p id="gameDesc">
-            Cargando...
-        </p>
+        <h1 id="gameTitle">Cargando...</h1>
+        <p id="gameDesc">Explora los juegos más virales del mes.</p>
     </main>
 
     <div class="slider-wrapper" id="slider">
-        <div class="cards-container">
-            
-            <div class="card active" 
-                 data-theme="honor"
-                 data-title="Honor of Kings" 
-                 data-desc="¿Por qué está acá? Es el MOBA que más plata recauda en el mundo <span class='hk-rune'>ᚱ</span>. Sus torneos millonarios lo hicieron imparable <span class='hk-rune'>ᚱ</span>."
-                 data-img="https://api.dicebear.com/8.x/bottts-neutral/svg?seed=Fabian"> <div class="hk-number-scroll">
-                     <span>1</span>
-                 </div>
-
-                 <div class="hk-crystal-emblem">
-                     <img src="https://w7.pngwing.com/pngs/434/461/png-transparent-video-games-league-of-legends-hextech-hextech-icon-blue-thumbnail.png" alt="Crystal">
-                 </div>
-
-                <img src="https://fastcdn.hoyoverse.com/content-v2/plat/123439/c39dd0699f78411122c6c9797d57a592_7063500647883927830.jpeg" alt="Honor of Kings">
-
-                 <div class="hk-scroll-block">
-                    <div class="hk-scroll-seal">
-                        <i class="ri-cursor-fill"></i>
-                    </div>
-                    <div class="hk-scroll-inner">
-                        <div class="hk-scroll-text">
-                            Hacé clic para saber más
-                        </div>
-                    </div>
-                </div>
-
+        <div class="cards-container" id="cardsContainer">
             </div>
-
-            <div class="card inactive" 
-                 data-theme="among"
-                 data-title="Among Us" 
-                 data-desc="¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia para unir gente."
-                 data-img="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-                <img src="https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg">
-            </div>
-
-            <div class="card inactive" 
-                 data-theme="among"
-                 data-title="League of Legends" 
-                 data-desc="Es la cara de los Esports. Riot domina la PC con el original y el móvil con Wild Rift."
-                 data-img="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-                <img src="https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg">
-            </div>
-
-        </div>
     </div>
 
     <nav class="dock">
-        <a href="#" class="dock-btn active">
-            <i class="ri-home-5-fill"></i>
-            <span>INICIO</span>
-        </a>
-        <a href="#" class="dock-btn">
-            <i class="ri-star-fill"></i>
-            <span>TOP 10</span>
-        </a>
-        <a href="#" class="dock-btn">
-            <i class="ri-tv-2-fill"></i>
-            <span>VIDEOS</span>
-        </a>
-        <a href="#" class="dock-btn">
-            <i class="ri-chat-3-fill"></i>
-            <span>CHAT</span>
-        </a>
-        <a href="#" class="dock-btn">
-            <i class="ri-user-6-fill"></i>
-            <span>PERFIL</span>
-        </a>
+        <a href="#" class="dock-btn active"><i class="ri-home-5-fill"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-star-fill"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-tv-2-fill"></i></a>
+        <a href="#" class="dock-btn"><i class="ri-user-fill"></i></a>
     </nav>
 
     <script>
-        const slider = document.getElementById('slider');
-        const cards = document.querySelectorAll('.card');
+        const games = [
+            { id: 1, theme: 'honor', title: "Honor of Kings", desc: "¿Por qué está acá? Es el MOBA que más plata recauda en el mundo. Sus torneos millonarios lo hicieron imparable.", img: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRN_7n4vBFt3x1Equgmm3zm8u5ftjjnftoG9IfAT-3lVA&s=10" },
+            { id: 2, theme: 'default', title: "Among Us", desc: "¿Por qué está acá? Sigue vivo porque corre hasta en una heladera. Es el juego social por excelencia.", img: "https://upload.wikimedia.org/wikipedia/en/thumb/9/9a/Among_Us_cover_art.jpg/250px-Among_Us_cover_art.jpg" },
+            { id: 3, theme: 'default', title: "Wild Rift", desc: "La versión móvil de LoL. Riot domina los móviles con la experiencia más pulida del género.", img: "https://cloudfront-us-east-1.images.arcpublishing.com/infobae/CNTWUAMXZRF3BPIYPCNPFHOMJQ.jpg" },
+            { id: 4, theme: 'default', title: "Warzone Mobile", desc: "Todo lo que haces en PC se guarda en tu celu. La experiencia de guerra definitiva en 2026.", img: "https://i.blogs.es/954c69/cod6/840_560.jpeg" },
+            { id: 5, theme: 'default', title: "Genshin Impact", desc: "Fue el primero en meter un juego de consola en un celular. Visualmente es una bestia.", img: "https://cdn2.unrealengine.com/genshin-impact-version-2-8-3840x2160-357d3d64d056.png" },
+            { id: 6, theme: 'default', title: "PUBG Mobile", desc: "El padre del género Battle Royale. Su comunidad es gigantesca y táctica.", img: "https://m.media-amazon.com/images/M/MV5BODQzNzJjY2QtY2Y2YS00OWJmLTlkZWMtMmNmMmE2NTg1MjQzXkEyXkFqcGc@._V1_FMjpg_UX1000_.jpg" },
+            { id: 7, theme: 'default', title: "Fortnite", desc: "Ya es más una red social que un juego. Conciertos, LEGO y diversión infinita.", img: "https://cms-assets.unrealengine.com/cm6l5gfpm05kr07my04cqgy2x/output=format:webp/cmhkq5qwo2mid07on940m6a7k" },
+            { id: 8, theme: 'default', title: "Free Fire", desc: "El rey de la gama baja. Domina porque todos tus amigos lo pueden jugar.", img: "https://assets.propmark.com.br/uploads/2022/06/unnamed--99-.jpg" },
+            { id: 9, theme: 'default', title: "Minecraft", desc: "El más vendido de la historia. Juega con cualquiera desde cualquier plataforma.", img: "https://artsyfartsy.eu/cdn/shop/files/17028.jpg?v=1760385248&width=320" },
+            { id: 10, theme: 'default', title: "Roblox 👑", desc: "No es un juego, son millones de juegos en uno. Podés jugar, crear y ganar plata.", img: "https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" }
+        ];
+
+        const container = document.getElementById('cardsContainer');
         const bgBlur = document.getElementById('bgBlur');
         const gameTitle = document.getElementById('gameTitle');
         const gameDesc = document.getElementById('gameDesc');
-        const body = document.body;
+        const slider = document.getElementById('slider');
 
-        function updateActiveCard(){
-            const sliderCenter = slider.scrollLeft + (slider.offsetWidth / 2);
+        // Generar Tarjetas
+        games.forEach(g => {
+            const card = document.createElement('div');
+            card.className = 'card';
+            card.dataset.theme = g.theme;
+            card.dataset.title = g.title;
+            card.dataset.desc = g.desc;
+            card.dataset.img = g.img;
+            
+            card.innerHTML = `
+                ${g.id === 1 ? '<div class="hk-scroll-block hok-only">Hacé clic para saber más</div>' : ''}
+                <img src="${g.img}">
+                <div class="badge">${g.id}</div>
+            `;
+            container.appendChild(card);
+        });
 
+        const cards = document.querySelectorAll('.card');
+
+        function updateUI() {
+            const center = slider.scrollLeft + (slider.offsetWidth / 2);
             cards.forEach(card => {
                 const cardCenter = card.offsetLeft + (card.offsetWidth / 2);
-                const distance = Math.abs(sliderCenter - cardCenter);
-
-                if(distance < 150){
-                    // Quitar activo de todos
-                    cards.forEach(c => {
-                        c.classList.remove('active');
-                        c.classList.add('inactive');
-                    });
-                    
-                    // Activar actual
+                if (Math.abs(center - cardCenter) < 130) {
+                    cards.forEach(c => c.classList.remove('active'));
                     card.classList.add('active');
-                    card.classList.remove('inactive');
-
-                    // Cambiar Contenido
+                    
                     bgBlur.style.backgroundImage = `url('${card.dataset.img}')`;
                     gameTitle.innerText = card.dataset.title;
-                    gameDesc.innerHTML = card.dataset.desc; // Usamos innerHTML para las runas
+                    gameDesc.innerText = card.dataset.desc;
 
-                    // CAMBIO DE TEMA MÁGICO ✨
-                    const theme = card.dataset.theme;
-                    body.className = ''; // Limpiar clases
-                    body.classList.add('theme-' + theme); 
+                    // Cambiar Tema
+                    document.body.className = 'theme-' + card.dataset.theme;
                 }
             });
         }
 
-        slider.addEventListener('scroll', updateActiveCard);
-
-        // Inicialización
-        window.onload = () => {
-            if(cards.length > 0) {
-                bgBlur.style.backgroundImage = `url('${cards[0].dataset.img}')`;
-                updateActiveCard();
-            }
-        };
+        slider.addEventListener('scroll', updateUI);
+        window.onload = updateUI;
     </script>
 </body>
-        </html>
-                     
+</html>
