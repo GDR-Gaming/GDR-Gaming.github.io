@@ -27,7 +27,7 @@
             overflow-x: hidden;
         }
 
-        /* --- ESTILOS DEL CARGADOR (LOADER) --- */
+        /* --- ESTILOS DEL CARGADOR MEJORADO --- */
         #loader {
             position: fixed;
             inset: 0;
@@ -40,10 +40,10 @@
         }
 
         #loader video {
-            width: 100%; /* Ocupa todo el ancho */
-            max-width: 800px; /* Tamaño máximo aumentado para que no se vea chico */
+            width: 90vw; /* Ocupa el 90% del ancho de la pantalla del celular */
             height: auto;
-            box-shadow: 0 0 50px rgba(0, 255, 255, 0.1); /* Brillo sutil */
+            max-width: 1000px; /* Límite para pantallas muy grandes */
+            filter: drop-shadow(0 0 20px rgba(0, 255, 255, 0.3));
         }
 
         .loader-hidden {
@@ -152,7 +152,7 @@
 <body>
 
 <div id="loader">
-    <video id="loaderVideo" autoplay playsinline>
+    <video id="loaderVideo" playsinline>
         <source src="77218d9e-341c-4a58-a77c-aeb553f8083c.mp4~2.mp4" type="video/mp4">
     </video>
 </div>
@@ -196,23 +196,7 @@
           </div>
         </div>
       </a>
-
-      <div class="wiki-card">
-        <img src="https://www.eclypse.com.ar/Temp/App_WebSite/App_PictureFiles/Content/21_800.jpg" alt="Set Up">
-        <div class="card-info">
-          <h4>Set Up</h4>
-          <p>Mejores Set Up calidad-precio del 2026 para potenciar tu espacio.</p>
-        </div>
       </div>
-
-      <div class="wiki-card">
-        <img src="https://images.unsplash.com/photo-1593642702821-c8da6771f0c6?auto=format&fit=crop&q=80&w=600" alt="Componentes">
-        <div class="card-info">
-          <h4>Productos más comprados</h4>
-          <p>El hardware y los periféricos que todos los gamers están eligiendo hoy.</p>
-        </div>
-      </div>
-    </div>
   </main>
 
   <footer class="dock-bar">
@@ -228,15 +212,23 @@
     const loader = document.getElementById('loader');
     const video = document.getElementById('loaderVideo');
 
-    // Desvanece el cargador al terminar el video
+    // Intentar reproducir el video con sonido al primer clic
+    document.addEventListener('click', () => {
+        video.play();
+    }, { once: true });
+
+    // También intentamos reproducir automáticamente
+    video.play().catch(() => {
+        console.log("Auto-play bloqueado, esperando clic del usuario");
+    });
+
     video.onended = () => {
         loader.classList.add('loader-hidden');
     };
 
-    // Respaldo de seguridad: se oculta a los 6 segundos si algo falla
     setTimeout(() => {
         loader.classList.add('loader-hidden');
-    }, 6000);
+    }, 7000);
 </script>
 
 </body>
