@@ -1,1 +1,102 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GDR - Among Us</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
+    <style>
+        /* === ESTILOS TIPO MOBILE APP === */
+        :root {
+            --bg-color: #0f172a;
+            --card-bg: rgba(30, 41, 59, 0.7);
+            --accent-yellow: #eab308;
+            --text-main: #ffffff;
+        }
+
+        body {
+            margin: 0; padding: 0;
+            background-color: var(--bg-color);
+            font-family: 'Inter', sans-serif;
+            color: var(--text-main);
+            display: flex; flex-direction: column; min-height: 100vh;
+        }
+
+        /* Imagen Principal con Overlay */
+        .hero-section {
+            position: relative;
+            width: 100%; height: 50vh;
+            background: url('https://upload.wikimedia.org/wikipedia/en/9/9a/Among_Us_cover_art.jpg') center/cover;
+        }
+
+        /* Tarjeta de Stats (Likes y Vistas) */
+        .stats-card {
+            position: absolute; top: 20px; right: 20px;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(10px);
+            padding: 10px; border-radius: 15px;
+            display: flex; flex-direction: column; gap: 10px;
+        }
+
+        .stat-item { display: flex; flex-direction: column; align-items: center; font-size: 12px; }
+        .stat-item i { font-size: 20px; }
+        .ri-heart-fill { color: #ef4444; } /* Rojo para Like */
+        .ri-eye-fill { color: #fbbf24; }   /* Amarillo para Vistas */
+
+        /* Información y Botones */
+        .content-section {
+            padding: 20px;
+            background: linear-gradient(to bottom, transparent, var(--bg-color) 10%);
+            margin-top: -30px; border-radius: 30px 30px 0 0;
+            flex-grow: 1;
+        }
+
+        .action-buttons {
+            display: flex; justify-content: space-between; gap: 10px; margin: 20px 0;
+        }
+
+        .btn {
+            flex: 1; padding: 12px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white; font-weight: bold; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; gap: 5px;
+            text-decoration: none; font-size: 14px;
+        }
+
+        .btn-play { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+
+        .description { line-height: 1.6; color: #cbd5e1; font-size: 15px; }
+
+    </style>
+</head>
+<body>
+
+    <div class="hero-section">
+        <div class="stats-card">
+            <div class="stat-item"><i class="ri-heart-fill"></i> 3.1M</div>
+            <div class="stat-item"><i class="ri-eye-fill"></i> 2.8M</div>
+            <div class="stat-item"><i class="ri-bookmark-fill" style="color: #eab308;"></i></div>
+        </div>
+    </div>
+
+    <div class="content-section">
+        <h1>AMONG US</h1>
+        <p style="opacity: 0.7;">Versión: 2024.1.2 - Juego de Misterio</p>
+
+        <div class="action-buttons">
+            <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" class="btn btn-play">
+                <i class="ri-play-mini-fill"></i> PLAY
+            </a>
+            <button class="btn"><i class="ri-add-line"></i> WATCHLIST</button>
+            <button class="btn"><i class="ri-share-forward-line"></i> COMPARTIR</button>
+        </div>
+
+        <p class="description">
+            Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor... <span style="color: var(--accent-yellow);">ver más</span>
+        </p>
+    </div>
+
+</body>
+</html>
 
