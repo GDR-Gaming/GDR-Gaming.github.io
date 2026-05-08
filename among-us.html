@@ -3,176 +3,242 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>GDR - Among Us (Innersloth)</title>
+    <title>GDR - Among Us</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800&display=swap');
+
         :root {
-            --bg-color: #0f172a;
+            --bg-dark: #0a0f1a;
             --accent-yellow: #eab308;
             --text-main: #ffffff;
-            --text-muted: #cbd5e1;
-            --overlay-dark: rgba(0, 0, 0, 0.6);
+            --text-muted: #94a3b8;
         }
 
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* RESET TOTAL PARA ELIMINAR BORDES BLANCOS */
-        html, body {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-            height: 100%;
-            background-color: var(--bg-color); /* Color oscuro en toda la pantalla */
+        body {
+            background-color: var(--bg-dark);
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             overflow-x: hidden;
         }
 
-        body {
-            display: flex;
-            flex-direction: column;
-            /* Espacio para que el buscador no tape el logo */
-            padding-top: env(safe-area-inset-top, 30px); 
+        /* FONDO DESENFOCADO CON ZOOM */
+        .background-blur {
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: url('1778216047984~2.jpg') center/cover;
+            transform: scale(1.2);
+            filter: blur(25px) brightness(0.4);
+            z-index: -1;
         }
 
-        .mobile-container {
+        .mobile-wrapper {
             width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
+            max-width: 420px;
+            padding: 20px;
+            padding-top: env(safe-area-inset-top, 40px);
             display: flex;
             flex-direction: column;
-            flex-grow: 1;
+            gap: 20px;
         }
 
-        /* IMAGEN PRINCIPAL: Ocupa todo el ancho sin bordes laterales */
-        .hero-section {
+        /* TARJETA DE IMAGEN PRINCIPAL */
+        .main-card {
             position: relative;
             width: 100%;
-            height: 55vh;
-            background: url('1778216047984~2.jpg') center top/cover;
-            border-radius: 0 0 35px 35px; /* Redondeado solo abajo */
+            height: 480px;
+            border-radius: 40px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            background: url('1778216047984~2.jpg') center/cover;
         }
 
-        .stats-overlay {
-            position: absolute; top: 20px; right: 20px;
-            background: var(--overlay-dark);
+        /* DEGRADADO PARA TEXTO SOBRE IMAGEN */
+        .card-overlay {
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 50%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9) 0%, transparent 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 30px;
+        }
+
+        .card-overlay h1 {
+            font-size: 26px;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .card-overlay p {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        /* ICONOS FLOTANTES (LIKES/EYES) */
+        .side-stats {
+            position: absolute;
+            top: 25px; right: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            z-index: 5;
+        }
+
+        .stat-bubble {
+            background: rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(10px);
-            padding: 10px; border-radius: 15px;
-            display: flex; flex-direction: column; gap: 10px;
-            z-index: 10;
+            padding: 8px;
+            border-radius: 14px;
+            text-align: center;
+            min-width: 45px;
         }
 
-        .stat-item {
-            display: flex; flex-direction: column; align-items: center; font-size: 11px;
-        }
-        .stat-item i { font-size: 20px; }
-        .ri-heart-fill { color: #ef4444; }
-        .ri-eye-fill { color: #fbbf24; }
-        .ri-bookmark-fill { color: var(--accent-yellow); }
+        .stat-bubble i { font-size: 18px; display: block; margin-bottom: 2px; }
+        .ri-heart-fill { color: #ff4d4d; }
+        .ri-eye-fill { color: #facc15; }
+        .stat-bubble span { font-size: 10px; font-weight: 700; }
 
-        .content-section {
-            padding: 25px 20px;
-            flex-grow: 1;
-        }
-
-        .game-info h1 { font-weight: 800; font-size: 30px; margin: 0; }
-        .game-info p { color: var(--text-muted); opacity: 0.8; font-size: 14px; margin: 5px 0 0; }
-
-        .action-bar {
-            display: flex; justify-content: space-between; gap: 10px; margin: 25px 0;
+        /* BOTONES DE ACCIÓN */
+        .action-row {
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
         }
 
-        .btn-tactical {
-            flex: 1; padding: 12px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: rgba(255,255,255,0.08);
-            color: white; font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 6px;
-            text-decoration: none; font-size: 12px;
+        .btn {
+            flex: 1;
+            padding: 12px;
+            border-radius: 25px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            text-decoration: none;
+            text-transform: uppercase;
         }
 
-        .btn-play { border-color: var(--accent-yellow); color: var(--accent-yellow); }
+        .btn-highlight {
+            border-color: var(--accent-yellow);
+            color: var(--accent-yellow);
+        }
 
-        .description-box { margin-bottom: 100px; }
-        .description-text { line-height: 1.6; color: var(--text-muted); font-size: 14px; }
-        .ver-mas { color: var(--accent-yellow); font-weight: bold; }
+        /* DESCRIPCIÓN Y INFO */
+        .info-section {
+            padding: 0 10px;
+        }
 
-        .metadata-badges { display: flex; gap: 8px; margin: 15px 0; }
-        .badge {
-            padding: 4px 10px; border-radius: 6px;
-            background: rgba(255,255,255,0.1); font-size: 11px;
+        .desc-text {
+            font-size: 14px;
+            line-height: 1.5;
+            color: #cbd5e1;
+            margin-bottom: 15px;
+        }
+
+        .ver-mas { color: var(--accent-yellow); font-weight: 600; }
+
+        .meta-tags { display: flex; gap: 8px; margin-bottom: 10px; }
+        .tag {
+            background: rgba(255,255,255,0.1);
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 10px;
+            font-weight: 700;
             color: var(--text-muted);
         }
 
-        /* DOCK FIJO ABAJO */
-        .bottom-nav {
-            position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(15, 23, 42, 0.95);
-            backdrop-filter: blur(15px);
-            padding: 20px 0;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            display: flex; justify-content: space-around;
+        .footer-info {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        /* BARRA DE NAVEGACIÓN INFERIOR */
+        .nav-dock {
+            position: fixed;
+            bottom: 20px;
+            left: 20px; right: 20px;
+            height: 65px;
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(20px);
+            border-radius: 30px;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            border: 1px solid rgba(255,255,255,0.1);
             z-index: 100;
         }
-        .nav-icon { font-size: 22px; color: var(--text-main); opacity: 0.4; }
-        .nav-icon.active { opacity: 1; color: var(--accent-yellow); }
+
+        .nav-item { color: #fff; opacity: 0.4; font-size: 22px; }
+        .nav-item.active { opacity: 1; color: var(--accent-yellow); }
+        .profile-img { width: 28px; height: 28px; border-radius: 50%; object-fit: cover; }
+
     </style>
 </head>
 <body>
 
-    <div class="mobile-container">
-        <section class="hero-section">
-            <div class="stats-overlay">
-                <div class="stat-item"><i class="ri-heart-fill"></i> 3.1M</div>
-                <div class="stat-item"><i class="ri-eye-fill"></i> 2.8M</div>
-                <div class="stat-item"><i class="ri-bookmark-fill"></i></div>
-            </div>
-        </section>
+    <div class="background-blur"></div>
 
-        <section class="content-section">
-            <div class="game-info">
+    <div class="mobile-wrapper">
+        
+        <div class="main-card">
+            <div class="side-stats">
+                <div class="stat-bubble"><i class="ri-heart-fill"></i><span>3.1M</span></div>
+                <div class="stat-bubble"><i class="ri-eye-fill"></i><span>2.8M</span></div>
+                <div class="stat-bubble"><i class="ri-bookmark-fill" style="color:#facc15"></i></div>
+            </div>
+
+            <div class="card-overlay">
                 <h1>AMONG US</h1>
-                <p>Version: 2024.1.2 - Immersive Game</p>
+                <p>Versión: 2024.1.2 - Immersive Game</p>
+            </div>
+        </div>
+
+        <div class="action-row">
+            <a href="#" class="btn"><i class="ri-play-circle-line"></i> Trailer</a>
+            <a href="#" class="btn"><i class="ri-add-line"></i> Watchlist</a>
+            <a href="#" class="btn btn-highlight"><i class="ri-share-forward-line"></i> Recommend</a>
+        </div>
+
+        <div class="info-section">
+            <p class="desc-text">
+                Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor... <span class="ver-mas">ver más</span>
+            </p>
+            
+            <div class="meta-tags">
+                <div class="tag">Disney+</div>
+                <div class="tag">PEGI 7</div>
+                <div class="tag">UHD</div>
+                <div class="tag">CC</div>
             </div>
 
-            <div class="action-bar">
-                <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" class="btn-tactical btn-play">
-                    <i class="ri-play-mini-fill"></i> PLAY
-                </a>
-                <button class="btn-tactical"><i class="ri-add-line"></i> WATCHLIST</button>
-                <button class="btn-tactical" onclick="compartir()"><i class="ri-share-forward-line"></i> SHARE</button>
-            </div>
+            <p class="footer-info">
+                Lanzamiento: 2018 • Acción • Multijugador • Misterio
+            </p>
+        </div>
 
-            <div class="description-box">
-                <p class="description-text">
-                    Among Us es un juego de deducción social ambientado en el espacio. El objetivo es completar tareas mientras evitas ser eliminado por el Impostor... <span class="ver-mas">ver más</span>
-                </p>
-                <div class="metadata-badges">
-                    <div class="badge">PEGI 7</div>
-                    <div class="badge">UHD</div>
-                    <div class="badge">CC</div>
-                </div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-top: 10px;">
-                    Lanzamiento: 2018 • Acción • Misterio
-                </p>
-            </div>
-        </section>
-
-        <nav class="bottom-nav">
-            <i class="ri-home-5-fill nav-icon"></i>
-            <i class="ri-search-line nav-icon"></i>
-            <i class="ri-heart-3-line nav-icon"></i>
-            <i class="ri-tv-2-line nav-icon active"></i>
-            <i class="ri-user-fill nav-icon"></i>
-        </nav>
     </div>
 
-    <script>
-        function compartir() {
-            if (navigator.share) {
-                navigator.share({ title: 'Among Us', url: window.location.href });
-            }
-        }
-    </script>
+    <nav class="nav-dock">
+        <i class="ri-home-5-fill nav-item active"></i>
+        <i class="ri-search-line nav-item"></i>
+        <i class="ri-heart-3-line nav-item"></i>
+        <i class="ri-play-list-add-line nav-item"></i>
+        <img src="https://i.pravatar.cc/100?img=12" class="profile-img">
+    </nav>
+
 </body>
 </html>
