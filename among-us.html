@@ -6,10 +6,8 @@
     <title>GDR - Among Us (Innersloth)</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet">
     <style>
-        /* === ESTILOS TIPO MOBILE APP === */
         :root {
             --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
             --accent-yellow: #eab308;
             --text-main: #ffffff;
             --text-muted: #cbd5e1;
@@ -18,41 +16,43 @@
 
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700;800&display=swap');
 
-        body {
-            margin: 0; padding: 0;
-            background-color: var(--bg-dark); /* Fondo oscuro general */
+        /* RESET TOTAL PARA ELIMINAR BORDES BLANCOS */
+        html, body {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background-color: var(--bg-color); /* Color oscuro en toda la pantalla */
             font-family: 'Inter', sans-serif;
             color: var(--text-main);
-            display: flex; flex-direction: column; min-height: 100vh;
             overflow-x: hidden;
         }
 
-        /* Contenedor principal que simula un móvil y baja el contenido */
-        .mobile-container {
-            max-width: 450px;
-            margin: 0 auto;
-            flex-grow: 1;
+        body {
             display: flex;
             flex-direction: column;
-            position: relative;
-            /* AJUSTE CLAVE: Empuja todo hacia abajo para despejar el navegador */
-            padding-top: calc(50px + env(safe-area-inset-top, 20px)); 
-            background-color: var(--bg-color); /* Fondo de la 'app' */
-            border-radius: 30px 30px 0 0; /* Bordes redondeados arriba */
+            /* Espacio para que el buscador no tape el logo */
+            padding-top: env(safe-area-inset-top, 30px); 
         }
 
-        /* Sección de Imagen Principal (Hero) */
+        .mobile-container {
+            width: 100%;
+            max-width: 450px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* IMAGEN PRINCIPAL: Ocupa todo el ancho sin bordes laterales */
         .hero-section {
             position: relative;
-            width: 100%; height: 50vh;
-            background: url('1778216047984~2.jpg') center top/cover; /* Imagen alineada arriba */
-            border-radius: 30px; /* Redondeamos toda la tarjeta de imagen */
-            overflow: hidden;
-            margin: 0 15px; /* Pequeño margen a los lados */
-            width: calc(100% - 30px); /* Ajuste de ancho por margen */
+            width: 100%;
+            height: 55vh;
+            background: url('1778216047984~2.jpg') center top/cover;
+            border-radius: 0 0 35px 35px; /* Redondeado solo abajo */
         }
 
-        /* Tarjeta de Stats (Likes, Ojos, Bookmark) */
         .stats-overlay {
             position: absolute; top: 20px; right: 20px;
             background: var(--overlay-dark);
@@ -64,79 +64,68 @@
 
         .stat-item {
             display: flex; flex-direction: column; align-items: center; font-size: 11px;
-            cursor: pointer;
         }
         .stat-item i { font-size: 20px; }
         .ri-heart-fill { color: #ef4444; }
         .ri-eye-fill { color: #fbbf24; }
         .ri-bookmark-fill { color: var(--accent-yellow); }
 
-        /* Contenido y Botones */
         .content-section {
-            padding: 20px;
+            padding: 25px 20px;
             flex-grow: 1;
         }
 
-        .game-info h1 { font-weight: 800; font-size: 28px; margin-bottom: 5px; }
-        .game-info p { color: var(--text-muted); opacity: 0.7; font-size: 14px; margin-top: 0; }
+        .game-info h1 { font-weight: 800; font-size: 30px; margin: 0; }
+        .game-info p { color: var(--text-muted); opacity: 0.8; font-size: 14px; margin: 5px 0 0; }
 
-        /* Botones de Acción */
         .action-bar {
-            display: flex; justify-content: space-between; gap: 10px; margin: 20px 0;
+            display: flex; justify-content: space-between; gap: 10px; margin: 25px 0;
         }
 
         .btn-tactical {
-            flex: 1; padding: 12px 10px; border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
+            flex: 1; padding: 12px; border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
             color: white; font-weight: bold; cursor: pointer;
-            display: flex; align-items: center; justify-content: center; gap: 5px;
+            display: flex; align-items: center; justify-content: center; gap: 6px;
             text-decoration: none; font-size: 12px;
         }
 
         .btn-play { border-color: var(--accent-yellow); color: var(--accent-yellow); }
 
-        /* Descripción y Metadata */
-        .description-box { margin: 20px 0; padding-bottom: 100px; /* Espacio para el dock */ }
+        .description-box { margin-bottom: 100px; }
         .description-text { line-height: 1.6; color: var(--text-muted); font-size: 14px; }
-        .ver-mas { color: var(--accent-yellow); cursor: pointer; }
+        .ver-mas { color: var(--accent-yellow); font-weight: bold; }
 
-        .metadata-badges { display: flex; gap: 10px; margin: 15px 0; }
+        .metadata-badges { display: flex; gap: 8px; margin: 15px 0; }
         .badge {
-            padding: 5px 10px; border-radius: 8px;
+            padding: 4px 10px; border-radius: 6px;
             background: rgba(255,255,255,0.1); font-size: 11px;
             color: var(--text-muted);
         }
 
-        /* Barra de Navegación Inferior (Dock) */
+        /* DOCK FIJO ABAJO */
         .bottom-nav {
             position: fixed; bottom: 0; left: 0; right: 0;
-            background: rgba(15,20,30,0.95); backdrop-filter: blur(15px);
-            padding: 20px 25px; 
-            border-top: 1px solid rgba(255,255,255,0.1);
-            display: flex; justify-content: space-around; align-items: center;
+            background: rgba(15, 23, 42, 0.95);
+            backdrop-filter: blur(15px);
+            padding: 20px 0;
+            border-top: 1px solid rgba(255,255,255,0.05);
+            display: flex; justify-content: space-around;
             z-index: 100;
         }
-        .nav-icon { font-size: 22px; color: var(--text-main); opacity: 0.5; }
+        .nav-icon { font-size: 22px; color: var(--text-main); opacity: 0.4; }
         .nav-icon.active { opacity: 1; color: var(--accent-yellow); }
-
     </style>
 </head>
 <body>
 
     <div class="mobile-container">
-        
         <section class="hero-section">
             <div class="stats-overlay">
-                <div class="stat-item">
-                    <i class="ri-heart-fill"></i> 3.1M
-                </div>
-                <div class="stat-item">
-                    <i class="ri-eye-fill"></i> 2.8M
-                </div>
-                <div class="stat-item">
-                    <i class="ri-bookmark-fill"></i>
-                </div>
+                <div class="stat-item"><i class="ri-heart-fill"></i> 3.1M</div>
+                <div class="stat-item"><i class="ri-eye-fill"></i> 2.8M</div>
+                <div class="stat-item"><i class="ri-bookmark-fill"></i></div>
             </div>
         </section>
 
@@ -150,14 +139,8 @@
                 <a href="https://play.google.com/store/apps/details?id=com.innersloth.spacemafia" class="btn-tactical btn-play">
                     <i class="ri-play-mini-fill"></i> PLAY
                 </a>
-                
-                <button class="btn-tactical" onclick="alert('Abriendo sección de anuncios...')">
-                    <i class="ri-add-line"></i> WATCHLIST
-                </button>
-                
-                <button class="btn-tactical" onclick="compartirApp()">
-                    <i class="ri-share-forward-line"></i> COMPARTIR
-                </button>
+                <button class="btn-tactical"><i class="ri-add-line"></i> WATCHLIST</button>
+                <button class="btn-tactical" onclick="compartir()"><i class="ri-share-forward-line"></i> SHARE</button>
             </div>
 
             <div class="description-box">
@@ -169,8 +152,8 @@
                     <div class="badge">UHD</div>
                     <div class="badge">CC</div>
                 </div>
-                <p style="font-size: 12px; color: var(--text-muted);">
-                    Lanzamiento: 2018 • Acción • Multijugador • Misterio
+                <p style="font-size: 12px; color: var(--text-muted); margin-top: 10px;">
+                    Lanzamiento: 2018 • Acción • Misterio
                 </p>
             </div>
         </section>
@@ -182,22 +165,14 @@
             <i class="ri-tv-2-line nav-icon active"></i>
             <i class="ri-user-fill nav-icon"></i>
         </nav>
-
     </div>
 
     <script>
-        function compartirApp() {
+        function compartir() {
             if (navigator.share) {
-                navigator.share({
-                    title: 'GDR - Among Us',
-                    text: '¡Mira este juego en el Top 10!',
-                    url: window.location.href
-                });
-            } else {
-                alert('Función de compartir no disponible.');
+                navigator.share({ title: 'Among Us', url: window.location.href });
             }
         }
     </script>
-
 </body>
 </html>
