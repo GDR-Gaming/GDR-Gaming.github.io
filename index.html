@@ -184,6 +184,7 @@
     </nav>
 
     <div class="wiki-grid">
+      
       <a href="top-10-juegos.html" class="card-link">
         <div class="wiki-card">
           <img src="https://www.pantallasamigas.net/wp-content/uploads/2020/08/Roblox-videojuego-para-jugar-en-familia.png" alt="Roblox">
@@ -209,6 +210,7 @@
           <p>El hardware y los periféricos que todos los gamers están eligiendo hoy.</p>
         </div>
       </div>
+
     </div>
   </main>
 
@@ -225,32 +227,29 @@
     const loader = document.getElementById('loader');
     const video = document.getElementById('loaderVideo');
 
-    // 1. LISTA DE VIDEOS (Asegurate que los nombres en GitHub sean EXACTAMENTE estos)
+    // 1. LISTA DE VIDEOS DISPONIBLES 🎥
     const videosDeCarga = [
         "77218d9e-341c-4a58-a77c-aeb553f8083c.mp4~2.mp4",
-        "Minecraft Sunset Live Wallpaper(MP4).mp4",
-        "Pin de Natália Elizete Franco Pedroso em pretérito imperfeito _ Cartazes gráficos_ Wallpaper animes_ Arte 8 bits(MP4).mp4",
-        "_hollowknight _silksong _games _edits _ Illustrazioni d_arte_ Sfondi_ Immagini(MP4).mp4",
         "✱(MP4).mp4"
     ];
 
-    // 2. ELEGIR UNO AL AZAR
+    // 2. SELECCIÓN ALEATORIA 🎲
     const videoElegido = videosDeCarga[Math.floor(Math.random() * videosDeCarga.length)];
     
-    // 3. ASIGNAR EL VIDEO AL REPRODUCTOR
+    // 3. ASIGNACIÓN Y REPRODUCCIÓN ⚡
     video.src = videoElegido;
 
-    // Quita el cargador cuando termina el video
+    // Desaparece el cargador cuando el video termina
     video.onended = () => {
         loader.classList.add('loader-hidden');
     };
 
-    // Respaldo por si el video falla (se quita a los 7 segundos por si son videos largos)
+    // Respaldo por seguridad (se quita solo en 6 segundos si algo falla)
     setTimeout(() => {
         if (!loader.classList.contains('loader-hidden')) {
             loader.classList.add('loader-hidden');
         }
-    }, 7000);
+    }, 6000);
 </script>
 
 </body>
